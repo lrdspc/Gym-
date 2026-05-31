@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="#131313" name="theme-color"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <title>TRAINFLOW | Nova Avaliação Física</title>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            tertiary: '#fefdff',
+            'on-tertiary-fixed-variant': '#274b5f',
+            'surface-container-highest': '#353534',
+            'primary-fixed-dim': '#aed50d',
+            'on-primary-container': '#566c00',
+            secondary: '#c8c6c5',
+            'surface-variant': '#353534',
+            outline: '#8f937b',
+            primary: '#ffffef',
+            surface: '#131313',
+            'inverse-surface': '#e5e2e1',
+            'surface-bright': '#3a3939',
+            'secondary-container': '#474746',
+            'surface-container-high': '#2a2a2a',
+            'surface-dim': '#131313',
+            'pure-black': '#000000',
+            'on-surface': '#e5e2e1',
+            'outline-variant': '#444934',
+            'text-muted': '#888888',
+            'primary-fixed': '#c9f236',
+            'surface-tint': '#aed50d',
+            'inverse-primary': '#526600',
+            background: '#131313',
+            'on-primary-fixed': '#171e00',
+            'status-warning': '#FFB800',
+            'surface-container': '#201f1f',
+            'on-surface-variant': '#c5c9ae',
+            'on-background': '#e5e2e1',
+            'surface-container-lowest': '#0e0e0e',
+            'border-subtle': '#333333',
+            'surface-container-low': '#1c1b1b'
+          },
+          borderRadius: { DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
+          spacing: { gutter: '1rem', 'button-height-heavy': '5rem', 'touch-target-min': '2.75rem', 'button-height-standard': '3.5rem', 'stack-gap-lg': '2rem', 'container-margin': '1.5rem' },
+          fontFamily: { 'body-lg': ['Inter'], 'label-sm': ['Inter'], 'headline-md': ['Bebas Neue'], 'label-md': ['Inter'], 'display-lg': ['Bebas Neue'], 'body-md': ['Inter'], 'display-giant': ['Bebas Neue'], 'headline-lg': ['Bebas Neue'] },
+          fontSize: {
+            'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+            'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '500' }],
+            'headline-md': ['24px', { lineHeight: '28px', letterSpacing: '0.05em', fontWeight: '600' }],
+            'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' }],
+            'display-lg': ['64px', { lineHeight: '64px', fontWeight: '700' }],
+            'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+            'display-giant': ['120px', { lineHeight: '110px', letterSpacing: '-0.02em', fontWeight: '700' }],
+            'headline-lg': ['32px', { lineHeight: '36px', letterSpacing: '0.05em', fontWeight: '700' }]
+          }
+        }
+      }
+    };
+  </script>
+  <style>
+
+      .glass-card {
+        background: rgba(26, 26, 26, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid #333333;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      html {
+        color-scheme: dark;
+        -webkit-tap-highlight-color: rgba(201, 242, 54, 0.18);
+      }
+      body {
+        min-height: max(884px, 100dvh);
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .sr-only:focus,
+      .sr-only:focus-visible {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        width: auto;
+        height: auto;
+        margin: 0;
+        clip: auto;
+        white-space: normal;
+        z-index: 100;
+      }
+      :focus-visible {
+        outline: 2px solid #c9f236;
+        outline-offset: 3px;
+      }
+      button,
+      a,
+      input,
+      select,
+      textarea {
+        touch-action: manipulation;
+      }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+      .input-shell {
+        transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+      }
+      .input-shell.is-active {
+        transform: scale(1.02);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
+        }
+        .input-shell.is-active {
+          transform: none;
+        }
+      }
+
+  </style>
+</head>
+<body class="bg-background pb-32 font-body-md text-on-background">
+  <a class="sr-only rounded-full bg-primary-fixed px-4 py-3 font-label-md text-pure-black" href="#main-content">Pular para o conteúdo</a>
+  <header class="fixed top-0 z-50 flex h-button-height-standard w-full items-center justify-between border-b border-border-subtle bg-background/80 px-container-margin backdrop-blur-xl">
+    <div class="flex items-center gap-3">
+      <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">fitness_center</span>
+      <p class="font-display-lg text-display-lg tracking-tighter text-primary-fixed">TRAINFLOW</p>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="h-10 w-10 overflow-hidden rounded-full border border-outline-variant bg-surface-container-highest">
+        <img alt="Perfil do treinador" class="h-full w-full object-cover" height="40" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0uhWO8SaIRTJQeFwOMC-VQqH7oehEHR1ugGm9V8V0kwEKN08Vf0A793jvLSjZS4c155lB8RhzRxxjFeW_rQ9LVTUnrWMSbAytzVmmVFfrwdyc5EgbNXzJc7rdJOooPFKYNqZPrXnbroHIqLXuV5t3JjJ9OzHxrITjLR7QtAOBrdQPUfP7eTalEHY6ftmZKbxZK302Fiezx6d9YJfQ_4He2YqXq9kPQibcu6paeRTNS1ZUSqtvwWIbLs7iCQ" width="40"/>
+      </div>
+      <button aria-label="Abrir notificações" class="rounded-full text-on-surface-variant transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" type="button">
+        <span aria-hidden="true" class="material-symbols-outlined">notifications</span>
+      </button>
+    </div>
+  </header>
+  <main id="main-content" tabindex="-1" class="mx-auto mt-20 max-w-2xl space-y-stack-gap-lg px-gutter">
+    <section class="pt-6">
+      <h1 class="font-headline-lg text-headline-lg uppercase italic text-primary-fixed">Nova Avaliação Física</h1>
+      <p class="font-label-md text-on-surface-variant">Protocolo Pollock 7 Dobras • Versão 2.4</p>
+    </section>
+    <form class="space-y-stack-gap-lg" id="assessment-form" novalidate>
+      <section class="glass-card rounded-xl p-6">
+        <div class="mb-4 flex items-center gap-2">
+          <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">person_search</span>
+          <h2 class="font-headline-md text-headline-md uppercase">Identificação</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="space-y-1">
+            <label class="ml-1 font-label-sm uppercase text-on-surface-variant" for="full-name">Nome Completo</label>
+            <div class="input-shell rounded-lg border border-border-subtle bg-surface-container-lowest">
+              <input autocomplete="name" class="h-12 w-full rounded-lg border-0 bg-transparent px-4 text-on-surface placeholder:text-on-surface-variant/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="full-name" name="fullName" placeholder="Ex.: Rodrigo Silva" required type="text"/>
+            </div>
+          </div>
+          <div class="space-y-1">
+            <label class="ml-1 font-label-sm uppercase text-on-surface-variant" for="student-email">Email do Aluno</label>
+            <div class="input-shell rounded-lg border border-border-subtle bg-surface-container-lowest">
+              <input autocomplete="email" class="h-12 w-full rounded-lg border-0 bg-transparent px-4 text-on-surface placeholder:text-on-surface-variant/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="student-email" inputmode="email" name="studentEmail" placeholder="aluno@exemplo.com" required spellcheck="false" type="email"/>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="glass-card rounded-xl p-6">
+        <div class="mb-6 flex items-center gap-2">
+          <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">straighten</span>
+          <h2 class="font-headline-md text-headline-md uppercase">Dados Básicos</h2>
+        </div>
+        <div class="grid grid-cols-2 gap-4">
+          <div class="space-y-1">
+            <label class="ml-1 font-label-sm uppercase text-on-surface-variant" for="input-weight">Peso (kg)</label>
+            <div class="input-shell rounded-lg border border-border-subtle bg-surface-container-lowest">
+              <input autocomplete="off" class="h-button-height-heavy w-full rounded-lg border-0 bg-transparent px-4 text-center font-display-lg text-display-lg text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="input-weight" inputmode="decimal" min="0" name="weight" placeholder="00.0" required step="0.1" type="number"/>
+            </div>
+          </div>
+          <div class="space-y-1">
+            <label class="ml-1 font-label-sm uppercase text-on-surface-variant" for="input-height">Altura (cm)</label>
+            <div class="input-shell rounded-lg border border-border-subtle bg-surface-container-lowest">
+              <input autocomplete="off" class="h-button-height-heavy w-full rounded-lg border-0 bg-transparent px-4 text-center font-display-lg text-display-lg text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="input-height" inputmode="numeric" min="0" name="height" placeholder="000" required step="1" type="number"/>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="glass-card rounded-xl p-6">
+        <div class="mb-6 flex items-center gap-2">
+          <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">architecture</span>
+          <h2 class="font-headline-md text-headline-md uppercase">Dobras Cutâneas (mm)</h2>
+        </div>
+        <fieldset>
+          <legend class="sr-only">Campos das sete dobras cutâneas</legend>
+          <div class="grid grid-cols-1 gap-x-6 gap-y-4 sm:grid-cols-2">
+            <label class="input-shell flex items-center justify-between rounded-lg border border-border-subtle bg-surface-container-low p-3 sm:col-span-1">
+              <span class="font-label-md uppercase">Peitoral</span>
+              <input autocomplete="off" class="skinfold-input w-24 rounded border-0 bg-pure-black text-right font-headline-md text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="fold-peitoral" inputmode="decimal" min="0" name="foldPeitoral" step="0.1" type="number" value="0"/>
+            </label>
+            <label class="input-shell flex items-center justify-between rounded-lg border border-border-subtle bg-surface-container-low p-3 sm:col-span-1">
+              <span class="font-label-md uppercase">Axilar Media</span>
+              <input autocomplete="off" class="skinfold-input w-24 rounded border-0 bg-pure-black text-right font-headline-md text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="fold-axilar" inputmode="decimal" min="0" name="foldAxilarMedia" step="0.1" type="number" value="0"/>
+            </label>
+            <label class="input-shell flex items-center justify-between rounded-lg border border-border-subtle bg-surface-container-low p-3 sm:col-span-1">
+              <span class="font-label-md uppercase">Triceps</span>
+              <input autocomplete="off" class="skinfold-input w-24 rounded border-0 bg-pure-black text-right font-headline-md text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="fold-triceps" inputmode="decimal" min="0" name="foldTriceps" step="0.1" type="number" value="0"/>
+            </label>
+            <label class="input-shell flex items-center justify-between rounded-lg border border-border-subtle bg-surface-container-low p-3 sm:col-span-1">
+              <span class="font-label-md uppercase">Subescapular</span>
+              <input autocomplete="off" class="skinfold-input w-24 rounded border-0 bg-pure-black text-right font-headline-md text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="fold-subescapular" inputmode="decimal" min="0" name="foldSubescapular" step="0.1" type="number" value="0"/>
+            </label>
+            <label class="input-shell flex items-center justify-between rounded-lg border border-border-subtle bg-surface-container-low p-3 sm:col-span-1">
+              <span class="font-label-md uppercase">Abdominal</span>
+              <input autocomplete="off" class="skinfold-input w-24 rounded border-0 bg-pure-black text-right font-headline-md text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="fold-abdominal" inputmode="decimal" min="0" name="foldAbdominal" step="0.1" type="number" value="0"/>
+            </label>
+            <label class="input-shell flex items-center justify-between rounded-lg border border-border-subtle bg-surface-container-low p-3 sm:col-span-1">
+              <span class="font-label-md uppercase">Suprailiaca</span>
+              <input autocomplete="off" class="skinfold-input w-24 rounded border-0 bg-pure-black text-right font-headline-md text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="fold-suprailiaca" inputmode="decimal" min="0" name="foldSuprailiaca" step="0.1" type="number" value="0"/>
+            </label>
+            <label class="input-shell flex items-center justify-between rounded-lg border border-border-subtle bg-surface-container-low p-3 sm:col-span-2">
+              <span class="font-label-md uppercase">Coxa</span>
+              <input autocomplete="off" class="skinfold-input w-24 rounded border-0 bg-pure-black text-right font-headline-md text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed" id="fold-coxa" inputmode="decimal" min="0" name="foldCoxa" step="0.1" type="number" value="0"/>
+            </label>
+          </div>
+        </fieldset>
+      </section>
+      <section aria-atomic="true" aria-live="polite" class="relative overflow-hidden rounded-3xl bg-primary-container p-8 text-on-primary-fixed-variant shadow-2xl">
+        <div aria-hidden="true" class="absolute -right-10 -top-10 h-40 w-40 rounded-full bg-primary-fixed-dim/20 blur-3xl"></div>
+        <div class="relative z-10 flex flex-col gap-6">
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h2 class="font-headline-lg text-headline-lg uppercase italic text-on-primary-fixed">Prévia Provisória</h2>
+              <p class="font-label-sm uppercase tracking-widest text-on-primary-fixed/70">Tempo real</p>
+            </div>
+            <span class="rounded-full bg-on-primary-fixed px-3 py-1 font-label-sm uppercase tracking-widest text-primary-fixed">Ao vivo</span>
+          </div>
+          <div class="grid grid-cols-3 gap-4">
+            <div class="flex flex-col">
+              <span class="font-label-sm uppercase opacity-70">IMC</span>
+              <output class="font-display-lg text-headline-lg lg:text-display-lg" id="result-imc">--</output>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-sm uppercase opacity-70">% Gordura</span>
+              <output class="font-display-lg text-headline-lg lg:text-display-lg" id="result-bf">--%</output>
+            </div>
+            <div class="flex flex-col">
+              <span class="font-label-sm uppercase opacity-70">Somatotipo</span>
+              <output class="mt-2 font-headline-md text-headline-md uppercase" id="result-somatotipo">---</output>
+            </div>
+          </div>
+          <div class="h-1 overflow-hidden rounded-full bg-on-primary-fixed/10">
+            <div class="h-full w-2/3 bg-on-primary-fixed" id="preview-bar"></div>
+          </div>
+          <p class="sr-only" id="result-status">Preencha os dados para visualizar os resultados.</p>
+        </div>
+      </section>
+      <div class="flex flex-col gap-4 pt-4">
+        <button class="flex h-16 w-full items-center justify-center gap-3 rounded-full bg-primary-fixed font-headline-md text-headline-md text-on-primary-fixed shadow-lg shadow-primary-fixed/20 transition-[filter,transform] hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-95" type="submit">
+          Salvar e Enviar Convite
+          <span aria-hidden="true" class="material-symbols-outlined">send</span>
+        </button>
+        <button class="h-12 w-full rounded-full border border-border-subtle font-label-md uppercase text-on-surface-variant transition-[background-color,color,border-color] hover:bg-surface-variant/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" type="reset">
+          Descartar Rascunho
+        </button>
+      </div>
+    </form>
+  </main>
+  <nav aria-label="Navegação inferior" class="fixed bottom-0 z-50 h-button-height-standard w-full border-t border-border-subtle bg-pure-black/80 backdrop-blur-3xl md:hidden">
+    <div class="mx-auto flex h-full max-w-md items-center justify-around px-gutter">
+      <a class="flex flex-col items-center justify-center text-secondary-fixed-dim transition-colors hover:text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Início</span>
+      </a>
+      <a aria-current="page" class="flex flex-col items-center justify-center rounded-full bg-surface-variant/30 px-4 py-1 font-bold text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined">fitness_center</span>
+        <span class="font-label-sm text-label-sm">Treinos</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-secondary-fixed-dim transition-colors hover:text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined">chat_bubble</span>
+        <span class="font-label-sm text-label-sm">Mensagens</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-secondary-fixed-dim transition-colors hover:text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined">person</span>
+        <span class="font-label-sm text-label-sm">Perfil</span>
+      </a>
+    </div>
+  </nav>
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const weightInput = document.getElementById('input-weight');
+    const heightInput = document.getElementById('input-height');
+    const skinfoldInputs = Array.from(document.querySelectorAll('.skinfold-input'));
+    const imcEl = document.getElementById('result-imc');
+    const bfEl = document.getElementById('result-bf');
+    const somatotipoEl = document.getElementById('result-somatotipo');
+    const resultStatus = document.getElementById('result-status');
+    const previewBar = document.getElementById('preview-bar');
+
+    function updateResults() {
+      const weight = parseFloat(weightInput.value) || 0;
+      const height = (parseFloat(heightInput.value) || 0) / 100;
+      const sum = skinfoldInputs.reduce((total, input) => total + (parseFloat(input.value) || 0), 0);
+      if (weight > 0 && height > 0) {
+        const imc = (weight / (height * height)).toFixed(1);
+        imcEl.value = imc;
+        imcEl.textContent = imc;
+      } else {
+        imcEl.value = '--';
+        imcEl.textContent = '--';
+      }
+      if (sum > 0) {
+        const bf = (sum * 0.15 + 5).toFixed(1);
+        const somatotipo = sum < 50 ? 'Ectomorfo' : sum < 100 ? 'Mesomorfo' : 'Endomorfo';
+        bfEl.value = bf + '%';
+        bfEl.textContent = bf + '%';
+        somatotipoEl.value = somatotipo;
+        somatotipoEl.textContent = somatotipo;
+        previewBar.style.width = Math.min(100, Math.max(15, sum / 1.5)) + '%';
+        resultStatus.textContent = 'Prévia atualizado: IMC ' + imcEl.textContent + ', gordura ' + bfEl.textContent + ' e somatotipo ' + somatotipo + '.';
+      } else {
+        bfEl.value = '--%';
+        bfEl.textContent = '--%';
+        somatotipoEl.value = '---';
+        somatotipoEl.textContent = '---';
+        previewBar.style.width = '24%';
+        resultStatus.textContent = 'Preencha as dobras cutâneas para visualizar o percentual de gordura.';
+      }
+    }
+
+    function bindInputShells() {
+      document.querySelectorAll('.input-shell').forEach((shell) => {
+        const field = shell.querySelector('input');
+        if (!field) return;
+        field.addEventListener('focus', () => shell.classList.add('is-active'));
+        field.addEventListener('blur', () => shell.classList.remove('is-active'));
+      });
+    }
+
+    document.getElementById('assessment-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      resultStatus.textContent = 'Avaliação salva como rascunho pronto para envio.';
+    });
+
+    document.getElementById('assessment-form').addEventListener('reset', () => {
+      window.setTimeout(updateResults, 0);
+      resultStatus.textContent = 'Rascunho descartado e campos redefinidos.';
+    });
+
+    [weightInput, heightInput, ...skinfoldInputs].forEach((input) => input.addEventListener('input', updateResults));
+    bindInputShells();
+    if (prefersReducedMotion.matches) {
+      previewBar.style.transition = 'none';
+    }
+    updateResults();
+  </script>
+</body>
+</html>
