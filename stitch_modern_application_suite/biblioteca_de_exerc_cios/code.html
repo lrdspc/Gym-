@@ -134,10 +134,7 @@
   </style>
   <style>
         html { color-scheme: dark; }
-        .transition-all {
-            transition-property: color, background-color, border-color, opacity, transform, box-shadow;
-        }
-        :where(a, button, input, textarea, select, summary, label) {
+:where(a, button, input, textarea, select, summary, label) {
             touch-action: manipulation;
             -webkit-tap-highlight-color: rgba(201, 242, 54, 0.14);
         }
@@ -185,7 +182,7 @@
 <div class="relative w-full md:w-96 group">
 <label class="sr-only" for="busca-biblioteca">Buscar exercícios</label>
 <span aria-hidden="true" class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-primary-container transition-colors">search</span>
-<input aria-label="Buscar exercícios" autocomplete="off" class="w-full h-12 pl-12 pr-4 bg-surface-container border border-border-subtle rounded-xl text-on-surface focus:border-primary-container transition-all placeholder:text-text-muted" enterkeyhint="search" id="busca-biblioteca" inputmode="search" name="busca" placeholder="Buscar exercícios…" type="search"/>
+<input aria-label="Buscar exercícios" autocomplete="off" class="w-full h-12 pl-12 pr-4 bg-surface-container border border-border-subtle rounded-xl text-on-surface focus:border-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] placeholder:text-text-muted" enterkeyhint="search" id="busca-biblioteca" inputmode="search" name="busca" placeholder="Buscar exercícios…" type="search"/>
 </div>
 </div>
 </form>
@@ -203,7 +200,7 @@
 <!-- Exercise Grid -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
 <!-- Card 1 -->
-<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-all duration-300">
+<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-300">
 <img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" height="800" loading="lazy" width="640" src="https://lh3.googleusercontent.com/aida/ADBb0uivus1jj5JuU9Sn5Aiwy2r9F_MW_yhAiT4CvWdpdLacdXEgLfEk8xy8Nb3H1SrkzkE6cffaVxoG3h-mLCEnub-m0gDw_mO1x4NEhtkMFzPuidRoa5lYZcZjs3TUFPIFRKn5b_ixBhuygTqteBLDGyiSegyEgoReD0omCqGPKMG2Uyu_Efsc6k2y0Urd8ksv8TamuDWT3r80DbsHUAQsuunII1PnsimmIhkgo9aYiDmET1g81cqgS3FnJg"/>
 <div class="card-image-gradient absolute inset-0"></div>
 <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -217,7 +214,7 @@
 </div>
 </article>
 <!-- Card 2 -->
-<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-all duration-300">
+<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-300">
 <img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" height="800" loading="lazy" width="640" src="https://lh3.googleusercontent.com/aida/ADBb0ujwrBiprVl8uggH3PnzgmAi99K_htGc4ucKMG0s3lzfcP2ob-O_2KONHKwJ2PScv4lelIyKRa_1lKaSdL2eeJ_wpWafAWGsRxoJ2xVb6yjTZ3DrygVXkRcZrHq9bpkilfmTDBCjmpu6SPYpN3mKVl6s_N-ypqB_GbvNXKZuQ1qJkUJj5cp4P1uYbC84hMWCwElJniRXYJXaLO0Jce7rF4corV66b7yT3j69BY33T9wvt85mf56Z8YMmSo4"/>
 <div class="card-image-gradient absolute inset-0"></div>
 <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -231,7 +228,7 @@
 </div>
 </article>
 <!-- Card 3 -->
-<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-all duration-300">
+<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-300">
 <img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" height="800" loading="lazy" width="640" src="https://lh3.googleusercontent.com/aida/ADBb0ugJjz5jhOQwXtdtNolR2oQeb_6zqhXRhF1S6lBogzJ6Fv2sMRKKNF0cJSpNKQ4Gv_ge8eDFqPC-Qac63tQw-ghSeqRjCnfubU8-3PTPINyQD7umeFPWB66U6lTlogsiNCvsKHZertLwGJjViP5O9Nhw8cWITtXDBvUtVLLY9Y63DvWDyDJ1r6uP-Lxhqf23MD6e_lU3HTXw1ZCK7nx53q_BiOgxCdoyJ3M0Tk7kSdxnqKukwf8PN_T9_Ms"/>
 <div class="card-image-gradient absolute inset-0"></div>
 <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -245,7 +242,7 @@
 </div>
 </article>
 <!-- Card 4 -->
-<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-all duration-300">
+<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-300">
 <img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" height="800" loading="lazy" width="640" src="https://lh3.googleusercontent.com/aida/ADBb0ug2aimZ6vmojSKxZdg1HsvPOnOh5DP7mzjChGH3tuwPSsRtmllDtJ3B8kZX99-kCn4Zk5z2qsiqnDyroOcR_ifQd5bTF6-RXfNw2MuQKlEjymIRmdWt-f9Kcdbd1u_vV_K-5qsj-dUsV1tpIzM34JzCprEQBnd9c5VQ2VC6Z7eDD6T5MGFMdilctsKI_EUlUn6oFB77fVaKvKy7lcu9pbjLWprRJ3eIizqoDSLR9R95lkAIxqua4KlkYZI"/>
 <div class="card-image-gradient absolute inset-0"></div>
 <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -259,7 +256,7 @@
 </div>
 </article>
 <!-- Card 5 (Different Layout/Size) -->
-<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-all duration-300">
+<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-300">
 <img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" height="800" loading="lazy" width="640" src="https://lh3.googleusercontent.com/aida/ADBb0uhV4ZVIG2st8LOuJHjffCZSnQMa4MfJRgK9ENJyZW3LuEieu6STuApwHUWzR7EvdxA5GGbJ4oZ-vwlyccFbCpusdUWb28Jr5UV7_j18tcQ9bRLtc2wVyxNTh40kywWQrLZ-GKTUBVj_g2J_UYJ6WbbTCuXD99ykB1doAm-5ktfCqN9jGVKCyGQTQeUW5XYvL42U3vKLPVfEEVVKuxtsqsD2Sj0pdWq8w2lXr_WLSt3U3P75QJHn4qL3kA"/>
 <div class="card-image-gradient absolute inset-0"></div>
 <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -268,7 +265,7 @@
 </div>
 </article>
 <!-- Card 6 -->
-<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-all duration-300">
+<article class="exercise-card group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border border-border-subtle hover:border-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-300">
 <img alt="" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" height="800" loading="lazy" width="640" src="https://lh3.googleusercontent.com/aida/ADBb0uj0mb5xFM68RlVtHOOp68mlgiWyAgQ3hNfjB2-dkZd8xii5MaEwTFS66oSp9hPlq2ev8K3UkmrQdEw7W9CEiEACrbJHr43MQ3zIOuLiKR-WYiGK8XpSkWBy54hTsxhxhWp3gBzPUFN8fhC0i-7VEYioc9JMPlSIiGkiqa0-5Wx62BRSn53LzE-1U9bKzD4f7wTs0xpDbG8n5AnPZlzo0MVm20kaq98XYlvbe4aHxaveKBVVd3u6BXUtiSo"/>
 <div class="card-image-gradient absolute inset-0"></div>
 <div class="absolute bottom-0 left-0 p-6 w-full">
@@ -277,7 +274,7 @@
 </div>
 </article>
 <!-- Add New Card (Skeleton/Placeholder) -->
-<button aria-label="Adicionar novo exercício" class="group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border-2 border-dashed border-border-subtle hover:border-primary-container hover:bg-surface-container-high transition-all duration-300 flex flex-col items-center justify-center gap-4" type="button">
+<button aria-label="Adicionar novo exercício" class="group relative aspect-[4/5] bg-surface-container rounded-3xl overflow-hidden border-2 border-dashed border-border-subtle hover:border-primary-container hover:bg-surface-container-high transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-300 flex flex-col items-center justify-center gap-4" type="button">
 <div class="w-16 h-16 rounded-full bg-border-subtle group-hover:bg-primary-container group-hover:text-pure-black transition-colors flex items-center justify-center">
 <span aria-hidden="true" class="material-symbols-outlined text-4xl">add</span>
 </div>
@@ -286,7 +283,7 @@
 </div>
 </main>
 <!-- FAB -->
-<button aria-label="Adicionar exercício" class="fixed right-container-margin bottom-24 w-16 h-16 bg-primary-container text-pure-black rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-all z-50" type="button">
+<button aria-label="Adicionar exercício" class="fixed right-container-margin bottom-24 w-16 h-16 bg-primary-container text-pure-black rounded-full shadow-2xl flex items-center justify-center hover:scale-110 active:scale-95 transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] z-50" type="button">
 <span aria-hidden="true" class="material-symbols-outlined text-3xl font-bold">add</span>
 </button>
 <!-- BottomNavBar -->

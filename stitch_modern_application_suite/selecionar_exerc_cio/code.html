@@ -130,10 +130,7 @@
   </style>
   <style>
         html { color-scheme: dark; }
-        .transition-all {
-            transition-property: color, background-color, border-color, opacity, transform, box-shadow;
-        }
-        :where(a, button, input, textarea, select, summary, label) {
+:where(a, button, input, textarea, select, summary, label) {
             touch-action: manipulation;
             -webkit-tap-highlight-color: rgba(201, 242, 54, 0.14);
         }
@@ -177,7 +174,7 @@
 <div class="relative group">
 <label class="sr-only" for="busca-exercicio">Buscar exercício</label>
 <span aria-hidden="true" class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-text-muted group-focus-within:text-primary-container transition-colors">search</span>
-<input aria-label="Buscar exercício" autocomplete="off" class="w-full h-14 bg-surface-container border-border-subtle border rounded-xl pl-12 pr-4 text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all font-body-md" enterkeyhint="search" id="busca-exercicio" inputmode="search" name="busca" placeholder="Buscar exercício…" type="search"/>
+<input aria-label="Buscar exercício" autocomplete="off" class="w-full h-14 bg-surface-container border-border-subtle border rounded-xl pl-12 pr-4 text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] font-body-md" enterkeyhint="search" id="busca-exercicio" inputmode="search" name="busca" placeholder="Buscar exercício…" type="search"/>
 </div>
 </form>
 </section>
@@ -285,7 +282,7 @@
 </a>
 </nav>
 <!-- Selection Overlay Counter (Floating Toast) -->
-<div aria-live="polite" class="fixed bottom-24 left-1/2 -translate-x-1/2 glass-panel border border-primary-container/30 rounded-full px-6 py-3 flex items-center gap-3 shadow-2xl transition-all translate-y-20 opacity-0" id="selection-counter">
+<div aria-live="polite" class="fixed bottom-24 left-1/2 -translate-x-1/2 glass-panel border border-primary-container/30 rounded-full px-6 py-3 flex items-center gap-3 shadow-2xl transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] translate-y-20 opacity-0" id="selection-counter">
 <div class="w-6 h-6 rounded-full bg-primary-container text-on-primary flex items-center justify-center text-[12px] font-bold">0</div>
 <p class="font-label-md text-on-surface">Nenhum exercício selecionado</p>
 <button class="ml-4 font-bold text-primary-container hover:opacity-80" type="button">VER PLANO</button>

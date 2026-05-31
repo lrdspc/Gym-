@@ -119,10 +119,7 @@
   </style>
   <style>
         html { color-scheme: dark; }
-        .transition-all {
-            transition-property: color, background-color, border-color, opacity, transform, box-shadow;
-        }
-        :where(a, button, input, textarea, select, summary, label) {
+:where(a, button, input, textarea, select, summary, label) {
             touch-action: manipulation;
             -webkit-tap-highlight-color: rgba(201, 242, 54, 0.14);
         }
@@ -186,7 +183,7 @@
 <div class="exercise-card bg-surface-container-low border border-border-subtle rounded-xl p-4 overflow-hidden relative group">
 <div class="flex gap-4 items-start">
 <div class="w-24 h-24 rounded-lg bg-surface-container-highest flex-shrink-0 overflow-hidden border border-border-subtle">
-<img alt="" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" height="96" loading="lazy" width="96" src="https://lh3.googleusercontent.com/aida/ADBb0uhaXQ8j2BQcbXDdt0ANzbbdR35kWX7_Dx6jH6JVdseOxI1MaejHu7gLHI8NvRihfYScM7Bzl7TEQH6nwGLAkUm87z8_FYFAV9EY8YWMQ0x_wzFCEPLsuECVqJysScf1m9aY3GslIxGn8u-EhjYXtA7DmHnIcmElyxvIhOjZFWEqlKdhPBksdFbRFhSOGOrX5bZhGCK9WUeapUDHej39hLmffQ_vsCvMKS6lkOjh-1q2X5ZgtoZwFabrIyA"/>
+<img alt="" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-500" height="96" loading="lazy" width="96" src="https://lh3.googleusercontent.com/aida/ADBb0uhaXQ8j2BQcbXDdt0ANzbbdR35kWX7_Dx6jH6JVdseOxI1MaejHu7gLHI8NvRihfYScM7Bzl7TEQH6nwGLAkUm87z8_FYFAV9EY8YWMQ0x_wzFCEPLsuECVqJysScf1m9aY3GslIxGn8u-EhjYXtA7DmHnIcmElyxvIhOjZFWEqlKdhPBksdFbRFhSOGOrX5bZhGCK9WUeapUDHej39hLmffQ_vsCvMKS6lkOjh-1q2X5ZgtoZwFabrIyA"/>
 </div>
 <div class="flex-grow">
 <div class="flex justify-between items-start">
@@ -221,7 +218,7 @@
 <div class="exercise-card bg-surface-container-low border border-border-subtle rounded-xl p-4 overflow-hidden relative group">
 <div class="flex gap-4 items-start">
 <div class="w-24 h-24 rounded-lg bg-surface-container-highest flex-shrink-0 overflow-hidden border border-border-subtle">
-<img alt="" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500" height="96" loading="lazy" width="96" src="https://lh3.googleusercontent.com/aida/ADBb0ugtlgjWb1vQZKxWDnjgQDeI_YFEqPOuAn3XmanQdd9N6pjhAfwohQfPx0-PfhN6U2URTj1SMvmr7ApIb0tvWrvY2tdP5wMFP8lpytylVec3VmSF2ttVVEXqnesbKDg-oPrq62JocKtJa5RiHnibVX9LtPAMgVoVp1nOaM82MgLSI6Er-AkaEz4ZUiEbkkylYgFhPdxxdnEaZcLoYky-AZlyng3T6YaHvuvF35bJ5k-LeSPS1kIGilazAHs"/>
+<img alt="" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] duration-500" height="96" loading="lazy" width="96" src="https://lh3.googleusercontent.com/aida/ADBb0ugtlgjWb1vQZKxWDnjgQDeI_YFEqPOuAn3XmanQdd9N6pjhAfwohQfPx0-PfhN6U2URTj1SMvmr7ApIb0tvWrvY2tdP5wMFP8lpytylVec3VmSF2ttVVEXqnesbKDg-oPrq62JocKtJa5RiHnibVX9LtPAMgVoVp1nOaM82MgLSI6Er-AkaEz4ZUiEbkkylYgFhPdxxdnEaZcLoYky-AZlyng3T6YaHvuvF35bJ5k-LeSPS1kIGilazAHs"/>
 </div>
 <div class="flex-grow">
 <div class="flex justify-between items-start">
@@ -249,7 +246,7 @@
 </div>
 </div>
 <!-- Add Exercise Button -->
-<button aria-label="Adicionar exercício" class="w-full h-button-height-standard border-2 border-dashed border-border-subtle rounded-xl flex items-center justify-center gap-3 text-on-surface-variant hover:border-primary-fixed hover:text-primary-fixed transition-all active:scale-95 group" type="button">
+<button aria-label="Adicionar exercício" class="w-full h-button-height-standard border-2 border-dashed border-border-subtle rounded-xl flex items-center justify-center gap-3 text-on-surface-variant hover:border-primary-fixed hover:text-primary-fixed transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] active:scale-95 group" type="button">
 <span aria-hidden="true" class="material-symbols-outlined group-hover:rotate-90 transition-transform">add</span>
 <span class="font-headline-md text-label-md uppercase tracking-widest">Adicionar Exercício</span>
 </button>

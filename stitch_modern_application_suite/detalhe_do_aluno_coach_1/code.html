@@ -205,17 +205,17 @@
 </div>
 </div>
 <!-- Ação principal -->
-<button class="bg-primary-fixed-dim text-pure-black h-button-height-standard w-full rounded-full font-headline-md text-headline-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary-fixed-dim/20" type="button">
+<button class="bg-primary-fixed-dim text-pure-black h-button-height-standard w-full rounded-full font-headline-md text-headline-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-[background-color,border-color,color,opacity,transform,box-shadow,filter] shadow-lg shadow-primary-fixed-dim/20" type="button">
 <span aria-hidden="true" class="material-symbols-outlined" data-icon="add_chart">add_chart</span>
                 NOVA AVALIAÇÃO
             </button>
 </section>
 <!-- Abas de navegação -->
 <nav aria-label="Seções do aluno" class="flex justify-between border-b border-border-subtle mb-6 sticky top-20 bg-pure-black z-40" role="tablist">
-<button aria-controls="tab-treinos" aria-selected="true" class="pb-3 text-primary-fixed-dim font-bold font-label-md text-label-md border-b-2 border-primary-fixed-dim transition-colors" data-tab-button="treinos" onclick="switchTab('treinos')" role="tab" type="button">Treinos</button>
-<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="historico" onclick="switchTab('historico')" role="tab" type="button">Histórico</button>
-<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="avaliacoes" onclick="switchTab('avaliacoes')" role="tab" type="button">Avaliações</button>
-<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="chat" onclick="switchTab('chat')" role="tab" type="button">Mensagens</button>
+<button aria-controls="tab-treinos" aria-selected="true" class="pb-3 text-primary-fixed-dim font-bold font-label-md text-label-md border-b-2 border-primary-fixed-dim transition-colors" data-tab-button="treinos" data-tab-target="treinos" role="tab" type="button">Treinos</button>
+<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="historico" data-tab-target="historico" role="tab" type="button">Histórico</button>
+<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="avaliacoes" data-tab-target="avaliacoes" role="tab" type="button">Avaliações</button>
+<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="chat" data-tab-target="chat" role="tab" type="button">Mensagens</button>
 </nav>
 <!-- Tab Content: Treinos (Default) -->
 <div aria-live="polite" class="space-y-6" id="tab-treinos" role="tabpanel">

@@ -177,7 +177,7 @@
 <!-- Top Navigation Shell -->
 <header class="bg-background/80 dark:bg-background/80 backdrop-blur-xl text-primary-fixed dark:text-primary-fixed fixed top-0 w-full z-50 border-b border-border-subtle flex items-center justify-between px-container-margin h-button-height-standard max-w-md">
 <div class="flex items-center gap-3">
-<button aria-label="Voltar" class="material-symbols-outlined hover:opacity-80 transition-opacity active:scale-95 transition-transform cursor-pointer" onclick="window.history.back()" type="button">arrow_back</button>
+<button aria-label="Voltar" class="material-symbols-outlined hover:opacity-80 transition-opacity active:scale-95 transition-transform cursor-pointer" data-history-back="true" type="button">arrow_back</button>
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-full overflow-hidden border border-primary-fixed">
 <img alt="Foto de perfil de Marcos Silva" class="w-full h-full object-cover" decoding="async" height="40" src="https://lh3.googleusercontent.com/aida/ADBb0uhKnkJvNaQel7wgC1bC5twtyhETGg5Vcsn44zM67A_z1qdv1erG4cwA_s7iDGnBmUa0MJYIqWGRHyn8iq_6W7PXvpm08ZsynH-OhX2ugI3zLXh2xV-k3eFmqReDT1NKug9akYAh9rFusg5amUYsyr0oaCWqIxzRVF6RTTT2Ofs9dDkVvJXpLmP1RHxuOdu90Lv4qxjtgImCDrvrfNJIScPUqg-on58zZfCgshi0VKU_2wb9eWEIrP44-Q" width="40"/>
@@ -319,6 +319,12 @@
         document.addEventListener('DOMContentLoaded', () => {
             const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const messages = document.querySelectorAll('.animate-fade-in');
+            const backButton = document.querySelector('[data-history-back="true"]');
+
+            if (backButton) {
+                backButton.addEventListener('click', () => window.history.back());
+            }
+
             if (prefersReducedMotion) {
                 messages.forEach((msg) => {
                     msg.style.opacity = '1';
