@@ -3,9 +3,9 @@
 <html class="dark" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="#131313" name="theme-color"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
         tailwind.config = {
@@ -116,6 +116,50 @@
             backdrop-filter: blur(30px);
             -webkit-backdrop-filter: blur(30px);
         }
+
+        html {
+            color-scheme: dark;
+            -webkit-tap-highlight-color: rgba(201, 242, 54, 0.18);
+        }
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+        .sr-only:focus,
+        .sr-only:focus-visible {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            width: auto;
+            height: auto;
+            margin: 0;
+            clip: auto;
+            white-space: normal;
+            z-index: 100;
+        }
+        :focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 3px;
+        }
+        a,
+        button {
+            touch-action: manipulation;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 <style>
     body {
@@ -124,19 +168,20 @@
   </style>
 </head>
 <body class="font-body-md text-body-md pb-32">
+<a class="sr-only rounded-full bg-primary-fixed px-4 py-3 font-label-md text-pure-black" href="#main-content">Pular para o conteúdo</a>
 <!-- Header / TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border-subtle flex items-center justify-between px-container-margin h-button-height-standard">
 <div class="flex items-center gap-4">
-<button class="active:scale-95 transition-transform">
+<button aria-label="Voltar" class="rounded-full active:scale-95 transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" type="button">
 <span class="material-symbols-outlined text-primary-fixed">arrow_back</span>
 </button>
 <h1 class="font-headline-md text-headline-md text-primary-fixed tracking-tight">HISTÓRICO DE AVALIAÇÕES</h1>
 </div>
 <div class="w-10 h-10 rounded-full overflow-hidden border border-primary-fixed/20">
-<img class="w-full h-full object-cover" data-alt="A close-up portrait of a determined athlete in a dark gym environment. The lighting is dramatic and low-key, highlighting muscle definition with high-contrast electric lime reflections. The overall mood is intense, professional, and focused, aligning with a high-performance fitness brand identity." src="https://lh3.googleusercontent.com/aida/ADBb0uhhun5hcLGO6277T_n9_ztUXdQsA8izGxfH3w3QMStYSrxmHGzEshImOHNmHzZjdTyGd-lyN-Elr0t5zUVo2mByUSOX2uVqyMrhHBb1dQIum9koUSZwJ6_xAzfPb460EvshnAdgJfs5ACcv-U2n8igEhBL4oJPtnPogDtXLnhcaTj37R2cKGheYQeSGrFGO1z4Ng-RpYm4mc4ANl2rXPGFdcW69hpuNqe-tMYihVcjDItPDA26V2IvZ-Co"/>
+<img alt="Perfil do aluno" class="w-full h-full object-cover" height="40" loading="lazy" width="40" src="https://lh3.googleusercontent.com/aida/ADBb0uhhun5hcLGO6277T_n9_ztUXdQsA8izGxfH3w3QMStYSrxmHGzEshImOHNmHzZjdTyGd-lyN-Elr0t5zUVo2mByUSOX2uVqyMrhHBb1dQIum9koUSZwJ6_xAzfPb460EvshnAdgJfs5ACcv-U2n8igEhBL4oJPtnPogDtXLnhcaTj37R2cKGheYQeSGrFGO1z4Ng-RpYm4mc4ANl2rXPGFdcW69hpuNqe-tMYihVcjDItPDA26V2IvZ-Co"/>
 </div>
 </header>
-<main class="mt-20 px-container-margin space-y-stack-gap-lg">
+<main id="main-content" tabindex="-1" class="mt-20 px-container-margin space-y-stack-gap-lg">
 <!-- Most Recent Assessment Card (Summary) -->
 <section class="mb-8">
 <h2 class="font-label-sm text-label-sm text-text-muted uppercase tracking-widest mb-4">EVOLUÇÃO VISUAL</h2>
@@ -148,7 +193,7 @@
 <span class="text-primary-fixed font-headline-md">12.4%</span>
 </div>
 <div class="h-32 w-full">
-<svg class="w-full h-full" viewbox="0 0 200 100">
+<svg aria-hidden="true" focusable="false" class="w-full h-full" viewbox="0 0 200 100">
 <!-- Grid Lines -->
 <line stroke="#333" stroke-width="0.5" x1="0" x2="200" y1="20" y2="20"></line>
 <line stroke="#333" stroke-width="0.5" x1="0" x2="200" y1="50" y2="50"></line>
@@ -183,7 +228,7 @@
 <span class="text-primary-fixed font-headline-md">78.5 KG</span>
 </div>
 <div class="h-32 w-full">
-<svg class="w-full h-full" viewbox="0 0 200 100">
+<svg aria-hidden="true" focusable="false" class="w-full h-full" viewbox="0 0 200 100">
 <!-- Grid Lines -->
 <line stroke="#333" stroke-width="0.5" x1="0" x2="200" y1="20" y2="20"></line>
 <line stroke="#333" stroke-width="0.5" x1="0" x2="200" y1="50" y2="50"></line>
@@ -208,7 +253,7 @@
 <span class="text-primary-fixed font-headline-md">78.5 KG</span>
 </div>
 <div class="h-32 w-full">
-<svg class="w-full h-full" viewbox="0 0 200 100">
+<svg aria-hidden="true" focusable="false" class="w-full h-full" viewbox="0 0 200 100">
 <!-- Grid Lines -->
 <line stroke="#333" stroke-width="0.5" x1="0" x2="200" y1="20" y2="20"></line>
 <line stroke="#333" stroke-width="0.5" x1="0" x2="200" y1="50" y2="50"></line>
@@ -285,7 +330,7 @@
 <span class="font-headline-md text-headline-md">77.2 kg</span>
 </div>
 </div>
-<button class="w-full h-12 flex items-center justify-center gap-2 border border-border-subtle rounded-full font-label-md text-label-md hover:border-primary-fixed hover:text-primary-fixed transition-all active:scale-95">
+<button class="w-full h-12 rounded-full border border-border-subtle font-label-md text-label-md hover:border-primary-fixed hover:text-primary-fixed active:scale-95 transition-[color,border-color,background-color,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background flex items-center justify-center gap-2" type="button">
                         VER DETALHES
                         <span class="material-symbols-outlined text-[18px]">chevron_right</span>
 </button>
@@ -315,7 +360,7 @@
 <span class="font-headline-md text-headline-md">75.0 kg</span>
 </div>
 </div>
-<button class="w-full h-12 flex items-center justify-center gap-2 border border-border-subtle rounded-full font-label-md text-label-md hover:border-primary-fixed hover:text-primary-fixed transition-all active:scale-95">
+<button class="w-full h-12 rounded-full border border-border-subtle font-label-md text-label-md hover:border-primary-fixed hover:text-primary-fixed active:scale-95 transition-[color,border-color,background-color,transform] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background flex items-center justify-center gap-2" type="button">
                         VER DETALHES
                         <span class="material-symbols-outlined text-[18px]">chevron_right</span>
 </button>
@@ -327,28 +372,28 @@
 </div>
 </section>
 </main>
-<!-- Bottom Navigation Shell -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-2xl glass-nav bg-pure-black/80 border-t border-border-subtle">
+<!-- Navegação inferior -->
+<nav aria-label="Navegação inferior" class="fixed bottom-0 w-full z-50 rounded-t-2xl glass-nav bg-pure-black/80 border-t border-border-subtle">
 <div class="flex justify-around items-center h-button-height-standard px-gutter w-full max-w-md mx-auto">
-<!-- Home -->
-<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
+<!-- Início -->
+<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
 <span class="material-symbols-outlined">home</span>
-<span class="font-label-sm text-label-sm mt-1">Home</span>
+<span class="font-label-sm text-label-sm mt-1">Início</span>
 </a>
-<!-- Workout -->
-<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
+<!-- Treinos -->
+<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
 <span class="material-symbols-outlined">fitness_center</span>
-<span class="font-label-sm text-label-sm mt-1">Workout</span>
+<span class="font-label-sm text-label-sm mt-1">Treinos</span>
 </a>
-<!-- Chat -->
-<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
+<!-- Mensagens -->
+<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
 <span class="material-symbols-outlined">chat_bubble</span>
-<span class="font-label-sm text-label-sm mt-1">Chat</span>
+<span class="font-label-sm text-label-sm mt-1">Mensagens</span>
 </a>
-<!-- Profile (Active) -->
-<a class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<!-- Perfil (ativo) -->
+<a aria-current="page" class="flex flex-col items-center justify-center rounded-full bg-surface-variant/30 px-4 py-1 font-bold text-primary-fixed active:scale-90 transition-transform duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" href="#">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
-<span class="font-label-sm text-label-sm mt-1">Profile</span>
+<span class="font-label-sm text-label-sm mt-1">Perfil</span>
 </a>
 </div>
 </nav>

@@ -1,323 +1,349 @@
 <!DOCTYPE html>
+<html class="dark" lang="pt-BR">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <meta content="#131313" name="theme-color"/>
+  <title>TRAINFLOW | Check-in Diário</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <style>
 
-<html class="dark" lang="pt-BR"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>TRAINFLOW | Check-in Diário</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue:wght@100..900&amp;family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-            display: inline-block;
-            line-height: 1;
+      .glass-card {
+        background: rgba(26, 26, 26, 0.6);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid #333333;
+      }
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+      html {
+        color-scheme: dark;
+        -webkit-tap-highlight-color: rgba(201, 242, 54, 0.18);
+      }
+      body {
+        min-height: max(884px, 100dvh);
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .sr-only:focus,
+      .sr-only:focus-visible {
+        position: fixed;
+        top: 1rem;
+        left: 1rem;
+        width: auto;
+        height: auto;
+        margin: 0;
+        clip: auto;
+        white-space: normal;
+        z-index: 100;
+      }
+      :focus-visible {
+        outline: 2px solid #c9f236;
+        outline-offset: 3px;
+      }
+      button,
+      a,
+      input,
+      select,
+      textarea {
+        touch-action: manipulation;
+      }
+      input[type="number"]::-webkit-outer-spin-button,
+      input[type="number"]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+      .input-shell {
+        transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+      }
+      .input-shell.is-active {
+        transform: scale(1.02);
+      }
+      .no-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+          scroll-behavior: auto !important;
         }
-        .glass-card {
-            background: rgba(26, 26, 26, 0.6);
-            backdrop-filter: blur(20px);
-            border: 1px solid #333333;
+        .input-shell.is-active {
+          transform: none;
         }
-        .progress-ring-container {
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            background: transparent;
-        }
-        input[type="range"]::-webkit-slider-runnable-track {
-            width: 100%;
-            height: 8px;
-            background: #333333;
-            border-radius: 4px;
-        }
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            height: 24px;
-            width: 24px;
-            border-radius: 50%;
-            background: #c9f236;
-            margin-top: -8px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(201, 242, 54, 0.4);
-        }
-        body {
-            background-color: #131313;
-            color: #e5e2e1;
-            font-family: 'Inter', sans-serif;
-        }
-        .hide-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-        .hide-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-    </style>
-<script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    "colors": {
-                        "on-error": "#690005",
-                        "on-background": "#e5e2e1",
-                        "surface-tint": "#aed50d",
-                        "surface": "#131313",
-                        "surface-container-high": "#2a2a2a",
-                        "on-error-container": "#ffdad6",
-                        "inverse-surface": "#e5e2e1",
-                        "on-tertiary-fixed": "#001e2d",
-                        "secondary-fixed-dim": "#c8c6c5",
-                        "surface-bright": "#3a3939",
-                        "on-primary-fixed-variant": "#3d4d00",
-                        "surface-container-highest": "#353534",
-                        "background": "#131313",
-                        "primary-fixed-dim": "#aed50d",
-                        "on-primary-fixed": "#171e00",
-                        "secondary-fixed": "#e5e2e1",
-                        "inverse-primary": "#526600",
-                        "on-primary-container": "#566c00",
-                        "on-primary": "#293500",
-                        "on-surface": "#e5e2e1",
-                        "on-secondary-container": "#b7b5b4",
-                        "text-muted": "#888888",
-                        "border-subtle": "#333333",
-                        "on-tertiary-fixed-variant": "#274b5f",
-                        "status-warning": "#FFB800",
-                        "surface-container": "#201f1f",
-                        "tertiary": "#fefdff",
-                        "on-secondary-fixed-variant": "#474746",
-                        "surface-variant": "#353534",
-                        "tertiary-fixed": "#c5e7ff",
-                        "outline-variant": "#444934",
-                        "surface-container-lowest": "#0e0e0e",
-                        "primary": "#ffffef",
-                        "on-surface-variant": "#c5c9ae",
-                        "surface-dim": "#131313",
-                        "primary-container": "#c8f135",
-                        "inverse-on-surface": "#313030",
-                        "tertiary-container": "#c2e6ff",
-                        "on-secondary": "#313030",
-                        "secondary": "#c8c6c5",
-                        "tertiary-fixed-dim": "#a8cbe4",
-                        "secondary-container": "#474746",
-                        "surface-container-low": "#1c1b1b",
-                        "pure-black": "#000000",
-                        "on-tertiary": "#0c3447",
-                        "error": "#ffb4ab",
-                        "outline": "#8f937b",
-                        "on-secondary-fixed": "#1c1b1b",
-                        "error-container": "#93000a",
-                        "primary-fixed": "#c9f236",
-                        "on-tertiary-container": "#45687d"
-                    },
-                    "borderRadius": {
-                        "DEFAULT": "0.25rem",
-                        "lg": "0.5rem",
-                        "xl": "0.75rem",
-                        "full": "9999px"
-                    },
-                    "spacing": {
-                        "gutter": "1rem",
-                        "button-height-standard": "3.5rem",
-                        "stack-gap-lg": "2rem",
-                        "touch-target-min": "2.75rem",
-                        "container-margin": "1.5rem",
-                        "button-height-heavy": "5rem"
-                    },
-                    "fontFamily": {
-                        "label-sm": ["Inter"],
-                        "headline-md": ["Bebas Neue"],
-                        "display-lg": ["Bebas Neue"],
-                        "display-giant": ["Bebas Neue"],
-                        "headline-lg": ["Bebas Neue"],
-                        "body-lg": ["Inter"],
-                        "body-md": ["Inter"],
-                        "label-md": ["Inter"]
-                    },
-                    "fontSize": {
-                        "label-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "500" }],
-                        "headline-md": ["24px", { "lineHeight": "28px", "letterSpacing": "0.05em", "fontWeight": "600" }],
-                        "display-lg": ["64px", { "lineHeight": "64px", "fontWeight": "700" }],
-                        "display-giant": ["120px", { "lineHeight": "110px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
-                        "headline-lg": ["32px", { "lineHeight": "36px", "letterSpacing": "0.05em", "fontWeight": "700" }],
-                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }],
-                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-                        "label-md": ["14px", { "lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "500" }]
-                    }
-                },
-            },
-        }
-    </script>
-<style>
-    body {
-      min-height: max(884px, 100dvh);
-    }
+      }
+
+      .progress-ring-container {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      input[type="range"] {
+        -webkit-appearance: none;
+        width: 100%;
+        background: transparent;
+      }
+      input[type="range"]::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8px;
+        background: #333333;
+        border-radius: 4px;
+      }
+      input[type="range"]::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        height: 24px;
+        width: 24px;
+        border-radius: 50%;
+        background: #c9f236;
+        margin-top: -8px;
+        cursor: pointer;
+        box-shadow: 0 0 10px rgba(201, 242, 54, 0.4);
+      }
+      body {
+        background-color: #131313;
+        color: #e5e2e1;
+        font-family: 'Inter', sans-serif;
+      }
+      .hide-scrollbar::-webkit-scrollbar {
+        display: none;
+      }
+      .hide-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+      }
   </style>
-  </head>
-<body class="bg-background text-on-background min-h-screen flex flex-col hide-scrollbar">
-<!-- TopAppBar -->
-<header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-border-subtle flex items-center justify-between px-container-margin h-button-height-standard">
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full overflow-hidden border border-primary-fixed">
-<img alt="Avatar" class="w-full h-full object-cover" data-alt="A high-contrast, professional studio portrait of a fit individual with dramatic lighting, emphasizing athletic determination. The background is a dark, minimalist gym setting with subtle neon green accents. This photography style is clean, modern, and high-performance, matching the electric lime and pure black branding of a premium fitness application." src="https://lh3.googleusercontent.com/aida/ADBb0ugHbwLlLdQVN1_amxpc58sZK7z2TRX-0G8hRceKd_pE_o3NueO0MXm7BDfkEhL9GSvddtkKTGeoR_qN2KN7nWIkAoPwCBChAT18c9jHAd8NIPaMddTSQYERN5v2NQEGMUFu9P3rylRlKG0TpKz4LCdo7ehXsDDDkhbMDRhDAZGYi0XaGbzwZrDF_NPdgqSZMeUQ3dNXgF-_ELWT137IotCsJgjwLhWh9qWc8DZLOak1ZWcBRUqF9DVEw1U"/>
-</div>
-<span class="font-display-lg text-display-lg text-primary-fixed tracking-tighter">TRAINFLOW</span>
-</div>
-<button class="material-symbols-outlined text-primary-fixed dark:text-primary-fixed text-headline-lg-mobile hover:opacity-80 transition-opacity active:scale-95 transition-transform">
-            notifications
-        </button>
-</header>
-<!-- Main Content -->
-<main class="flex-1 pt-24 pb-32 px-container-margin max-w-lg mx-auto w-full">
-<div class="mb-stack-gap-lg">
-<h1 class="font-headline-lg text-headline-lg uppercase text-primary-fixed leading-tight mb-2">Check-in de Hábitos</h1>
-<p class="font-body-md text-on-surface-variant">Registre sua performance diária para seu Personal acompanhar.</p>
-</div>
-<div class="grid grid-cols-1 gap-6">
-<!-- Water Intake Card -->
-<div class="glass-card rounded-xl p-6 flex flex-col gap-4">
-<div class="flex justify-between items-center">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed">water_drop</span>
-<h2 class="font-headline-md text-headline-md uppercase">Hidratação</h2>
-</div>
-<span class="font-headline-md text-primary-fixed" id="water-value">2.5L</span>
-</div>
-<div class="progress-ring-container py-4">
-<svg class="w-32 h-32 transform -rotate-90">
-<circle class="text-surface-container-highest" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
-<circle class="text-primary-fixed transition-all duration-500" cx="64" cy="64" fill="transparent" id="water-ring" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="145.7" stroke-width="8"></circle>
-</svg>
-<div class="absolute flex flex-col items-center">
-<span class="font-label-sm text-on-surface-variant uppercase">Meta</span>
-<span class="font-headline-md">4.0L</span>
-</div>
-</div>
-<div class="flex items-center gap-4">
-<button class="w-12 h-12 flex items-center justify-center rounded-full bg-surface-container-high border border-border-subtle active:scale-90 transition-transform" onclick="updateWater(-0.25)">
-<span class="material-symbols-outlined">remove</span>
-</button>
-<div class="flex-1 h-2 bg-surface-container-highest rounded-full relative overflow-hidden">
-<div class="absolute left-0 top-0 h-full bg-primary-fixed transition-all duration-500" id="water-bar" style="width: 62.5%"></div>
-</div>
-<button class="w-12 h-12 flex items-center justify-center rounded-full bg-primary-fixed text-pure-black active:scale-90 transition-transform" onclick="updateWater(0.25)">
-<span class="material-symbols-outlined">add</span>
-</button>
-</div>
-</div>
-<!-- Protein Card -->
-<div class="glass-card rounded-xl p-6 flex flex-col gap-4">
-<div class="flex justify-between items-center">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed">restaurant</span>
-<h2 class="font-headline-md text-headline-md uppercase">Proteína</h2>
-</div>
-<span class="font-headline-md text-primary-fixed" id="protein-value">145g</span>
-</div>
-<p class="font-body-md text-on-surface-variant">Arraste para definir o consumo total de hoje.</p>
-<div class="py-2">
-<input class="w-full" id="protein-slider" max="250" min="0" type="range" value="145"/>
-</div>
-<div class="flex justify-between font-label-sm text-on-surface-variant uppercase">
-<span>0g</span>
-<span>180g (Meta)</span>
-<span>250g</span>
-</div>
-</div>
-<!-- Sleep Card -->
-<div class="glass-card rounded-xl p-6 flex flex-col gap-4">
-<div class="flex justify-between items-center">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-primary-fixed">bedtime</span>
-<h2 class="font-headline-md text-headline-md uppercase">Sono</h2>
-</div>
-<span class="font-headline-md text-primary-fixed" id="sleep-value">7.5h</span>
-</div>
-<div class="flex gap-2 h-24 items-end justify-between">
-<div class="w-full bg-surface-container-highest rounded-t-lg transition-all duration-500" style="height: 60%"></div>
-<div class="w-full bg-surface-container-highest rounded-t-lg transition-all duration-500" style="height: 85%"></div>
-<div class="w-full bg-surface-container-highest rounded-t-lg transition-all duration-500" style="height: 40%"></div>
-<div class="w-full bg-surface-container-highest rounded-t-lg transition-all duration-500" style="height: 70%"></div>
-<div class="w-full bg-surface-container-highest rounded-t-lg transition-all duration-500" style="height: 90%"></div>
-<div class="w-full bg-surface-container-highest rounded-t-lg transition-all duration-500" style="height: 65%"></div>
-<div class="w-full bg-primary-fixed rounded-t-lg transition-all duration-500" style="height: 75%"></div>
-</div>
-<div class="flex justify-between font-label-sm text-on-surface-variant uppercase">
-<span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SAB</span><span class="text-primary-fixed">HOJE</span>
-</div>
-<div class="flex items-center justify-center gap-4 mt-2">
-<input class="w-full" id="sleep-slider" max="12" min="0" step="0.5" type="range" value="7.5"/>
-</div>
-</div>
-<!-- Submit Button -->
-<button class="w-full h-button-height-standard bg-primary-fixed text-pure-black font-headline-md uppercase rounded-full mt-4 active:scale-95 transition-transform shadow-[0_0_20px_rgba(201,242,54,0.3)]">
-                Salvar Check-in
-            </button>
-</div>
-</main>
-<!-- BottomNavBar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-pure-black/80 dark:bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle">
-<div class="flex justify-around items-center h-button-height-standard px-gutter w-full max-w-md mx-auto">
-<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</a>
-<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined">fitness_center</span>
-<span class="font-label-sm text-label-sm">Workout</span>
-</a>
-<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined">chat_bubble</span>
-<span class="font-label-sm text-label-sm">Chat</span>
-</a>
-<a class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
-<span class="font-label-sm text-label-sm">Profile</span>
-</a>
-</div>
-</nav>
-<script>
-        let waterAmount = 2.5;
-        const waterMeta = 4.0;
-        const waterRing = document.getElementById('water-ring');
-        const waterValue = document.getElementById('water-value');
-        const waterBar = document.getElementById('water-bar');
-        const proteinSlider = document.getElementById('protein-slider');
-        const proteinValue = document.getElementById('protein-value');
-        const sleepSlider = document.getElementById('sleep-slider');
-        const sleepValue = document.getElementById('sleep-value');
-
-        function updateWater(val) {
-            waterAmount = Math.max(0, Math.min(waterMeta, waterAmount + val));
-            waterValue.innerText = waterAmount.toFixed(1) + 'L';
-            
-            const percentage = (waterAmount / waterMeta) * 100;
-            waterBar.style.width = percentage + '%';
-            
-            // Circumference of r=58 circle is ~364.4
-            const offset = 364.4 - (364.4 * (percentage / 100));
-            waterRing.style.strokeDashoffset = offset;
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            'on-background': '#e5e2e1',
+            surface: '#131313',
+            'surface-container-high': '#2a2a2a',
+            'surface-container-highest': '#353534',
+            background: '#131313',
+            'text-muted': '#888888',
+            'border-subtle': '#333333',
+            'surface-variant': '#353534',
+            'surface-container-lowest': '#0e0e0e',
+            'on-surface-variant': '#c5c9ae',
+            'surface-container-low': '#1c1b1b',
+            'pure-black': '#000000',
+            'primary-fixed': '#c9f236'
+          },
+          borderRadius: { DEFAULT: '0.25rem', lg: '0.5rem', xl: '0.75rem', full: '9999px' },
+          spacing: { gutter: '1rem', 'button-height-standard': '3.5rem', 'stack-gap-lg': '2rem', 'touch-target-min': '2.75rem', 'container-margin': '1.5rem', 'button-height-heavy': '5rem' },
+          fontFamily: { 'label-sm': ['Inter'], 'headline-md': ['Bebas Neue'], 'display-lg': ['Bebas Neue'], 'headline-lg': ['Bebas Neue'], 'body-lg': ['Inter'], 'body-md': ['Inter'], 'label-md': ['Inter'] },
+          fontSize: {
+            'label-sm': ['12px', { lineHeight: '16px', letterSpacing: '0.02em', fontWeight: '500' }],
+            'headline-md': ['24px', { lineHeight: '28px', letterSpacing: '0.05em', fontWeight: '600' }],
+            'display-lg': ['64px', { lineHeight: '64px', fontWeight: '700' }],
+            'headline-lg': ['32px', { lineHeight: '36px', letterSpacing: '0.05em', fontWeight: '700' }],
+            'body-lg': ['18px', { lineHeight: '28px', fontWeight: '400' }],
+            'body-md': ['16px', { lineHeight: '24px', fontWeight: '400' }],
+            'label-md': ['14px', { lineHeight: '20px', letterSpacing: '0.01em', fontWeight: '500' }]
+          }
         }
+      }
+    };
+  </script>
+</head>
+<body class="hide-scrollbar flex min-h-screen flex-col bg-background text-on-background">
+  <a class="sr-only rounded-full bg-primary-fixed px-4 py-3 font-label-md text-pure-black" href="#main-content">Pular para o conteúdo</a>
+  <header class="fixed top-0 z-50 flex h-button-height-standard w-full items-center justify-between border-b border-border-subtle bg-background/80 px-container-margin backdrop-blur-xl">
+    <div class="flex items-center gap-3">
+      <div class="h-10 w-10 overflow-hidden rounded-full border border-primary-fixed">
+        <img alt="Avatar do aluno" class="h-full w-full object-cover" height="40" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0ugHbwLlLdQVN1_amxpc58sZK7z2TRX-0G8hRceKd_pE_o3NueO0MXm7BDfkEhL9GSvddtkKTGeoR_qN2KN7nWIkAoPwCBChAT18c9jHAd8NIPaMddTSQYERN5v2NQEGMUFu9P3rylRlKG0TpKz4LCdo7ehXsDDDkhbMDRhDAZGYi0XaGbzwZrDF_NPdgqSZMeUQ3dNXgF-_ELWT137IotCsJgjwLhWh9qWc8DZLOak1ZWcBRUqF9DVEw1U" width="40"/>
+      </div>
+      <p class="font-display-lg text-display-lg tracking-tighter text-primary-fixed">TRAINFLOW</p>
+    </div>
+    <button aria-label="Abrir notificações" class="rounded-full text-primary-fixed transition-opacity hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background" type="button">
+      <span aria-hidden="true" class="material-symbols-outlined">notifications</span>
+    </button>
+  </header>
+  <main id="main-content" tabindex="-1" class="mx-auto flex-1 w-full max-w-lg px-container-margin pb-32 pt-24">
+    <div class="mb-stack-gap-lg">
+      <h1 class="mb-2 font-headline-lg text-headline-lg uppercase leading-tight text-primary-fixed">Check-in de Hábitos</h1>
+      <p class="font-body-md text-on-surface-variant">Registre sua performance diária para seu personal acompanhar.</p>
+    </div>
+    <form class="grid grid-cols-1 gap-6" id="daily-form" novalidate>
+      <section class="glass-card flex flex-col gap-4 rounded-xl p-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">water_drop</span>
+            <h2 class="font-headline-md text-headline-md uppercase">Hidratação</h2>
+          </div>
+          <output aria-live="polite" class="font-headline-md text-primary-fixed" for="water-amount" id="water-value">2.5L</output>
+        </div>
+        <div class="progress-ring-container py-4">
+          <svg aria-hidden="true" class="h-32 w-32 -rotate-90 transform" focusable="false">
+            <circle class="text-surface-container-highest" cx="64" cy="64" fill="transparent" r="58" stroke="currentColor" stroke-width="8"></circle>
+            <circle class="text-primary-fixed transition-[stroke-dashoffset] duration-500" cx="64" cy="64" fill="transparent" id="water-ring" r="58" stroke="currentColor" stroke-dasharray="364.4" stroke-dashoffset="145.7" stroke-width="8"></circle>
+          </svg>
+          <div class="absolute flex flex-col items-center">
+            <span class="font-label-sm uppercase text-on-surface-variant">Meta</span>
+            <span class="font-headline-md">4.0L</span>
+          </div>
+        </div>
+        <input id="water-amount" name="waterAmount" type="hidden" value="2.5"/>
+        <div class="flex items-center gap-4">
+          <button aria-label="Diminuir agua em 250 mililitros" class="flex h-12 w-12 items-center justify-center rounded-full border border-border-subtle bg-surface-container-high transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-90" data-water-step="-0.25" type="button">
+            <span aria-hidden="true" class="material-symbols-outlined">remove</span>
+          </button>
+          <div class="relative h-2 flex-1 overflow-hidden rounded-full bg-surface-container-highest">
+            <div class="absolute left-0 top-0 h-full bg-primary-fixed transition-[width] duration-500" id="water-bar" style="width: 62.5%"></div>
+          </div>
+          <button aria-label="Aumentar agua em 250 mililitros" class="flex h-12 w-12 items-center justify-center rounded-full bg-primary-fixed text-pure-black transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-90" data-water-step="0.25" type="button">
+            <span aria-hidden="true" class="material-symbols-outlined">add</span>
+          </button>
+        </div>
+      </section>
+      <section class="glass-card flex flex-col gap-4 rounded-xl p-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">restaurant</span>
+            <h2 class="font-headline-md text-headline-md uppercase">Proteína</h2>
+          </div>
+          <output aria-live="polite" class="font-headline-md text-primary-fixed" for="protein-slider" id="protein-value">145g</output>
+        </div>
+        <label class="font-body-md text-on-surface-variant" for="protein-slider">Arraste para definir o consumo total de hoje.</label>
+        <div class="py-2">
+          <input aria-describedby="protein-scale" class="w-full" id="protein-slider" max="250" min="0" name="protein" step="1" type="range" value="145"/>
+        </div>
+        <div class="flex justify-between font-label-sm uppercase text-on-surface-variant" id="protein-scale">
+          <span>0g</span>
+          <span>180g (Meta)</span>
+          <span>250g</span>
+        </div>
+      </section>
+      <section class="glass-card flex flex-col gap-4 rounded-xl p-6">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center gap-3">
+            <span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">bedtime</span>
+            <h2 class="font-headline-md text-headline-md uppercase">Sono</h2>
+          </div>
+          <output aria-live="polite" class="font-headline-md text-primary-fixed" for="sleep-slider" id="sleep-value">7.5h</output>
+        </div>
+        <div aria-hidden="true" class="flex h-24 items-end justify-between gap-2">
+          <div class="w-full rounded-t-lg bg-surface-container-highest transition-[height] duration-500" style="height: 60%"></div>
+          <div class="w-full rounded-t-lg bg-surface-container-highest transition-[height] duration-500" style="height: 85%"></div>
+          <div class="w-full rounded-t-lg bg-surface-container-highest transition-[height] duration-500" style="height: 40%"></div>
+          <div class="w-full rounded-t-lg bg-surface-container-highest transition-[height] duration-500" style="height: 70%"></div>
+          <div class="w-full rounded-t-lg bg-surface-container-highest transition-[height] duration-500" style="height: 90%"></div>
+          <div class="w-full rounded-t-lg bg-surface-container-highest transition-[height] duration-500" style="height: 65%"></div>
+          <div class="w-full rounded-t-lg bg-primary-fixed transition-[height] duration-500" style="height: 75%"></div>
+        </div>
+        <div class="flex justify-between font-label-sm uppercase text-on-surface-variant">
+          <span>SEG</span><span>TER</span><span>QUA</span><span>QUI</span><span>SEX</span><span>SAB</span><span class="text-primary-fixed">HOJE</span>
+        </div>
+        <label class="font-body-md text-on-surface-variant" for="sleep-slider">Informe quantas horas você dormiu.</label>
+        <input class="w-full" id="sleep-slider" max="12" min="0" name="sleep" step="0.5" type="range" value="7.5"/>
+      </section>
+      <button class="mt-4 h-button-height-standard w-full rounded-full bg-primary-fixed font-headline-md uppercase text-pure-black shadow-[0_0_20px_rgba(201,242,54,0.3)] transition-[transform,box-shadow,filter] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-background active:scale-95" type="submit">Salvar Check-in</button>
+      <p aria-live="polite" class="sr-only" id="form-status">Formulario pronto para salvar.</p>
+    </form>
+  </main>
+  <nav aria-label="Navegação inferior" class="fixed bottom-0 z-50 w-full rounded-t-xl border-t border-border-subtle bg-pure-black/80 backdrop-blur-3xl">
+    <div class="mx-auto flex h-button-height-standard w-full max-w-md items-center justify-around px-gutter">
+      <a class="flex flex-col items-center justify-center text-secondary-fixed-dim transition-colors hover:text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-pure-black" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined">home</span>
+        <span class="font-label-sm text-label-sm">Home</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-secondary-fixed-dim transition-colors hover:text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-pure-black" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined">fitness_center</span>
+        <span class="font-label-sm text-label-sm">Workout</span>
+      </a>
+      <a class="flex flex-col items-center justify-center text-secondary-fixed-dim transition-colors hover:text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-pure-black" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined">chat_bubble</span>
+        <span class="font-label-sm text-label-sm">Chat</span>
+      </a>
+      <a aria-current="page" class="flex flex-col items-center justify-center rounded-full bg-surface-variant/30 px-4 py-1 font-bold text-primary-fixed focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-fixed focus-visible:ring-offset-2 focus-visible:ring-offset-pure-black" href="#">
+        <span aria-hidden="true" class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+        <span class="font-label-sm text-label-sm">Profile</span>
+      </a>
+    </div>
+  </nav>
+  <script>
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    let waterAmount = 2.5;
+    const waterGoal = 4.0;
+    const waterRing = document.getElementById('water-ring');
+    const waterValue = document.getElementById('water-value');
+    const waterBar = document.getElementById('water-bar');
+    const waterField = document.getElementById('water-amount');
+    const proteinSlider = document.getElementById('protein-slider');
+    const proteinValue = document.getElementById('protein-value');
+    const sleepSlider = document.getElementById('sleep-slider');
+    const sleepValue = document.getElementById('sleep-value');
+    const formStatus = document.getElementById('form-status');
 
-        proteinSlider.addEventListener('input', (e) => {
-            proteinValue.innerText = e.target.value + 'g';
-        });
+    function updateWater(step) {
+      waterAmount = Math.max(0, Math.min(waterGoal, waterAmount + step));
+      waterField.value = waterAmount.toFixed(2);
+      waterValue.textContent = waterAmount.toFixed(1) + 'L';
+      const percentage = (waterAmount / waterGoal) * 100;
+      waterBar.style.width = percentage + '%';
+      waterRing.style.strokeDashoffset = 364.4 - (364.4 * (percentage / 100));
+      formStatus.textContent = 'Hidratação ajustada para ' + waterValue.textContent + '.';
+    }
 
-        sleepSlider.addEventListener('input', (e) => {
-            sleepValue.innerText = e.target.value + 'h';
-        });
+    function updateProtein() {
+      proteinValue.textContent = proteinSlider.value + 'g';
+      proteinSlider.setAttribute('aria-valuetext', proteinSlider.value + ' gramas');
+    }
 
-        // Minimalist atmospheric effect: random subtle pulse on primary elements
-        setInterval(() => {
-            const btn = document.querySelector('button.bg-primary-fixed');
-            btn.style.boxShadow = `0 0 ${20 + Math.random() * 10}px rgba(201, 242, 54, 0.4)`;
-        }, 2000);
-    </script>
-</body></html>
+    function updateSleep() {
+      sleepValue.textContent = sleepSlider.value + 'h';
+      sleepSlider.setAttribute('aria-valuetext', sleepSlider.value + ' horas');
+    }
+
+    document.querySelectorAll('[data-water-step]').forEach((button) => {
+      button.addEventListener('click', () => updateWater(parseFloat(button.dataset.waterStep)));
+    });
+    proteinSlider.addEventListener('input', () => {
+      updateProtein();
+      formStatus.textContent = 'Proteína atualizada para ' + proteinValue.textContent + '.';
+    });
+    sleepSlider.addEventListener('input', () => {
+      updateSleep();
+      formStatus.textContent = 'Sono atualizado para ' + sleepValue.textContent + '.';
+    });
+    document.getElementById('daily-form').addEventListener('submit', (event) => {
+      event.preventDefault();
+      formStatus.textContent = 'Check-in salvo com sucesso.';
+    });
+
+    if (!prefersReducedMotion.matches) {
+      window.setInterval(() => {
+        const button = document.querySelector('button[type="submit"]');
+        if (!button) return;
+        button.style.boxShadow = `0 0 ${20 + Math.random() * 10}px rgba(201, 242, 54, 0.4)`;
+      }, 2000);
+    }
+
+    updateProtein();
+    updateSleep();
+  </script>
+</body>
+</html>

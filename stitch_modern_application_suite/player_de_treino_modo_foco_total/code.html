@@ -111,6 +111,38 @@
             font-family: 'Inter', sans-serif;
             overflow-x: hidden;
         }
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background-color: #c9f236;
+            color: #000000;
+            transform: translateY(-200%);
+            transition: transform 0.2s ease;
+        }
+        .skip-link:focus-visible {
+            transform: translateY(0);
+            outline: 2px solid #e5e2e1;
+            outline-offset: 2px;
+        }
+        .focus-ring:focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 3px;
+        }
+        .transition-interactive {
+            transition-property: transform, opacity, box-shadow, color, background-color, border-color;
+            transition-duration: 200ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        button,
+        input,
+        a {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(201, 242, 54, 0.16);
+        }
 
         .glass-panel {
             background: rgba(26, 26, 26, 0.4);
@@ -137,6 +169,13 @@
         }
 
         .bebas { font-family: 'Bebas Neue', sans-serif; }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 <style>
     body {
@@ -145,21 +184,26 @@
   </style>
   </head>
 <body class="flex flex-col min-h-screen">
+<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 <!-- Top Navigation (Shell Implementation) -->
 <header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-border-subtle flex items-center justify-between px-container-margin h-button-height-standard">
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-primary-fixed active:scale-95 transition-transform cursor-pointer">arrow_back</span>
-<h1 class="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary-fixed tracking-tighter uppercase">TRAINFLOW</h1>
+<button aria-label="Voltar" class="focus-ring text-primary-fixed active:scale-95 transition-transform" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">arrow_back</span>
+</button>
+<p class="font-display-lg text-headline-lg-mobile md:text-display-lg text-primary-fixed tracking-tighter uppercase">TRAINFLOW</p>
 </div>
 <div class="flex items-center gap-4">
 <div class="w-10 h-10 rounded-full bg-surface-container-high border border-border-subtle flex items-center justify-center overflow-hidden">
-<img alt="Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uhuFX4_AYk1YzBQuMlRvVUZ1ti216AHHYAgRbWHswupiPZta3YXxupKFuUxA7ljgzt7N5oMS36PgakgFYLlawq00457HlJKNMr5r76rA89xnx36mZE4qOCGBXoNBAv46L5J2QArNbO5gQDy8FUCTwuwCuSR0YvAy3L1waRSA1fzD1LiTE0y79TI-g0Kwx0b0c-A_rcI3IZO31MP1DDF06K_OQ_Hk8ISkdHJrMP3hjge-sHpMPONcFrJ42A"/>
+<img alt="Perfil do usuario" class="w-full h-full object-cover" height="40" loading="eager" src="https://lh3.googleusercontent.com/aida/ADBb0uhuFX4_AYk1YzBQuMlRvVUZ1ti216AHHYAgRbWHswupiPZta3YXxupKFuUxA7ljgzt7N5oMS36PgakgFYLlawq00457HlJKNMr5r76rA89xnx36mZE4qOCGBXoNBAv46L5J2QArNbO5gQDy8FUCTwuwCuSR0YvAy3L1waRSA1fzD1LiTE0y79TI-g0Kwx0b0c-A_rcI3IZO31MP1DDF06K_OQ_Hk8ISkdHJrMP3hjge-sHpMPONcFrJ42A" width="40"/>
 </div>
-<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity cursor-pointer">notifications</span>
+<button aria-label="Notificações" class="focus-ring text-on-surface-variant hover:opacity-80 transition-opacity" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">notifications</span>
+</button>
 </div>
 </header>
 <!-- Main Workout Player -->
-<main class="flex-1 flex flex-col pt-24 pb-32 px-container-margin max-w-lg mx-auto w-full gap-stack-gap-lg">
+<main class="flex-1 flex flex-col pt-24 pb-32 px-container-margin max-w-lg mx-auto w-full gap-stack-gap-lg" id="main-content" tabindex="-1">
 <!-- Exercise Status Header -->
 <div class="flex flex-col gap-2">
 <div class="flex items-center justify-between">
@@ -176,7 +220,7 @@
 </div>
 <!-- Immersive Exercise Visual/Background -->
 <div class="relative w-full aspect-video rounded-xl overflow-hidden glass-panel group">
-<img class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700" data-alt="A gritty, high-contrast black and white photograph of a powerful muscular athlete performing a heavy deadlift in a dark industrial gym. Intense green neon light strips on the background wall create a geometric pattern that slices through the shadows. The atmosphere is aggressive and focused, with sweat glistening on the athlete's skin under dramatic overhead spotlighting. Professional sports photography style." src="https://lh3.googleusercontent.com/aida/ADBb0ujM4KsUtW9C1r04X4keyb9b82DdU9vWNalEzWcfmPPaHiJJm_Z7b9VO8JOy9LKqd96Hx_qFmNzHxHY1pIv5HPCFxsDZmD_5YAFNUcvA5Ml1Jog4mWJ4JpSYmc5qk12HZUEj6bbyndzwwVHQMFOL5y6pruso78YUAMlFZwFdowUIBCirqmuv-s0vVyKB0WCmBqCksaCvqi_Ig-fRycx4RfTcubmUm-uuuAB0bLZUM-Vw7XzDIeEOOkUjIIU"/>
+<img alt="Atleta executando levantamento terra em ambiente escuro" class="w-full h-full object-cover opacity-60 group-hover:opacity-80 transition-opacity duration-700" fetchpriority="high" height="720" loading="eager" src="https://lh3.googleusercontent.com/aida/ADBb0ujM4KsUtW9C1r04X4keyb9b82DdU9vWNalEzWcfmPPaHiJJm_Z7b9VO8JOy9LKqd96Hx_qFmNzHxHY1pIv5HPCFxsDZmD_5YAFNUcvA5Ml1Jog4mWJ4JpSYmc5qk12HZUEj6bbyndzwwVHQMFOL5y6pruso78YUAMlFZwFdowUIBCirqmuv-s0vVyKB0WCmBqCksaCvqi_Ig-fRycx4RfTcubmUm-uuuAB0bLZUM-Vw7XzDIeEOOkUjIIU" width="1280"/>
 <div class="absolute inset-0 bg-gradient-to-t from-pure-black via-transparent to-transparent"></div>
 <!-- Intensity Indicator Overlay -->
 <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
@@ -203,19 +247,19 @@
 <span class="font-display-giant text-display-giant select-none">FOCUS</span>
 </div>
 <p class="font-label-md text-primary-fixed tracking-[0.3em] uppercase mb-2">TEMPO DE DESCANSO</p>
-<div class="font-display-giant text-display-giant leading-none tracking-tighter text-on-background pulse-active" id="rest-timer">
+<div class="font-display-giant text-display-giant leading-none tracking-tighter text-on-background pulse-active" id="rest-timer" role="timer">
                 01:28
             </div>
 <div class="flex gap-4 mt-8">
-<button class="w-14 h-14 rounded-full border border-border-subtle flex items-center justify-center active:scale-90 transition-transform" onclick="adjustTime(-15)">
-<span class="material-symbols-outlined text-on-surface">15mp</span>
+<button aria-label="Reduzir descanso em 15 segundos" class="focus-ring w-14 h-14 rounded-full border border-border-subtle flex items-center justify-center active:scale-90 transition-transform" onclick="adjustTime(-15)" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface">15mp</span>
 </button>
-<button class="px-8 h-14 rounded-full bg-primary-fixed text-pure-black font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all electric-glow" id="timer-toggle" onclick="toggleTimer()">
-<span class="material-symbols-outlined" id="timer-icon">pause</span>
-<span class="font-label-md">PULAR DESCANSO</span>
+<button aria-label="Pausar descanso" aria-pressed="true" class="focus-ring px-8 h-14 rounded-full bg-primary-fixed text-pure-black font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-interactive electric-glow" id="timer-toggle" type="button">
+<span aria-hidden="true" class="material-symbols-outlined" id="timer-icon">pause</span>
+<span class="font-label-md" id="timer-label">PAUSAR DESCANSO</span>
 </button>
-<button class="w-14 h-14 rounded-full border border-border-subtle flex items-center justify-center active:scale-90 transition-transform" onclick="adjustTime(15)">
-<span class="material-symbols-outlined text-on-surface">15mp</span>
+<button aria-label="Aumentar descanso em 15 segundos" class="focus-ring w-14 h-14 rounded-full border border-border-subtle flex items-center justify-center active:scale-90 transition-transform" onclick="adjustTime(15)" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-on-surface">15mp</span>
 </button>
 </div>
 </div>
@@ -240,7 +284,7 @@
 <div class="glass-panel px-6 py-4 rounded-full flex items-center justify-between border border-border-subtle mt-4">
 <div class="flex items-center gap-3 overflow-hidden">
 <div class="w-10 h-10 rounded-lg bg-surface-container-highest flex-shrink-0 overflow-hidden relative">
-<img class="w-full h-full object-cover" data-alt="Abstract music album art with dark moody textures, electric lime geometric accents and liquid glitch effects. High-end modern music player aesthetic, professional lighting, cinematic vibe." src="https://lh3.googleusercontent.com/aida/ADBb0ug7nIBSx6GC35dm-oxihMG0UOm1BTX5IP1FTtnUP8m9hRW4U9ubHcva1rV29hYGZQe_Aqh2ULj9AAqWmxnENoMnYQPUEot4hAXcm18zW12LIW2v6cpFOiu9khDQCHjxGDSlIPs65w3fg8r8HkxHqFQaoqfr9hzKr40SJS4lgW5wIG0S6kifB0BMbGquhzFhqXbUPJg1sOASGGSef8LlyQ04Agj-yIBAM30fAebq3lzidQmpoCW5SzxUGg"/>
+<img alt="Capa do album Phonk Focus Volume 1" class="w-full h-full object-cover" height="40" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0ug7nIBSx6GC35dm-oxihMG0UOm1BTX5IP1FTtnUP8m9hRW4U9ubHcva1rV29hYGZQe_Aqh2ULj9AAqWmxnENoMnYQPUEot4hAXcm18zW12LIW2v6cpFOiu9khDQCHjxGDSlIPs65w3fg8r8HkxHqFQaoqfr9hzKr40SJS4lgW5wIG0S6kifB0BMbGquhzFhqXbUPJg1sOASGGSef8LlyQ04Agj-yIBAM30fAebq3lzidQmpoCW5SzxUGg" width="40"/>
 </div>
 <div class="flex flex-col truncate">
 <span class="font-label-md text-on-surface truncate">PHONK FOCUS - VOLUME 1</span>
@@ -248,33 +292,37 @@
 </div>
 </div>
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer active:scale-90 transition-transform">skip_previous</span>
-<div class="w-10 h-10 rounded-full bg-on-surface text-pure-black flex items-center justify-center cursor-pointer active:scale-95 transition-transform">
-<span class="material-symbols-outlined">play_arrow</span>
-</div>
-<span class="material-symbols-outlined text-on-surface-variant hover:text-on-surface cursor-pointer active:scale-90 transition-transform">skip_next</span>
+<button aria-label="Faixa anterior" class="focus-ring text-on-surface-variant hover:text-on-surface active:scale-90 transition-transform" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">skip_previous</span>
+</button>
+<button aria-label="Reproduzir musica" class="focus-ring w-10 h-10 rounded-full bg-on-surface text-pure-black flex items-center justify-center cursor-pointer active:scale-95 transition-transform" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">play_arrow</span>
+</button>
+<button aria-label="Próxima faixa" class="focus-ring text-on-surface-variant hover:text-on-surface active:scale-90 transition-transform" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">skip_next</span>
+</button>
 </div>
 </div>
 </main>
 <!-- Bottom Navigation Shell -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-pure-black/80 dark:bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle">
+<nav aria-label="Navegação principal" class="fixed bottom-0 w-full z-50 rounded-t-xl bg-pure-black/80 dark:bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle">
 <div class="flex justify-around items-center h-button-height-standard px-gutter w-full max-w-md mx-auto">
-<div class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined">home</span>
+<a class="focus-ring flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-[color,transform] active:scale-90 duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined">home</span>
 <span class="font-label-sm text-label-sm">Home</span>
-</div>
-<div class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
+</a>
+<a aria-current="page" class="focus-ring flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">fitness_center</span>
 <span class="font-label-sm text-label-sm">Workout</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined">chat_bubble</span>
+</a>
+<a class="focus-ring flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-[color,transform] active:scale-90 duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined">chat_bubble</span>
 <span class="font-label-sm text-label-sm">Chat</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined">person</span>
+</a>
+<a class="focus-ring flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-[color,transform] active:scale-90 duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined">person</span>
 <span class="font-label-sm text-label-sm">Profile</span>
-</div>
+</a>
 </div>
 </nav>
 <script>
@@ -282,6 +330,8 @@
         let isRunning = true;
         const timerDisplay = document.getElementById('rest-timer');
         const timerIcon = document.getElementById('timer-icon');
+        const timerToggle = document.getElementById('timer-toggle');
+        const timerLabel = document.getElementById('timer-label');
 
         function updateTimerDisplay() {
             const mins = Math.floor(seconds / 60);
@@ -298,6 +348,9 @@
         function toggleTimer() {
             isRunning = !isRunning;
             timerIcon.textContent = isRunning ? 'pause' : 'play_arrow';
+            timerToggle.setAttribute('aria-pressed', String(isRunning));
+            timerToggle.setAttribute('aria-label', isRunning ? 'Pausar descanso' : 'Retomar descanso');
+            timerLabel.textContent = isRunning ? 'PAUSAR DESCANSO' : 'RETOMAR DESCANSO';
             if(isRunning) {
                 timerDisplay.classList.add('pulse-active');
             } else {
@@ -318,7 +371,9 @@
         }, 1000);
 
         // Haptic feedback simulation
-        document.querySelectorAll('button, .material-symbols-outlined').forEach(el => {
+        timerToggle.addEventListener('click', toggleTimer);
+
+        document.querySelectorAll('button').forEach(el => {
             el.addEventListener('click', () => {
                 if (window.navigator.vibrate) {
                     window.navigator.vibrate(10);

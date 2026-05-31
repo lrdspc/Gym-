@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="pt-br"><head>
+<html class="dark" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <title>TRAINFLOW | Alunos</title>
@@ -126,35 +125,74 @@
         }
     </style>
 <style>
+        :root {
+            color-scheme: dark;
+        }
+        html {
+            -webkit-tap-highlight-color: rgba(201, 242, 54, 0.18);
+        }
+        a,
+        button,
+        input,
+        [role="button"] {
+            touch-action: manipulation;
+        }
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        [role="button"]:focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 2px;
+        }
+        .focus-ring:focus-visible,
+        .focus-ring:focus-within {
+            outline: 2px solid #c9f236;
+            outline-offset: 2px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+<style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
 </head>
 <body class="pb-32">
+<a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-primary-fixed focus:px-4 focus:py-2 focus:text-pure-black" href="#main-content">Pular para o conteúdo principal</a>
 <!-- TopAppBar -->
 <header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-border-subtle flex items-center justify-between px-container-margin h-button-height-standard">
 <div class="flex items-center gap-2">
 <h1 class="font-display-lg text-[32px] text-primary-fixed tracking-tighter leading-none">TRAINFLOW</h1>
 </div>
 <div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform">notifications</button>
+<button aria-label="Ver notificações" class="material-symbols-outlined text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform" type="button">notifications</button>
 <div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
-<img alt="User profile avatar" class="w-full h-full object-cover" data-alt="A professional headshot of a fitness coach with a determined expression, captured in high-contrast cinematic lighting within a modern gym environment. The background shows blurred gym equipment and sleek dark walls, maintaining a sophisticated black-mode aesthetic. The lighting highlights sharp textures and professional attire, reflecting a high-performance athletic brand identity." src="https://lh3.googleusercontent.com/aida/ADBb0ugzOY_WvSFMN9zaqnq4vtfx-PV3krTeuBXlEnGHitJTW5HcoaWHNeL4t771bd0xWVoSZeofk-0oSsWVYisG3beZktEIDz5W698f_QKgD0ev0k0NcMzaBK8tGD6l77az1_pK595gqCnfi8BK30myzak4yPyVrsv0vOkXQk1TvVzj7iCFl6hMtqXseoaYm3r-nT1JFdyXZwZSB6a85yQCzkIWG2Y4Se7sk-NIYhD0M-aOLzWl5FZWGItwNAU"/>
+<img alt="Avatar do treinador" class="w-full h-full object-cover" fetchpriority="high" height="32" src="https://lh3.googleusercontent.com/aida/ADBb0ugzOY_WvSFMN9zaqnq4vtfx-PV3krTeuBXlEnGHitJTW5HcoaWHNeL4t771bd0xWVoSZeofk-0oSsWVYisG3beZktEIDz5W698f_QKgD0ev0k0NcMzaBK8tGD6l77az1_pK595gqCnfi8BK30myzak4yPyVrsv0vOkXQk1TvVzj7iCFl6hMtqXseoaYm3r-nT1JFdyXZwZSB6a85yQCzkIWG2Y4Se7sk-NIYhD0M-aOLzWl5FZWGItwNAU" width="32"/>
 </div>
 </div>
 </header>
-<main class="pt-24 px-container-margin max-w-2xl mx-auto">
+<main class="pt-24 px-container-margin max-w-2xl mx-auto" id="main-content">
 <!-- Search & Filter Section -->
-<section class="mb-8 space-y-4">
-<div class="relative group">
-<span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
-<input class="w-full h-button-height-standard bg-surface-container-high border-none rounded-xl pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant focus:ring-2 focus:ring-primary-fixed transition-all" placeholder="Buscar aluno..." type="text"/>
+<section aria-labelledby="busca-alunos-title" class="mb-8 space-y-4">
+<h2 class="sr-only" id="busca-alunos-title">Buscar e filtrar alunos</h2>
+<div class="relative group focus-ring">
+<label class="sr-only" for="student-search">Buscar aluno</label>
+<span aria-hidden="true" class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input autocomplete="off" class="w-full h-button-height-standard bg-surface-container-high border-none rounded-xl pl-12 pr-4 text-on-surface placeholder:text-on-surface-variant focus:ring-2 focus:ring-primary-fixed transition-all" id="student-search" inputmode="search" name="student-search" placeholder="Buscar aluno…" spellcheck="false" type="search"/>
 </div>
-<div class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide">
-<button class="px-6 py-2 rounded-full font-label-md text-label-md active-filter transition-all whitespace-nowrap">Todos</button>
-<button class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface-variant border border-border-subtle hover:bg-surface-variant transition-all whitespace-nowrap">Ativos</button>
-<button class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface-variant border border-border-subtle hover:bg-surface-variant transition-all whitespace-nowrap">Convidados</button>
+<div aria-label="Filtros de alunos" class="flex gap-3 overflow-x-auto pb-2 scrollbar-hide" role="toolbar">
+<button aria-pressed="true" class="px-6 py-2 rounded-full font-label-md text-label-md active-filter transition-all whitespace-nowrap" data-filter-button type="button">Todos</button>
+<button aria-pressed="false" class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface-variant border border-border-subtle hover:bg-surface-variant transition-all whitespace-nowrap" data-filter-button type="button">Ativos</button>
+<button aria-pressed="false" class="px-6 py-2 rounded-full font-label-md text-label-md bg-surface-container-high text-on-surface-variant border border-border-subtle hover:bg-surface-variant transition-all whitespace-nowrap" data-filter-button type="button">Convidados</button>
 </div>
 </section>
 <!-- Students Grid -->
@@ -163,23 +201,23 @@
 <div class="glass-card rounded-2xl p-5 flex items-center justify-between group hover:border-primary-fixed transition-colors">
 <div class="flex items-center gap-4">
 <div class="relative">
-<img alt="Student Profile" class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed" data-alt="A portrait of a male athlete in mid-workout, sweat glistening on his skin under intense gym lighting. The image captures a raw, powerful moment of physical exertion in a minimalist dark gym setting. Deep shadows and vibrant high-key accents create a professional and energetic atmosphere consistent with premium performance athletic gear aesthetics." src="https://lh3.googleusercontent.com/aida/ADBb0ujmKkJ6x3PgxG6DDT1zr07BMbaJPbz3HXxfhuVCOZ_qj2KTtCjeLNI9VbxhzUCi98ykBmfq1v3hi5pH8jltUzwzmoC1sKoPB0APVfTw_vTbPa3Kb95BepWh-JUWvroi_j53gdP90ktByUrNvS0rxA8mATzxIB7hNaGGm076fQGkYoYN1mAya-6OOvNipwRTBhMB7uXgup8jrhEsZKFeYHfJfbWuwQqsAtGjWkoMtt8gKLVCEX3moxflcGk"/>
+<img alt="Perfil do aluno" class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed" height="56" loading="lazy" width="56" src="https://lh3.googleusercontent.com/aida/ADBb0ujmKkJ6x3PgxG6DDT1zr07BMbaJPbz3HXxfhuVCOZ_qj2KTtCjeLNI9VbxhzUCi98ykBmfq1v3hi5pH8jltUzwzmoC1sKoPB0APVfTw_vTbPa3Kb95BepWh-JUWvroi_j53gdP90ktByUrNvS0rxA8mATzxIB7hNaGGm076fQGkYoYN1mAya-6OOvNipwRTBhMB7uXgup8jrhEsZKFeYHfJfbWuwQqsAtGjWkoMtt8gKLVCEX3moxflcGk"/>
 <span class="absolute bottom-0 right-0 w-3 h-3 bg-primary-fixed border-2 border-pure-black rounded-full"></span>
 </div>
 <div><h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-fixed transition-colors">RICARDO SILVA</h3><div class="flex flex-wrap items-center gap-2 mt-1"><span class="font-label-sm text-label-sm text-primary-fixed bg-primary-fixed/10 px-2 py-0.5 rounded uppercase">Ativo</span><span class="font-label-sm text-label-sm text-on-surface-variant">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Ectomorfo</span><span class="font-label-sm text-label-sm text-on-surface-variant">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Hipertrofia</span></div><div class="mt-1"><p class="font-label-sm text-label-sm text-text-muted">Avaliação: 12 Out</p></div></div>
 </div>
-<button class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed transition-colors">chevron_right</button>
+<button aria-label="Abrir perfil de Ricardo Silva" class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed transition-colors" type="button">chevron_right</button>
 </div>
 <!-- Student Card 2 -->
 <div class="glass-card rounded-2xl p-5 flex items-center justify-between group hover:border-primary-fixed transition-colors">
 <div class="flex items-center gap-4">
 <div class="relative">
-<img alt="Student Profile" class="w-14 h-14 rounded-full object-cover border-2 border-border-subtle" data-alt="A professional photograph of a female athlete training intensely. The lighting is dramatic and low-key, emphasizing muscle definition and focus. The environment is a clean, modern gym with a dark color palette. The composition is dynamic and captures the essence of a high-performance fitness journey, aligning with the brand's energetic and professional personality." src="https://lh3.googleusercontent.com/aida/ADBb0ugB0QOTluoCmr9uej7xpqvs4j1I2HKcWQllYpafjJQNIHqCBRX_5B3RhyUdCx0qkY9u7W6LJV5Z0ALzru2QWw2O4ISzM_B-cqhJQq8jHM_y8QjOjiHfbLB-tVfsz4Z63-Bf5wEhBSU4v8mZferiGVXS2tr_fF5LYnQ1jS4epwUUyYRMcKcw5mdC6avgupSrCo3PloLly5SIvddXCU3x65fuypTPj9-6Kr8wkr3L6kD3Qp3RPLQCPaDyQew"/>
+<img alt="Perfil da aluna" class="w-14 h-14 rounded-full object-cover border-2 border-border-subtle" height="56" loading="lazy" width="56" src="https://lh3.googleusercontent.com/aida/ADBb0ugB0QOTluoCmr9uej7xpqvs4j1I2HKcWQllYpafjJQNIHqCBRX_5B3RhyUdCx0qkY9u7W6LJV5Z0ALzru2QWw2O4ISzM_B-cqhJQq8jHM_y8QjOjiHfbLB-tVfsz4Z63-Bf5wEhBSU4v8mZferiGVXS2tr_fF5LYnQ1jS4epwUUyYRMcKcw5mdC6avgupSrCo3PloLly5SIvddXCU3x65fuypTPj9-6Kr8wkr3L6kD3Qp3RPLQCPaDyQew"/>
 <span class="absolute bottom-0 right-0 w-3 h-3 bg-primary-fixed border-2 border-pure-black rounded-full"></span>
 </div>
 <div><h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-fixed transition-colors">BEATRIZ COSTA</h3><div class="flex flex-wrap items-center gap-2 mt-1"><span class="font-label-sm text-label-sm text-primary-fixed bg-primary-fixed/10 px-2 py-0.5 rounded uppercase">Ativo</span><span class="font-label-sm text-label-sm text-on-surface-variant">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Mesomorfo</span><span class="font-label-sm text-label-sm text-on-surface-variant">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Definição</span></div><div class="mt-1"><p class="font-label-sm text-label-sm text-text-muted">Avaliação: 28 Out</p></div></div>
 </div>
-<button class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed transition-colors">chevron_right</button>
+<button aria-label="Abrir perfil de Beatriz Costa" class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed transition-colors" type="button">chevron_right</button>
 </div>
 <!-- Student Card 3 (Guest) -->
 <div class="glass-card rounded-2xl p-5 flex items-center justify-between opacity-70 group hover:opacity-100 hover:border-status-warning transition-all border-dashed border-outline-variant">
@@ -192,53 +230,55 @@
 </div>
 <div><h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-status-warning transition-colors">MARCUS OLIVEIRA</h3><div class="flex flex-wrap items-center gap-2 mt-1"><span class="font-label-sm text-label-sm text-status-warning bg-status-warning/10 px-2 py-0.5 rounded uppercase">Convidado</span><span class="font-label-sm text-label-sm text-on-surface-variant">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Pendente</span></div><div class="mt-1"><p class="font-label-sm text-label-sm text-text-muted italic">Aguardando aceite do convite</p></div></div>
 </div>
-<button class="material-symbols-outlined text-on-surface-variant group-hover:text-status-warning transition-colors">mail</button>
+<button aria-label="Reenviar convite para Marcus Oliveira" class="material-symbols-outlined text-on-surface-variant group-hover:text-status-warning transition-colors" type="button">mail</button>
 </div>
 <!-- Student Card 4 -->
 <div class="glass-card rounded-2xl p-5 flex items-center justify-between group hover:border-primary-fixed transition-colors">
 <div class="flex items-center gap-4">
 <div class="relative">
-<img alt="Student Profile" class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed" data-alt="A gritty, high-detail portrait of a weightlifter in a dark, atmospheric training space. High-contrast lighting picks out the spray of water and chalk dust in the air. The mood is aggressive and focused, utilizing a deep black and electric lime accent palette to define the space and subject with a sense of high-performance intensity." src="https://lh3.googleusercontent.com/aida/ADBb0uiHL0w5AT5urkAB4ZlP6yhH3dIDwIFaTXpkM8s4ds6VkNmb5OPt5aZg8RYUrIWEzrj472xLgUtEKx3h3BmaA_XU0ZR1DnqAIaq6BWqP845f95qMMs1fbStRc5qA63iqim-PC6m74lDZN99ojNcA5Cbz-M5-sXNxI3AqQEqtavapuMrkQ8jdz7QeZupn3TGMxrC9P9lciK1xXmvmXgpuzBRWNtqTMQLlT_Apf_C0limKjkGIZTNqKG5DRc0"/>
+<img alt="Perfil do aluno" class="w-14 h-14 rounded-full object-cover border-2 border-primary-fixed" height="56" loading="lazy" width="56" src="https://lh3.googleusercontent.com/aida/ADBb0uiHL0w5AT5urkAB4ZlP6yhH3dIDwIFaTXpkM8s4ds6VkNmb5OPt5aZg8RYUrIWEzrj472xLgUtEKx3h3BmaA_XU0ZR1DnqAIaq6BWqP845f95qMMs1fbStRc5qA63iqim-PC6m74lDZN99ojNcA5Cbz-M5-sXNxI3AqQEqtavapuMrkQ8jdz7QeZupn3TGMxrC9P9lciK1xXmvmXgpuzBRWNtqTMQLlT_Apf_C0limKjkGIZTNqKG5DRc0"/>
 <span class="absolute bottom-0 right-0 w-3 h-3 bg-primary-fixed border-2 border-pure-black rounded-full"></span>
 </div>
 <div><h3 class="font-headline-md text-headline-md text-on-surface group-hover:text-primary-fixed transition-colors">GABRIEL JUNIOR</h3><div class="flex flex-wrap items-center gap-2 mt-1"><span class="font-label-sm text-label-sm text-text-muted bg-surface-container-highest px-2 py-0.5 rounded uppercase">Inativo</span><span class="font-label-sm text-label-sm text-on-surface-variant">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Endomorfo</span><span class="font-label-sm text-label-sm text-on-surface-variant">•</span><span class="font-label-sm text-label-sm text-on-surface-variant">Performance</span></div><div class="mt-1"><p class="font-label-sm text-label-sm text-text-muted">Avaliação: 05 Nov</p></div></div>
 </div>
-<button class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed transition-colors">chevron_right</button>
+<button aria-label="Abrir perfil de Gabriel Junior" class="material-symbols-outlined text-on-surface-variant group-hover:text-primary-fixed transition-colors" type="button">chevron_right</button>
 </div>
 </div>
 </main>
 <!-- FAB -->
-<div class="fixed right-6 bottom-24 flex flex-col items-end gap-3 z-50"><button class="flex items-center gap-2 bg-surface-container-high border border-border-subtle text-on-surface px-4 py-2 rounded-full shadow-xl active:scale-95 transition-transform"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-label-md">Nova Avaliação</span></button><button class="w-16 h-16 bg-primary-fixed text-pure-black rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform duration-200"><span class="material-symbols-outlined font-bold text-[32px]">person_add</span></button></div>
+<div class="fixed right-6 bottom-24 flex flex-col items-end gap-3 z-50"><button class="flex items-center gap-2 bg-surface-container-high border border-border-subtle text-on-surface px-4 py-2 rounded-full shadow-xl active:scale-95 transition-transform" type="button"><span class="material-symbols-outlined text-[20px]">analytics</span><span class="font-label-md">Nova Avaliação</span></button><button aria-label="Adicionar novo aluno" class="w-16 h-16 bg-primary-fixed text-pure-black rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform duration-200" type="button"><span class="material-symbols-outlined font-bold text-[32px]">person_add</span></button></div>
 <!-- BottomNavBar -->
-<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-pure-black/80 dark:bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle">
+<nav aria-label="Navegação principal móvel" class="fixed bottom-0 w-full z-50 rounded-t-xl bg-pure-black/80 dark:bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle">
 <div class="flex justify-around items-center h-button-height-standard px-gutter w-full max-w-md mx-auto">
 <a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
+<span class="font-label-sm text-label-sm">Início</span>
 </a>
 <a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined">fitness_center</span>
-<span class="font-label-sm text-label-sm">Workout</span>
+<span class="font-label-sm text-label-sm">Treinos</span>
 </a>
-<a class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<a aria-current="page" class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
-<span class="font-label-sm text-label-sm">Profile</span>
+<span class="font-label-sm text-label-sm">Perfil</span>
 </a>
 <a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined">chat_bubble</span>
-<span class="font-label-sm text-label-sm">Chat</span>
+<span class="font-label-sm text-label-sm">Mensagens</span>
 </a>
 </div>
 </nav>
 <script>
         // Simple Interaction logic
-        const filterButtons = document.querySelectorAll('button[class*="rounded-full"]');
+        const filterButtons = document.querySelectorAll('[data-filter-button]');
         filterButtons.forEach(btn => {
             btn.addEventListener('click', () => {
                 filterButtons.forEach(b => {
+                    b.setAttribute('aria-pressed', 'false');
                     b.classList.remove('active-filter');
                     b.classList.add('bg-surface-container-high', 'text-on-surface-variant');
                 });
+                btn.setAttribute('aria-pressed', 'true');
                 btn.classList.add('active-filter');
                 btn.classList.remove('bg-surface-container-high', 'text-on-surface-variant');
             });

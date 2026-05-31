@@ -109,6 +109,38 @@
             color: #e5e2e1;
             overflow: hidden;
         }
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background-color: #c9f236;
+            color: #000000;
+            transform: translateY(-200%);
+            transition: transform 0.2s ease;
+        }
+        .skip-link:focus-visible {
+            transform: translateY(0);
+            outline: 2px solid #e5e2e1;
+            outline-offset: 2px;
+        }
+        .focus-ring:focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 3px;
+        }
+        .transition-interactive {
+            transition-property: transform, opacity, color, background-color, border-color, box-shadow;
+            transition-duration: 200ms;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        button,
+        input,
+        a {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(201, 242, 54, 0.16);
+        }
         .timer-ring {
             transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
             transform: rotate(-90deg);
@@ -118,6 +150,13 @@
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
         }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation: none !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 <style>
     body {
@@ -126,16 +165,19 @@
   </style>
   </head>
 <body class="flex flex-col min-h-screen">
+<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 <!-- Top App Bar (From Shared Components JSON) -->
 <header class="fixed top-0 w-full z-50 bg-pure-black/80 backdrop-blur-xl border-b border-border-subtle flex justify-between items-center px-container-margin h-button-height-standard max-w-full">
 <div class="flex items-center gap-3 active:scale-95 transition-transform duration-150">
-<img alt="User Profile" class="w-8 h-8 rounded-full border border-border-subtle" src="https://lh3.googleusercontent.com/aida/ADBb0ugp8LWF00enOKMcpJUDZOfuqT2KtT4lD3OtaqKnmTQCxV6JTR9eQ2M6_uiezVC8AqZ9PKmxxyjv3b3J6SShLnALlC5CnEGwD6wq0tqzWrN1WMXYv2i5QkYO3Hbwb2ycsemHlxnqYEz8UXdA-jyohsIWoeJL3WQZKwDfMHPYT-T4l2nXVkB3vFZJ6W0ng3BIBcv_X1uciD1bKuIRGrZpW0VUCTCC7JGEkYrZxPwHoxTrYu-wKwnfmfOkwHM"/>
+<img alt="Perfil do usuario" class="w-8 h-8 rounded-full border border-border-subtle" height="32" loading="eager" src="https://lh3.googleusercontent.com/aida/ADBb0ugp8LWF00enOKMcpJUDZOfuqT2KtT4lD3OtaqKnmTQCxV6JTR9eQ2M6_uiezVC8AqZ9PKmxxyjv3b3J6SShLnALlC5CnEGwD6wq0tqzWrN1WMXYv2i5QkYO3Hbwb2ycsemHlxnqYEz8UXdA-jyohsIWoeJL3WQZKwDfMHPYT-T4l2nXVkB3vFZJ6W0ng3BIBcv_X1uciD1bKuIRGrZpW0VUCTCC7JGEkYrZxPwHoxTrYu-wKwnfmfOkwHM" width="32"/>
 <span class="font-headline-lg text-headline-lg uppercase text-primary-fixed tracking-tight">TRAINFLOW</span>
 </div>
-<button class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="notifications">notifications</button>
+<button aria-label="Notificações" class="focus-ring text-on-surface-variant hover:opacity-80 transition-opacity" type="button">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
 </header>
 <!-- Main Canvas -->
-<main class="flex-grow flex flex-col items-center justify-center px-container-margin pt-20 pb-24 relative overflow-hidden">
+<main class="flex-grow flex flex-col items-center justify-center px-container-margin pt-20 pb-24 relative overflow-hidden" id="main-content" tabindex="-1">
 <!-- Background Ambient Glow (JS Animated) -->
 <div class="absolute inset-0 opacity-10 pointer-events-none transition-colors duration-1000 bg-primary-fixed-dim" id="ambient-glow"></div>
 <!-- Progress Indicator & Phase Info -->
@@ -145,61 +187,61 @@
 </div>
 <!-- Massive Countdown Timer with Progress Ring -->
 <div class="relative z-10 flex items-center justify-center w-full max-w-[340px] aspect-square">
-<svg class="absolute inset-0 w-full h-full p-2" viewbox="0 0 100 100">
+<svg aria-hidden="true" class="absolute inset-0 w-full h-full p-2" viewbox="0 0 100 100">
 <!-- Track -->
 <circle class="stroke-surface-container-highest" cx="50" cy="50" fill="transparent" r="46" stroke-width="4"></circle>
 <!-- Progress -->
 <circle class="timer-ring stroke-primary-fixed" cx="50" cy="50" fill="transparent" id="progress-ring" r="46" stroke-dasharray="289" stroke-dashoffset="0" stroke-linecap="round" stroke-width="4"></circle>
 </svg>
 <div class="flex flex-col items-center">
-<span class="font-display-giant text-display-giant text-white drop-shadow-2xl" id="countdown-value">20</span>
+<span class="font-display-giant text-display-giant text-white drop-shadow-2xl" id="countdown-value" role="timer">20</span>
 <span class="font-headline-md text-headline-md text-on-surface-variant -mt-4 uppercase">SEC</span>
 </div>
 </div>
 <!-- Next Exercise Preview (Asymmetric Card Pattern) -->
-<div class="z-10 mt-stack-gap-lg w-full max-w-md bg-surface-container/40 blur-backdrop border border-border-subtle rounded-xl p-6 flex items-center justify-between group active:scale-[0.98] transition-all">
+<section aria-label="Proximo exercicio" class="z-10 mt-stack-gap-lg w-full max-w-md bg-surface-container/40 blur-backdrop border border-border-subtle rounded-xl p-6 flex items-center justify-between group transition-interactive">
 <div class="flex flex-col gap-1">
 <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Next Exercise</span>
 <span class="font-headline-md text-headline-md text-white">BATTLE ROPE SLAMS</span>
 </div>
 <div class="w-16 h-16 rounded-lg overflow-hidden border border-border-subtle bg-black">
-<img class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" data-alt="Close up action shot of heavy battle ropes hitting a gym floor with intensity. Cinematic low-angle lighting highlights the dust and sweat in the air. High-performance fitness aesthetic with deep blacks and vibrant textures." src="https://lh3.googleusercontent.com/aida/ADBb0ujeKtWNNpOCqen_3HL_Ob_lYHwxOSEwSPv4b8bxfBGan7eOPm7TfHF4VcUmffyIohEjaiab3tsEMxC1V7q_Z9-btLVcqcaDGolYMNkcXxd9Qu1TXKLkepXDy1s9HChmhCCKa8cEsa-CVqtdakWLxCNBWtHmulK7XQ8K3WX22038nd_bIYhwY5j5__pdIrmpaOx7Vra56c3phC97o9iuUYEnbrEzJ_YAXlpxcZRHispFpaqPgKJYMOooR7Y"/>
+<img alt="Preview do proximo exercicio Battle Rope Slams" class="w-full h-full object-cover opacity-60 group-hover:opacity-100 transition-opacity" height="64" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0ujeKtWNNpOCqen_3HL_Ob_lYHwxOSEwSPv4b8bxfBGan7eOPm7TfHF4VcUmffyIohEjaiab3tsEMxC1V7q_Z9-btLVcqcaDGolYMNkcXxd9Qu1TXKLkepXDy1s9HChmhCCKa8cEsa-CVqtdakWLxCNBWtHmulK7XQ8K3WX22038nd_bIYhwY5j5__pdIrmpaOx7Vra56c3phC97o9iuUYEnbrEzJ_YAXlpxcZRHispFpaqPgKJYMOooR7Y" width="64"/>
 </div>
-</div>
+</section>
 <!-- Primary Controls -->
 <div class="z-10 mt-12 flex gap-gutter w-full max-w-md">
-<button class="flex-1 h-button-height-standard bg-primary-fixed text-pure-black font-headline-md text-headline-md rounded-full active:scale-95 transition-transform flex items-center justify-center gap-2" id="pause-btn">
-<span class="material-symbols-outlined" data-icon="pause">pause</span>
+<button aria-label="Pausar ou retomar timer" aria-pressed="false" class="focus-ring flex-1 h-button-height-standard bg-primary-fixed text-pure-black font-headline-md text-headline-md rounded-full active:scale-95 transition-transform flex items-center justify-center gap-2" id="pause-btn" type="button">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="pause">pause</span>
                 PAUSE
             </button>
-<button class="flex-none w-button-height-standard h-button-height-standard bg-surface-container-high border border-border-subtle text-white rounded-full active:scale-90 transition-transform flex items-center justify-center">
-<span class="material-symbols-outlined" data-icon="skip_next">skip_next</span>
+<button aria-label="Pular para a proxima fase" class="focus-ring flex-none w-button-height-standard h-button-height-standard bg-surface-container-high border border-border-subtle text-white rounded-full active:scale-90 transition-transform flex items-center justify-center" type="button">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="skip_next">skip_next</span>
 </button>
 </div>
 </main>
 <!-- Bottom Navigation (From Shared Components JSON) - Minimal for focus -->
-<nav class="fixed bottom-0 w-full z-50 pb-safe bg-pure-black/90 backdrop-blur-2xl border-t border-border-subtle flex justify-around items-center h-button-height-standard px-gutter w-full">
+<nav aria-label="Navegação principal" class="fixed bottom-0 w-full z-50 pb-safe bg-pure-black/90 backdrop-blur-2xl border-t border-border-subtle flex justify-around items-center h-button-height-standard px-gutter w-full">
 <!-- Train Tab Active -->
-<div class="flex flex-col items-center justify-center text-primary-fixed scale-110 active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+<a aria-current="page" class="focus-ring flex flex-col items-center justify-center text-primary-fixed scale-110 active:scale-90 transition-transform duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
 <span class="font-label-sm text-label-sm uppercase tracking-widest">Train</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors cursor-pointer">
-<span class="material-symbols-outlined" data-icon="straighten">straighten</span>
+</a>
+<a class="focus-ring flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="straighten">straighten</span>
 <span class="font-label-sm text-label-sm uppercase tracking-widest">Assess</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors cursor-pointer">
-<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+</a>
+<a class="focus-ring flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
 <span class="font-label-sm text-label-sm uppercase tracking-widest">Stats</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors cursor-pointer">
-<span class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
+</a>
+<a class="focus-ring flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="workspace_premium">workspace_premium</span>
 <span class="font-label-sm text-label-sm uppercase tracking-widest">Social</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors cursor-pointer">
-<span class="material-symbols-outlined" data-icon="person">person</span>
+</a>
+<a class="focus-ring flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="person">person</span>
 <span class="font-label-sm text-label-sm uppercase tracking-widest">Profile</span>
-</div>
+</a>
 </nav>
 <!-- Interactive Script -->
 <script>
@@ -258,9 +300,11 @@
 
         pauseBtn.addEventListener('click', () => {
             isPaused = !isPaused;
+            pauseBtn.setAttribute('aria-pressed', String(isPaused));
+            pauseBtn.setAttribute('aria-label', isPaused ? 'Retomar timer' : 'Pausar timer');
             pauseBtn.innerHTML = isPaused ? 
-                `<span class="material-symbols-outlined">play_arrow</span> RESUME` : 
-                `<span class="material-symbols-outlined">pause</span> PAUSE`;
+                `<span aria-hidden="true" class="material-symbols-outlined">play_arrow</span> RETOMAR` : 
+                `<span aria-hidden="true" class="material-symbols-outlined">pause</span> PAUSAR`;
             
             if (isPaused) {
                 pauseBtn.classList.replace('bg-primary-fixed', 'bg-white');

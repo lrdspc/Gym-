@@ -7,7 +7,6 @@
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
@@ -134,31 +133,68 @@
         }
       </script>
 <style>
+        :root {
+            color-scheme: dark;
+        }
+        html {
+            -webkit-tap-highlight-color: rgba(201, 242, 54, 0.18);
+        }
+        a,
+        button,
+        input,
+        [role="button"] {
+            touch-action: manipulation;
+        }
+        a:focus-visible,
+        button:focus-visible,
+        input:focus-visible,
+        [role="button"]:focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 2px;
+        }
+        .focus-ring:focus-visible,
+        .focus-ring:focus-within {
+            outline: 2px solid #c9f236;
+            outline-offset: 2px;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+<style>
     body {
       min-height: max(884px, 100dvh);
     }
   </style>
   </head>
 <body class="bg-pure-black text-on-surface font-body-md min-h-screen pb-32">
+<a class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:rounded-full focus:bg-primary-fixed focus:px-4 focus:py-2 focus:text-pure-black" href="#main-content">Pular para o conteúdo principal</a>
 <!-- Top App Bar -->
 <header class="bg-pure-black flex justify-between items-center w-full px-container-margin h-touch-target-min fixed top-0 z-50">
 <div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-primary-container hover:opacity-80 transition-opacity" data-icon="arrow_back">arrow_back</button>
+<button aria-label="Voltar" class="material-symbols-outlined text-primary-container hover:opacity-80 transition-opacity" data-icon="arrow_back" type="button">arrow_back</button>
 <h1 class="font-headline-lg text-headline-lg tracking-widest text-primary-container">TRAINFLOW</h1>
 </div>
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="notifications">notifications</span>
+<button aria-label="Ver notificações" class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="notifications" type="button">notifications</button>
 <div class="w-8 h-8 rounded-full overflow-hidden border border-border-subtle">
-<img alt="Coach Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a fitness coach in a dark, high-end gym setting. He has a focused and determined expression, lit by dramatic cinematic lighting that emphasizes his athletic features. The background is softly blurred, showing premium gym equipment in a minimalist aesthetic of deep blacks and subtle metallic textures." src="https://lh3.googleusercontent.com/aida/ADBb0ugdkqPcbGZxy5KDLimLxC6aqJrGHEtHbmnnknpXyPbKoaq8LUPEQs6QwOqDzynbO7CGWTQY56fbvts0Du76Uyr_NaAqAvSj1HE-oJn0yFJqHvADikmRYpLEI3CHsFcZQAOIwugFN2VJhyyJd49cH9YoXDlYlhWGCC-RwD90qpvorRrpkK_wo9BP2irkbH76m56pZOnfJH97HVn6wPpnMgMtgWrTGXIPCy2SomcGUg1RTmgNAEdaN0L_hwA"/>
+<img alt="Perfil do treinador" class="w-full h-full object-cover" fetchpriority="high" height="32" src="https://lh3.googleusercontent.com/aida/ADBb0ugdkqPcbGZxy5KDLimLxC6aqJrGHEtHbmnnknpXyPbKoaq8LUPEQs6QwOqDzynbO7CGWTQY56fbvts0Du76Uyr_NaAqAvSj1HE-oJn0yFJqHvADikmRYpLEI3CHsFcZQAOIwugFN2VJhyyJd49cH9YoXDlYlhWGCC-RwD90qpvorRrpkK_wo9BP2irkbH76m56pZOnfJH97HVn6wPpnMgMtgWrTGXIPCy2SomcGUg1RTmgNAEdaN0L_hwA" width="32"/>
 </div>
 </div>
 </header>
-<main class="mt-20 px-container-margin">
-<!-- Student Hero Profile -->
+<main class="mt-20 px-container-margin" id="main-content">
+<!-- Perfil principal do aluno -->
 <section class="flex flex-col gap-6 mb-stack-gap-lg">
 <div class="flex items-center gap-6">
 <div class="w-24 h-24 rounded-2xl overflow-hidden border-2 border-primary-fixed-dim shrink-0">
-<img alt="Ricardo Silva" class="w-full h-full object-cover" data-alt="A high-contrast, muscular male athlete named Ricardo Silva training in a dark, atmospheric industrial gym. He is wearing high-performance black athletic gear. The lighting is intense and directional, highlighting his physique against the void-like black background, reflecting a professional and energetic somatotype aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0ujzoiwsZwjt4CI5r47PG9bkucnHJBHqlA53wthsGXSBQzrT9D6xVhLpPsXuDkny2BDEM42-7BhJii5OSPGifGA3vigEJL6w-eLhTB5U7wgV_qosJj3Ej8FFNlQVmswtTB-OnOEohYQALUDc7OkOocphA55cJ1YrC1e9UWXnWC_gqwV3eA-xG5ZHOK0Z9xoytylUHL2RL_4JnaxR4VUX4ql3paA73fdeRPhNih-ruwXs6E7VbaSlvhgvau0"/>
+<img alt="Ricardo Silva" class="w-full h-full object-cover" fetchpriority="high" height="96" src="https://lh3.googleusercontent.com/aida/ADBb0ujzoiwsZwjt4CI5r47PG9bkucnHJBHqlA53wthsGXSBQzrT9D6xVhLpPsXuDkny2BDEM42-7BhJii5OSPGifGA3vigEJL6w-eLhTB5U7wgV_qosJj3Ej8FFNlQVmswtTB-OnOEohYQALUDc7OkOocphA55cJ1YrC1e9UWXnWC_gqwV3eA-xG5ZHOK0Z9xoytylUHL2RL_4JnaxR4VUX4ql3paA73fdeRPhNih-ruwXs6E7VbaSlvhgvau0" width="96"/>
 </div>
 <div class="flex flex-col">
 <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase">Ricardo Silva</h2>
@@ -168,21 +204,21 @@
 </div>
 </div>
 </div>
-<!-- Action Primary -->
-<button class="bg-primary-fixed-dim text-pure-black h-button-height-standard w-full rounded-full font-headline-md text-headline-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary-fixed-dim/20">
-<span class="material-symbols-outlined" data-icon="add_chart">add_chart</span>
+<!-- Ação principal -->
+<button class="bg-primary-fixed-dim text-pure-black h-button-height-standard w-full rounded-full font-headline-md text-headline-md flex items-center justify-center gap-2 hover:opacity-90 active:scale-95 transition-all shadow-lg shadow-primary-fixed-dim/20" type="button">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="add_chart">add_chart</span>
                 NOVA AVALIAÇÃO
             </button>
 </section>
-<!-- Navigation Tabs -->
-<nav class="flex justify-between border-b border-border-subtle mb-6 sticky top-20 bg-pure-black z-40">
-<button class="pb-3 text-primary-fixed-dim font-bold font-label-md text-label-md border-b-2 border-primary-fixed-dim transition-colors" onclick="switchTab('treinos')">Treinos</button>
-<button class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" onclick="switchTab('historico')">Histórico</button>
-<button class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" onclick="switchTab('avaliacoes')">Avaliações</button>
-<button class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" onclick="switchTab('chat')">Chat</button>
+<!-- Abas de navegação -->
+<nav aria-label="Seções do aluno" class="flex justify-between border-b border-border-subtle mb-6 sticky top-20 bg-pure-black z-40" role="tablist">
+<button aria-controls="tab-treinos" aria-selected="true" class="pb-3 text-primary-fixed-dim font-bold font-label-md text-label-md border-b-2 border-primary-fixed-dim transition-colors" data-tab-button="treinos" onclick="switchTab('treinos')" role="tab" type="button">Treinos</button>
+<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="historico" onclick="switchTab('historico')" role="tab" type="button">Histórico</button>
+<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="avaliacoes" onclick="switchTab('avaliacoes')" role="tab" type="button">Avaliações</button>
+<button aria-controls="tab-treinos" aria-selected="false" class="pb-3 text-text-muted font-label-md text-label-md hover:text-on-surface transition-colors" data-tab-button="chat" onclick="switchTab('chat')" role="tab" type="button">Mensagens</button>
 </nav>
 <!-- Tab Content: Treinos (Default) -->
-<div class="space-y-6" id="tab-treinos">
+<div aria-live="polite" class="space-y-6" id="tab-treinos" role="tabpanel">
 <div class="flex justify-between items-end">
 <div>
 <p class="text-text-muted font-label-sm text-label-sm uppercase tracking-widest">Plano Atual</p>
@@ -210,7 +246,7 @@
 <span class="material-symbols-outlined text-primary-fixed-dim group-hover:translate-x-1 transition-transform" data-icon="chevron_right">chevron_right</span>
 </div>
 </div>
-<!-- Workout List Breakdown -->
+<!-- Distribuição de treinos -->
 <div class="space-y-4 pt-4">
 <h4 class="font-label-md text-label-md text-text-muted uppercase tracking-widest border-l-2 border-primary-fixed-dim pl-3">Distribuição Semanal</h4>
 <div class="space-y-3">
@@ -255,39 +291,41 @@
 </div>
 </main>
 <!-- Bottom Navigation Bar (Coach Context: Students is Active) -->
-<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-button-height-standard px-gutter pb-safe bg-pure-black/80 backdrop-blur-xl border-t border-border-subtle">
-<div class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors cursor-pointer">
+<nav aria-label="Navegação principal móvel" class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-button-height-standard px-gutter pb-safe bg-pure-black/80 backdrop-blur-xl border-t border-border-subtle">
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
-</div>
-<div class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors cursor-pointer">
+<span class="font-label-sm text-label-sm">Início</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
-<span class="font-label-sm text-label-sm">Workout</span>
-</div>
-<div class="flex flex-col items-center justify-center text-primary-container font-bold scale-110 transition-transform duration-200 cursor-pointer">
+<span class="font-label-sm text-label-sm">Treinos</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center text-primary-container font-bold scale-110 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="group" style="font-variation-settings: 'FILL' 1;">group</span>
 <span class="font-label-sm text-label-sm">Students</span>
-</div>
-<div class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors cursor-pointer">
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
-<span class="font-label-sm text-label-sm">Chat</span>
-</div>
-<div class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors cursor-pointer">
+<span class="font-label-sm text-label-sm">Mensagens</span>
+</a>
+<a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-label-sm text-label-sm">Profile</span>
-</div>
+<span class="font-label-sm text-label-sm">Perfil</span>
+</a>
 </nav>
 <script>
         function switchTab(tabName) {
             // Logica visual simples para trocar abas no protótipo
-            const buttons = document.querySelectorAll('nav button');
+            const buttons = document.querySelectorAll('[data-tab-button]');
             buttons.forEach(btn => {
+                btn.setAttribute('aria-selected', 'false');
                 btn.classList.remove('text-primary-fixed-dim', 'font-bold', 'border-b-2', 'border-primary-fixed-dim');
                 btn.classList.add('text-text-muted');
             });
 
             const clickedBtn = Array.from(buttons).find(btn => btn.innerText.toLowerCase() === tabName);
             if (clickedBtn) {
+                clickedBtn.setAttribute('aria-selected', 'true');
                 clickedBtn.classList.remove('text-text-muted');
                 clickedBtn.classList.add('text-primary-fixed-dim', 'font-bold', 'border-b-2', 'border-primary-fixed-dim');
             }

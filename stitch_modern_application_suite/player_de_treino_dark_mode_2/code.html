@@ -108,6 +108,33 @@
             background-color: theme('colors.pure-black');
             color: theme('colors.on-background');
         }
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background-color: theme('colors.primary-fixed');
+            color: theme('colors.pure-black');
+            transform: translateY(-200%);
+            transition: transform 0.2s ease;
+        }
+        .skip-link:focus-visible {
+            transform: translateY(0);
+            outline: 2px solid theme('colors.on-background');
+            outline-offset: 2px;
+        }
+        .focus-ring:focus-visible {
+            outline: 2px solid theme('colors.primary-fixed');
+            outline-offset: 3px;
+        }
+        button,
+        input,
+        a {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(201, 242, 54, 0.16);
+        }
         .glass-panel {
             background-color: theme('colors.surface-container-low');
             border: 1px solid theme('colors.border-subtle');
@@ -167,11 +194,16 @@
         .animate-timer { animation: timerRotate 20s linear infinite; }
 
         @media (prefers-reduced-motion: reduce) {
-            .animate-entrance, .animate-badge, .animate-ambient, .animate-timer, .transition-all, .transition-colors, .transition-opacity {
+        .animate-entrance, .animate-badge, .animate-ambient, .animate-timer, .transition-colors, .transition-opacity, .transition-interactive {
                 animation: none !important;
                 transition: none !important;
                 transform: none !important;
             }
+        }
+        .transition-interactive {
+            transition-property: transform, opacity, box-shadow, border-color, color;
+            transition-duration: 300ms;
+            transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
         }
     </style>
 <style>
@@ -181,10 +213,11 @@
     </style>
 </head>
 <body class="antialiased min-h-screen flex flex-col overflow-hidden pb-8 bg-pure-black">
+<a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
 <!-- Top Navigation Bar -->
 <header class="flex items-center justify-between px-container-margin h-button-height-standard w-full z-50 bg-pure-black border-b border-border-subtle shrink-0">
-<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface hover:opacity-80 transition-opacity active:scale-90">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
+<button aria-label="Fechar treino" class="focus-ring w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface hover:opacity-80 transition-opacity active:scale-90" type="button">
+<span aria-hidden="true" class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">close</span>
 </button>
 <div class="flex items-center gap-4">
 <span class="font-headline-md text-headline-md text-on-background">3/8</span>
@@ -197,10 +230,10 @@
 </div>
 </header>
 <!-- Main Workout Area -->
-<main class="flex-1 flex flex-col px-gutter overflow-y-auto w-full max-w-md mx-auto no-scrollbar gap-stack-gap-lg pt-6 bg-pure-black">
+<main class="flex-1 flex flex-col px-gutter overflow-y-auto w-full max-w-md mx-auto no-scrollbar gap-stack-gap-lg pt-6 bg-pure-black" id="main-content" tabindex="-1">
 <!-- Exercise Media Container -->
 <div class="animate-entrance w-full aspect-[4/3] bg-surface-container-low rounded-xl overflow-hidden relative shadow-2xl border border-border-subtle">
-<img alt="Exercise Demo" class="w-full h-full object-cover opacity-60" data-alt="A powerful athlete performing a heavy barbell back squat in a dark, grimy industrial gym setting." src="https://lh3.googleusercontent.com/aida/ADBb0ugGCayf2R6meX7XkzQt_ul6hBHqvvoJqo9Gk8xbpAKWi7I54AdW6ockjD36od4x4x-DbQ_64qRrHDrmrfo68DZ3Ioprgv3IE4Fr-yWx9w2Bb2RgC6nbbp0XacVNrQ65aTmdNbaJmxXUMAprYjQWaZXPYSnbIq11I8StcgusGAgFgWBWMoUihjLuAEVHUkGJGyhh_h-epAYCcLUoW7H0AVfDry7fgt5vCkD1qDT_czXcELRlAd3kPdBDMZ0"/>
+<img alt="Demonstracao do exercicio Barbell Back Squat" class="w-full h-full object-cover opacity-60" fetchpriority="high" height="900" loading="eager" src="https://lh3.googleusercontent.com/aida/ADBb0ugGCayf2R6meX7XkzQt_ul6hBHqvvoJqo9Gk8xbpAKWi7I54AdW6ockjD36od4x4x-DbQ_64qRrHDrmrfo68DZ3Ioprgv3IE4Fr-yWx9w2Bb2RgC6nbbp0XacVNrQ65aTmdNbaJmxXUMAprYjQWaZXPYSnbIq11I8StcgusGAgFgWBWMoUihjLuAEVHUkGJGyhh_h-epAYCcLUoW7H0AVfDry7fgt5vCkD1qDT_czXcELRlAd3kPdBDMZ0" width="1200"/>
 <div class="absolute inset-0 bg-gradient-to-t from-pure-black via-pure-black/20 to-transparent"></div>
 <div class="absolute bottom-4 left-4 right-4 flex justify-between items-end">
 <div>
@@ -214,36 +247,36 @@
 </div>
 </div>
 <!-- Logger Section -->
-<div class="flex flex-col gap-4">
+<form class="flex flex-col gap-4">
 <div class="flex gap-4">
-<div class="flex-1 bg-surface-container-low border border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center relative focus-within:border-primary-fixed transition-all duration-300">
-<label class="font-label-sm text-label-sm text-secondary-fixed-dim absolute top-3 uppercase tracking-wider">KG</label>
-<input class="w-full h-20 bg-transparent text-center font-display-lg text-display-lg text-on-background focus:outline-none focus:ring-0 border-none mt-4 placeholder:text-surface-variant" data-target="100" id="kg-input" placeholder="000" type="number" value="0"/>
+<div class="flex-1 bg-surface-container-low border border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center relative focus-within:border-primary-fixed transition-colors duration-300">
+<label class="font-label-sm text-label-sm text-secondary-fixed-dim absolute top-3 uppercase tracking-wider" for="kg-input">KG</label>
+<input aria-label="Carga em quilogramas" autocomplete="off" class="focus-ring w-full h-20 bg-transparent text-center font-display-lg text-display-lg text-on-background focus:outline-none focus:ring-0 border-none mt-4 placeholder:text-surface-variant" data-target="100" id="kg-input" inputmode="numeric" name="weight" placeholder="000" type="number" value="0"/>
 </div>
-<div class="flex-1 bg-surface-container-low border border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center relative focus-within:border-primary-fixed transition-all duration-300">
-<label class="font-label-sm text-label-sm text-secondary-fixed-dim absolute top-3 uppercase tracking-wider">REPS</label>
-<input class="w-full h-20 bg-transparent text-center font-display-lg text-display-lg text-on-background focus:outline-none focus:ring-0 border-none mt-4 placeholder:text-surface-variant" data-target="8" id="reps-input" placeholder="00" type="number" value="0"/>
+<div class="flex-1 bg-surface-container-low border border-border-subtle rounded-xl p-4 flex flex-col items-center justify-center relative focus-within:border-primary-fixed transition-colors duration-300">
+<label class="font-label-sm text-label-sm text-secondary-fixed-dim absolute top-3 uppercase tracking-wider" for="reps-input">REPS</label>
+<input aria-label="Numero de repeticoes" autocomplete="off" class="focus-ring w-full h-20 bg-transparent text-center font-display-lg text-display-lg text-on-background focus:outline-none focus:ring-0 border-none mt-4 placeholder:text-surface-variant" data-target="8" id="reps-input" inputmode="numeric" name="reps" placeholder="00" type="number" value="0"/>
 </div>
 </div>
 <div class="relative">
-<button class="animate-ambient w-full h-button-height-standard bg-primary-fixed rounded-full flex items-center justify-center font-headline-md text-headline-md text-pure-black uppercase hover:brightness-110 active:scale-[0.97] transition-all mt-2 relative overflow-hidden" id="confirm-btn">
+<button class="focus-ring animate-ambient w-full h-button-height-standard bg-primary-fixed rounded-full flex items-center justify-center font-headline-md text-headline-md text-pure-black uppercase hover:brightness-110 active:scale-[0.97] transition-interactive mt-2 relative overflow-hidden" id="confirm-btn" type="submit">
 <span class="relative z-10">CONFIRMAR SÉRIE</span>
 </button>
-<div class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 z-20" id="check-overlay">
-<span class="material-symbols-outlined text-4xl text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<div aria-live="polite" class="absolute inset-0 flex items-center justify-center pointer-events-none opacity-0 z-20" id="check-overlay">
+<span aria-hidden="true" class="material-symbols-outlined text-4xl text-primary-fixed" style="font-variation-settings: 'FILL' 1;">check_circle</span>
 </div>
 </div>
-</div>
+</form>
 <!-- Playback Controls -->
 <div class="mt-auto flex justify-center items-center gap-10 py-6">
-<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface hover:text-primary-fixed transition-all active:scale-90">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
+<button aria-label="Exercicio anterior" class="focus-ring w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface hover:text-primary-fixed transition-interactive active:scale-90" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">skip_previous</span>
 </button>
-<button class="w-16 h-16 rounded-full bg-surface-container-low border border-primary-fixed/20 flex items-center justify-center text-on-background hover:text-primary-fixed transition-all active:scale-90 hover:border-primary-fixed shadow-lg">
-<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">pause</span>
+<button aria-label="Pausar reproducao" class="focus-ring w-16 h-16 rounded-full bg-surface-container-low border border-primary-fixed/20 flex items-center justify-center text-on-background hover:text-primary-fixed transition-interactive active:scale-90 hover:border-primary-fixed shadow-lg" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">pause</span>
 </button>
-<button class="w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface hover:text-primary-fixed transition-all active:scale-90">
-<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">skip_next</span>
+<button aria-label="Proximo exercicio" class="focus-ring w-touch-target-min h-touch-target-min flex items-center justify-center text-on-surface hover:text-primary-fixed transition-interactive active:scale-90" type="button">
+<span aria-hidden="true" class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">skip_next</span>
 </button>
 </div>
 </main>
@@ -298,7 +331,8 @@
     const confirmBtn = document.getElementById('confirm-btn');
     const checkOverlay = document.getElementById('check-overlay');
 
-    confirmBtn.addEventListener('click', () => {
+    confirmBtn.addEventListener('click', (event) => {
+        event.preventDefault();
         // Trigger pulse/glow animation
         confirmBtn.style.animation = 'none';
         confirmBtn.offsetHeight; // Trigger reflow

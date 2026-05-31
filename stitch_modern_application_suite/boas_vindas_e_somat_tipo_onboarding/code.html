@@ -28,6 +28,53 @@
         .animate-pulse-slow {
             animation: pulse-slow 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background: #c9f236;
+            color: #000000;
+            font: 600 0.875rem/1 Inter, sans-serif;
+            transform: translateY(-200%);
+            transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus-visible {
+            transform: translateY(0);
+        }
+
+        :focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 4px;
+        }
+
+        button,
+        a,
+        [role="button"] {
+            touch-action: manipulation;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 <script id="tailwind-config">
         tailwind.config = {
@@ -132,17 +179,20 @@
   </style>
   </head>
 <body class="bg-pure-black text-on-background font-body-md overflow-hidden bg-mesh min-h-screen flex flex-col">
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
 <!-- Top Navigation Anchor (Simulated context from Shared Components) -->
 <header class="fixed top-0 w-full z-50 bg-background/80 backdrop-blur-xl border-b border-border-subtle flex items-center justify-between px-container-margin h-button-height-standard">
-<h1 class="font-display-lg text-headline-lg text-primary-fixed tracking-tighter">TRAINFLOW</h1>
+<p aria-label="TRAINFLOW" class="font-display-lg text-headline-lg text-primary-fixed tracking-tighter">TRAINFLOW</p>
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-primary-fixed hover:opacity-80 transition-opacity cursor-pointer">notifications</span>
+<button aria-label="Abrir notificações" class="flex items-center justify-center text-primary-fixed hover:opacity-80 transition-opacity cursor-pointer" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">notifications</span>
+</button>
 <div class="w-8 h-8 rounded-full bg-surface-container-highest border border-primary-fixed/30 flex items-center justify-center overflow-hidden">
-<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0uizA9Tt_JpFcg43-QQ5C03UIe24Jr5Mjn5z9aUr1eQQ7JkcCMCBG_l_YKwM2cXPeO4mcYDuTj3DYg87rVJWlpYm8lg6pSSj3T7PYeVGK5ORmsUaJqc7QuJ8-VEKg1ZDK3L90MgR7g9DK7vIpLO-7ZzdsNSXBppOulNQjCdm5gE68j2zhmPQUBRibO_pF8nalQB-2MJ7Lh_Ln9c8miGu1R5FI8hWPTrWBhOIEdaE6H8i9ZvpcjgutM7rJw"/>
+<img alt="Foto de perfil do usuário" class="w-full h-full object-cover" height="32" src="https://lh3.googleusercontent.com/aida/ADBb0uizA9Tt_JpFcg43-QQ5C03UIe24Jr5Mjn5z9aUr1eQQ7JkcCMCBG_l_YKwM2cXPeO4mcYDuTj3DYg87rVJWlpYm8lg6pSSj3T7PYeVGK5ORmsUaJqc7QuJ8-VEKg1ZDK3L90MgR7g9DK7vIpLO-7ZzdsNSXBppOulNQjCdm5gE68j2zhmPQUBRibO_pF8nalQB-2MJ7Lh_Ln9c8miGu1R5FI8hWPTrWBhOIEdaE6H8i9ZvpcjgutM7rJw" width="32"/>
 </div>
 </div>
 </header>
-<main class="flex-grow flex flex-col items-center justify-center pt-20 px-container-margin relative overflow-hidden">
+<main class="flex-grow flex flex-col items-center justify-center pt-20 px-container-margin relative overflow-hidden" id="conteudo-principal" tabindex="-1">
 <!-- Background Lighting FX -->
 <div class="absolute inset-0 z-0 overflow-hidden pointer-events-none">
 <div class="absolute -top-[20%] -left-[10%] w-[60%] h-[60%] bg-primary-fixed/5 rounded-full blur-[120px] animate-pulse-slow"></div>
@@ -151,84 +201,85 @@
 <!-- Content Container -->
 <div class="relative z-10 w-full max-w-2xl flex flex-col items-center gap-stack-gap-lg text-center">
 <!-- Somatotype Visual Component -->
-<div class="relative group">
+<section aria-labelledby="somatotipo-title" class="relative group">
 <div class="absolute -inset-4 bg-primary-fixed/10 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
 <div class="relative w-full aspect-square max-w-[320px] md:max-w-[400px]">
 <!-- Main Profile Image -->
 <div class="w-full h-full rounded-[40px] overflow-hidden border border-border-subtle glass-panel flex items-center justify-center">
-<img alt="Mesomorph Somatotype Visualization" class="w-full h-full object-cover grayscale brightness-50" data-alt="A powerful mesomorph athlete standing confidently in a futuristic dark gym environment with electric lime neon light streaks on the walls. The scene is high-contrast, professional, and dramatic, capturing a muscular silhouette with sharp lighting highlights against a black void background. The mood is intense, focused, and high-performance." src="https://lh3.googleusercontent.com/aida/ADBb0ugLWDWvB1DRQksRSyC2PmNb1INVLT0Axbp4NyZoxDJF-ez1QwL1PMhLXAVlqhoeRzGFbRawYvGtYx02xGWWNK-4kGq3-bUvXha3xWJLOabRid6UHEjrKeZs1D34EzT_wC0YmPayYpwHYOVm-wezyvZ0ZvwlKHOlm2HPnJOYuC84IJWHwnhfyq4ogsxYQg6MK5QPdbSTM8XIe_HQMD86edphvQx66oAXWJ94ncOrZIAL8J_LgUFSeEpNvmU"/>
+<img alt="Atleta representando o somatotipo mesomorfo" class="w-full h-full object-cover grayscale brightness-50" height="400" src="https://lh3.googleusercontent.com/aida/ADBb0ugLWDWvB1DRQksRSyC2PmNb1INVLT0Axbp4NyZoxDJF-ez1QwL1PMhLXAVlqhoeRzGFbRawYvGtYx02xGWWNK-4kGq3-bUvXha3xWJLOabRid6UHEjrKeZs1D34EzT_wC0YmPayYpwHYOVm-wezyvZ0ZvwlKHOlm2HPnJOYuC84IJWHwnhfyq4ogsxYQg6MK5QPdbSTM8XIe_HQMD86edphvQx66oAXWJ94ncOrZIAL8J_LgUFSeEpNvmU" width="400"/>
 </div>
 <!-- Floating Data Chips -->
 <div class="absolute -top-4 -right-4 glass-panel px-6 py-3 rounded-xl border border-primary-fixed/40 glow-lime">
-<span class="font-headline-md text-headline-md text-primary-fixed block">MESOMORFO</span>
+<h1 class="font-headline-md text-headline-md text-primary-fixed block" id="somatotipo-title">MESOMORFO</h1>
 <span class="font-label-sm text-label-sm text-on-surface-variant uppercase tracking-widest">Seu Biotipo</span>
 </div>
 <!-- Decorative Graphic Elements -->
 <div class="absolute -bottom-8 -left-8 w-32 h-32 border-l-2 border-b-2 border-primary-fixed/30 rounded-bl-[40px]"></div>
 </div>
-</div>
+</section>
 <!-- Text Content Stack -->
-<section class="flex flex-col gap-4 max-w-md">
-<h2 class="font-headline-lg text-headline-lg text-on-background">ANALISE COMPLETA</h2>
+<section aria-labelledby="analise-completa-title" class="flex flex-col gap-4 max-w-md">
+<h2 class="font-headline-lg text-headline-lg text-on-background" id="analise-completa-title">ANÁLISE COMPLETA</h2>
 <p class="font-body-lg text-body-lg text-on-surface-variant leading-relaxed">
                     Seu perfil indica uma <span class="text-primary-fixed font-bold">predomínio de massa muscular</span> e metabolismo equilibrado. Seu corpo responde rapidamente a estímulos hipertróficos.
                 </p>
-<div class="grid grid-cols-2 gap-4 mt-2">
+<dl class="grid grid-cols-2 gap-4 mt-2">
 <div class="glass-panel p-4 rounded-xl text-left border border-border-subtle">
 <div class="flex items-center gap-2 mb-1">
-<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
-<span class="font-label-sm text-label-sm text-primary-fixed uppercase">Poder</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<dt class="font-label-sm text-label-sm text-primary-fixed uppercase">Poder</dt>
 </div>
-<p class="text-[20px] font-headline-md text-on-background">ALTO</p>
+<dd class="text-[20px] font-headline-md text-on-background">ALTO</dd>
 </div>
 <div class="glass-panel p-4 rounded-xl text-left border border-border-subtle">
 <div class="flex items-center gap-2 mb-1">
-<span class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">monitoring</span>
-<span class="font-label-sm text-label-sm text-primary-fixed uppercase">Recuperação</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed text-sm" style="font-variation-settings: 'FILL' 1;">monitoring</span>
+<dt class="font-label-sm text-label-sm text-primary-fixed uppercase">Recuperação</dt>
 </div>
-<p class="text-[20px] font-headline-md text-on-background">RÁPIDA</p>
+<dd class="text-[20px] font-headline-md text-on-background">RÁPIDA</dd>
 </div>
-</div>
+</dl>
 </section>
 <!-- Action Button -->
-<button class="w-full max-w-sm bg-primary-fixed text-pure-black font-headline-md text-headline-md h-button-height-standard rounded-full flex items-center justify-center gap-3 active:scale-95 transition-all glow-lime mt-4 group">
+<button aria-label="Entender meu treino" class="w-full max-w-sm bg-primary-fixed text-pure-black font-headline-md text-headline-md h-button-height-standard rounded-full flex items-center justify-center gap-3 active:scale-95 transition-all glow-lime mt-4 group" type="button">
                 ENTENDER MEU TREINO
-                <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+                <span aria-hidden="true" class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
 </button>
 </div>
 <!-- Progress Indicator -->
-<div class="absolute bottom-8 flex gap-2">
-<div class="w-12 h-1 rounded-full bg-primary-fixed"></div>
-<div class="w-8 h-1 rounded-full bg-surface-container-highest"></div>
-<div class="w-8 h-1 rounded-full bg-surface-container-highest"></div>
+<div aria-label="Passo 1 de 3" class="absolute bottom-8 flex gap-2" role="img">
+<div aria-hidden="true" class="w-12 h-1 rounded-full bg-primary-fixed"></div>
+<div aria-hidden="true" class="w-8 h-1 rounded-full bg-surface-container-highest"></div>
+<div aria-hidden="true" class="w-8 h-1 rounded-full bg-surface-container-highest"></div>
 </div>
 </main>
 <!-- Bottom Navigation Mock (Contextual Shell from JSON) -->
-<nav class="fixed bottom-0 w-full z-50 bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle md:hidden rounded-t-xl">
+<nav aria-label="Navegação principal" class="fixed bottom-0 w-full z-50 bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle md:hidden rounded-t-xl">
 <div class="flex justify-around items-center h-button-height-standard px-gutter w-full max-w-md mx-auto">
-<div class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined" data-icon="home">home</span>
+<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="home">home</span>
 <span class="font-label-sm text-label-sm">Home</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
 <span class="font-label-sm text-label-sm">Workout</span>
-</div>
-<div class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+</a>
+<a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
 <span class="font-label-sm text-label-sm">Chat</span>
-</div>
-<div class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200 cursor-pointer">
-<span class="material-symbols-outlined" data-icon="person">person</span>
+</a>
+<a aria-current="page" class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<span aria-hidden="true" class="material-symbols-outlined" data-icon="person">person</span>
 <span class="font-label-sm text-label-sm">Profile</span>
-</div>
+</a>
 </div>
 </nav>
 <script>
         // Micro-interactions for the welcome flow
-        document.querySelector('button').addEventListener('click', () => {
-            const btn = document.querySelector('button');
-            btn.innerHTML = '<span class="material-symbols-outlined animate-spin">progress_activity</span> CONFIGURANDO...';
+        const primaryCta = document.querySelector('main button');
+        primaryCta.addEventListener('click', () => {
+            const btn = primaryCta;
+            btn.innerHTML = '<span aria-hidden="true" class="material-symbols-outlined animate-spin">progress_activity</span> CONFIGURANDO...';
             
             setTimeout(() => {
                 alert("Redirecionando para seu cronograma personalizado de Mesomorfo!");
@@ -238,7 +289,11 @@
         });
 
         // Parallax effect on mouse move for the background glow
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
         document.addEventListener('mousemove', (e) => {
+            if (prefersReducedMotion.matches) {
+                return;
+            }
             const glows = document.querySelectorAll('.animate-pulse-slow');
             const x = e.clientX / window.innerWidth;
             const y = e.clientY / window.innerHeight;

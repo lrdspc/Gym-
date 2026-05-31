@@ -3,6 +3,7 @@
 <html class="dark" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="dark" name="color-scheme"/>
 <title>Trainflow - Login</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -111,44 +112,88 @@
         .animate-fade-in {
             animation: fadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
-        /* Simulated noise texture - darkened for all-black theme */
         .bg-noise {
             background-image: radial-gradient(rgba(255, 255, 255, 0.015) 1px, transparent 1px);
             background-size: 4px 4px;
         }
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 20;
+            transform: translateY(-200%);
+            border-radius: 9999px;
+            background: #c9f236;
+            color: #000000;
+            padding: 0.75rem 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: transform 0.2s ease;
+        }
+        .skip-link:focus-visible {
+            transform: translateY(0);
+            outline: 2px solid #ffffff;
+            outline-offset: 3px;
+        }
+        a,
+        button,
+        input,
+        label {
+            touch-action: manipulation;
+            -webkit-tap-highlight-color: rgba(201, 242, 54, 0.2);
+        }
         body {
           min-height: max(884px, 100dvh);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                scroll-behavior: auto !important;
+                transition-duration: 0.01ms !important;
+            }
+            .animate-fade-in {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+            }
+            .skip-link {
+                transition: none;
+            }
         }
     </style>
 </head>
 <body class="bg-pure-black text-on-surface min-h-screen flex flex-col items-center justify-between p-container-margin font-body-md antialiased relative z-10 selection:bg-primary-fixed selection:text-pure-black">
-<!-- Atmospheric Background: Pure black focused -->
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
 <div class="fixed inset-0 pointer-events-none z-[-1] bg-pure-black"></div>
 <div class="fixed inset-0 pointer-events-none z-[-1] bg-noise opacity-30"></div>
-<!-- Top: Logo Anchor -->
 <header class="w-full max-w-md pt-8 flex justify-center md:justify-start">
-<h1 class="font-headline-md text-headline-md text-primary-fixed tracking-widest">TRAINFLOW</h1>
+<p class="font-headline-md text-headline-md text-primary-fixed tracking-widest" translate="no">TRAINFLOW</p>
 </header>
-<!-- Center: Primary Interaction Canvas -->
-<main class="w-full max-w-md flex-1 flex flex-col justify-center animate-fade-in">
+<main class="w-full max-w-md flex-1 flex flex-col justify-center animate-fade-in" id="conteudo-principal" tabindex="-1">
 <div class="mb-10 text-center md:text-left">
-<h2 class="font-display-lg text-display-lg text-primary-fixed mb-2 drop-shadow-[0_0_15px_rgba(201,242,54,0.15)]">BEM-VINDO</h2>
+<h1 class="font-display-lg text-display-lg text-primary-fixed mb-2 drop-shadow-[0_0_15px_rgba(201,242,54,0.15)]" id="page-title">BEM-VINDO</h1>
 <p class="font-body-md text-body-md text-text-muted">Enviaremos um link de acesso para o seu email.</p>
 </div>
-<form class="flex flex-col gap-4" onsubmit="event.preventDefault();">
+<form aria-labelledby="page-title" class="flex flex-col gap-4" onsubmit="event.preventDefault();">
 <div class="relative group">
-<input class="w-full h-button-height-standard bg-surface-container-high border border-border-subtle rounded-xl px-4 py-2 font-body-md text-body-md text-on-surface placeholder:text-on-secondary-container focus:outline-none focus:border-primary-fixed focus:ring-1 focus:ring-primary-fixed transition-all duration-300 group-hover:border-outline-variant" id="email" placeholder="Seu email" required="" type="email"/>
+<label class="sr-only" for="email">Email</label>
+<p class="sr-only" id="email-hint">Digite o email cadastrado para receber o link de acesso.</p>
+<input aria-describedby="email-hint" autocomplete="email" autocapitalize="none" class="w-full h-button-height-standard bg-surface-container-high border border-border-subtle rounded-xl px-4 py-2 font-body-md text-body-md text-on-surface placeholder:text-on-secondary-container focus:outline-none focus-visible:border-primary-fixed focus-visible:ring-1 focus-visible:ring-primary-fixed focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-fixed transition-[border-color,box-shadow] duration-300 group-hover:border-outline-variant" id="email" inputmode="email" name="email" placeholder="Seu email" required="" spellcheck="false" type="email"/>
 </div>
-<button class="w-full h-button-height-standard bg-primary-fixed text-pure-black font-headline-md text-headline-md rounded-full flex items-center justify-center gap-2 hover:bg-primary-container active:scale-95 transition-all duration-200 mt-4 shadow-[0_4px_20px_rgba(201,242,54,0.15)] hover:shadow-[0_4px_25px_rgba(201,242,54,0.25)]" type="submit">
+<button class="w-full h-button-height-standard bg-primary-fixed text-pure-black font-headline-md text-headline-md rounded-full flex items-center justify-center gap-2 hover:bg-primary-container active:scale-95 transition-[background-color,box-shadow,transform] duration-200 mt-4 shadow-[0_4px_20px_rgba(201,242,54,0.15)] hover:shadow-[0_4px_25px_rgba(201,242,54,0.25)] focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-fixed focus-visible:ring-2 focus-visible:ring-primary-fixed/40" type="submit">
                 ENTRAR
-                <span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
+                <span aria-hidden="true" class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">arrow_forward</span>
 </button>
 </form>
 </main>
-<!-- Footer: Secondary Action -->
 <footer class="w-full max-w-md pb-8 flex justify-center">
-<a class="font-label-md text-label-md text-text-muted hover:text-primary-fixed transition-colors duration-200 inline-block py-2 px-4 rounded-full hover:bg-surface-container-high" href="#">
+<nav aria-label="Opcoes de acesso">
+<a aria-label="Entrar como personal trainer" class="font-label-md text-label-md text-text-muted hover:text-primary-fixed transition-[color,background-color] duration-200 inline-block py-2 px-4 rounded-full hover:bg-surface-container-high focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-fixed" href="#">
             Sou personal trainer
         </a>
+</nav>
 </footer>
 </body></html>

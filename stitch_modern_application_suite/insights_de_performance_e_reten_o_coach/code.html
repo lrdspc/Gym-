@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="pt"><head>
+<html class="dark" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>TRAINFLOW | Performance &amp; Retention Insights</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
@@ -126,6 +125,41 @@
         .scrollbar-hide::-webkit-scrollbar {
             display: none;
         }
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background: #c9f236;
+            color: #171e00;
+            font-weight: 700;
+            transform: translateY(-200%);
+        }
+        .skip-link:focus-visible {
+            transform: translateY(0);
+        }
+        :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 4px rgba(201, 242, 54, 0.18);
+        }
+        :where(a, button, input, select, textarea, summary, [role="button"]) {
+            touch-action: manipulation;
+        }
+        img {
+            display: block;
+            height: auto;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 <style>
     body {
@@ -134,21 +168,22 @@
   </style>
   </head>
 <body class="pb-32">
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 <!-- Top App Bar -->
 <header class="fixed top-0 w-full z-50 bg-pure-black/80 backdrop-blur-xl border-b border-border-subtle flex justify-between items-center px-container-margin h-button-height-standard max-w-full">
 <h1 class="font-display-lg text-headline-lg text-primary-fixed tracking-tight uppercase">TRAINFLOW</h1>
 <div class="flex items-center gap-4">
-<button class="material-symbols-outlined text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150" data-icon="notifications">notifications</button>
+<button aria-label="Abrir notificações" class="material-symbols-outlined text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform duration-150" data-icon="notifications" type="button">notifications</button>
 <div class="w-10 h-10 rounded-full border border-primary-fixed overflow-hidden">
-<img alt="Coach Avatar" class="w-full h-full object-cover" data-alt="A professional high-performance fitness coach with a determined expression, lit by dramatic cinematic lighting with electric lime highlights. The background is a dark, modern gym setting with premium equipment. The overall aesthetic is aggressive, sleek, and high-end, matching the brand's performance-driven identity." src="https://lh3.googleusercontent.com/aida/ADBb0ujBn3V82_CVU7Eybj6pdo5jUujbM8XjKiFZRXvbulKT1anic4RfTqlUkFpz5SL-I1RiNmjmTZH7D6YKZqvcoCkDO57T4ZPUDe2Xf3nnDehrjdf5jNfCVuTYf6bTkeOLHd7KmZc0o0Ym9HtIOnSsucyBHou1VmASuruEQPpXQIhyRdnFfoTdVFJvIT-dOh03pW0CEpJfsq6Lwh6x1jUpwSIll02Z2oloFXbCakvaZs70tI0fSvOl22pUhJY"/>
+<img alt="Avatar do coach" class="w-full h-full object-cover" decoding="async" height="40" src="https://lh3.googleusercontent.com/aida/ADBb0ujBn3V82_CVU7Eybj6pdo5jUujbM8XjKiFZRXvbulKT1anic4RfTqlUkFpz5SL-I1RiNmjmTZH7D6YKZqvcoCkDO57T4ZPUDe2Xf3nnDehrjdf5jNfCVuTYf6bTkeOLHd7KmZc0o0Ym9HtIOnSsucyBHou1VmASuruEQPpXQIhyRdnFfoTdVFJvIT-dOh03pW0CEpJfsq6Lwh6x1jUpwSIll02Z2oloFXbCakvaZs70tI0fSvOl22pUhJY" width="40"/>
 </div>
 </div>
 </header>
-<main class="mt-24 px-container-margin max-w-7xl mx-auto space-y-stack-gap-lg">
-<!-- Dashboard Header -->
+<main class="mt-24 px-container-margin max-w-7xl mx-auto space-y-stack-gap-lg" id="main-content">
+<!-- Painel Header -->
 <section class="flex flex-col md:flex-row md:items-end justify-between gap-4">
 <div>
-<span class="font-label-sm text-primary-fixed uppercase tracking-widest">Dashboard de Estratégia</span>
+<span class="font-label-sm text-primary-fixed uppercase tracking-widest">Painel de Estratégia</span>
 <h2 class="font-headline-lg text-headline-lg uppercase text-on-surface">PERFORMANCE &amp; RETENÇÃO</h2>
 </div>
 <div class="flex items-center gap-2 bg-surface-container-high px-4 py-2 rounded-lg border border-border-subtle">
@@ -211,8 +246,13 @@
                             for(let i=0; i<210; i++) {
                                 const opacity = Math.random();
                                 const colorClass = opacity > 0.7 ? 'bg-primary-fixed' : (opacity > 0.3 ? 'bg-primary-fixed/30' : 'bg-surface-container');
-                                const cell = document.createElement('div');
-                                cell.className = `heatmap-cell ${colorClass} hover:ring-1 ring-primary-fixed cursor-pointer transition-all`;
+                                const activity = Math.floor(opacity * 100);
+                                const cell = document.createElement('button');
+                                cell.type = 'button';
+                                cell.className = `heatmap-cell ${colorClass} hover:ring-1 ring-primary-fixed cursor-pointer transition-shadow`;
+                                cell.setAttribute('aria-label', `Atividade do aluno: ${activity}%`);
+                                cell.title = `Atividade: ${activity}%`;
+                                cell.dataset.activity = activity;
                                 grid.appendChild(cell);
                             }
                         </script>
@@ -241,7 +281,7 @@
 <p class="font-label-sm text-status-warning">Sem treino há 6 dias</p>
 </div>
 </div>
-<button class="material-symbols-outlined text-text-muted group-hover:text-primary-fixed">chat_bubble</button>
+<button aria-label="Enviar mensagem para Ricardo Batista" class="material-symbols-outlined text-text-muted group-hover:text-primary-fixed" type="button">chat_bubble</button>
 </div>
 <div class="flex items-center justify-between group cursor-pointer">
 <div class="flex items-center gap-3">
@@ -251,10 +291,10 @@
 <p class="font-label-sm text-status-warning">Sem treino há 5 dias</p>
 </div>
 </div>
-<button class="material-symbols-outlined text-text-muted group-hover:text-primary-fixed">chat_bubble</button>
+<button aria-label="Enviar mensagem para Ana Luisa" class="material-symbols-outlined text-text-muted group-hover:text-primary-fixed" type="button">chat_bubble</button>
 </div>
 </div>
-<button class="w-full mt-6 py-3 border border-border-subtle rounded-full font-label-md uppercase tracking-widest text-on-surface hover:bg-surface-container transition-colors">Ver Todos (4)</button>
+<button class="w-full mt-6 py-3 border border-border-subtle rounded-full font-label-md uppercase tracking-widest text-on-surface hover:bg-surface-container transition-colors" type="button">Ver Todos (4)</button>
 </div>
 <!-- Top Performers -->
 <div class="glass-card p-6 rounded-xl border-l-4 border-primary-fixed">
@@ -266,7 +306,7 @@
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-3">
 <div class="w-10 h-10 rounded-full border border-primary-fixed p-0.5">
-<img class="w-full h-full object-cover rounded-full" data-alt="A fit woman in intense training session in a dark gym, focused and sweating, with dramatic lighting highlighting her muscles and form. High-contrast athletic photography." src="https://lh3.googleusercontent.com/aida/ADBb0ugUmLLV65MmD2R6st8WrxLL45x4b0rkhm3visF_AcUWZJDWuiPV5gl8CM7KJKgcgB_62-a9yMr-_dUCFRV3UVUJd5MejZ-g5l11Hv3XNxNDGD7nGD_KN1Q8ogDduSv2QAIRilS2K2oOuJrmColXP9R7wlm2v6QHbEg4J46rfrxlLOpVu8dDst7hq2Cj_m1W337nhcLS26yT3vN9Jb-z7T-LJUgoIg2KEXnq1M4iX0YFQaBauO-tExXq_yU"/>
+<img alt="Foto de Camila Torres" class="w-full h-full object-cover rounded-full" decoding="async" height="40" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0ugUmLLV65MmD2R6st8WrxLL45x4b0rkhm3visF_AcUWZJDWuiPV5gl8CM7KJKgcgB_62-a9yMr-_dUCFRV3UVUJd5MejZ-g5l11Hv3XNxNDGD7nGD_KN1Q8ogDduSv2QAIRilS2K2oOuJrmColXP9R7wlm2v6QHbEg4J46rfrxlLOpVu8dDst7hq2Cj_m1W337nhcLS26yT3vN9Jb-z7T-LJUgoIg2KEXnq1M4iX0YFQaBauO-tExXq_yU" width="40"/>
 </div>
 <div>
 <p class="font-label-md text-on-surface">Camila Torres</p>
@@ -337,7 +377,7 @@
 <span class="material-symbols-outlined" data-icon="straighten">straighten</span>
 <span class="font-label-sm text-label-sm uppercase tracking-widest mt-1">Assess</span>
 </a>
-<a class="flex flex-col items-center justify-center text-primary-fixed scale-110 hover:text-primary-fixed-dim transition-colors active:scale-90 transition-transform duration-200" href="#">
+<a aria-current="page" class="flex flex-col items-center justify-center text-primary-fixed scale-110 hover:text-primary-fixed-dim transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="leaderboard" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
 <span class="font-label-sm text-label-sm uppercase tracking-widest mt-1">Stats</span>
 </a>
@@ -347,29 +387,32 @@
 </a>
 <a class="flex flex-col items-center justify-center text-secondary-container hover:text-primary-fixed-dim transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-label-sm text-label-sm uppercase tracking-widest mt-1">Profile</span>
+<span class="font-label-sm text-label-sm uppercase tracking-widest mt-1">Perfil</span>
 </a>
 </nav>
-<!-- Floating Action Button: Quick Consultation Health Check -->
-<button class="fixed bottom-24 right-6 w-16 h-16 bg-primary-fixed text-pure-black rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 z-40">
+<!-- Botão flutuante: consulta rápida do check-in -->
+<button aria-label="Adicionar insight rapido" class="fixed bottom-24 right-6 w-16 h-16 bg-primary-fixed text-pure-black rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-transform active:scale-95 z-40" type="button">
 <span class="material-symbols-outlined text-3xl font-bold">add</span>
 </button>
 <script>
         // Micro-interaction for heatmap cells
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         document.querySelectorAll('.heatmap-cell').forEach(cell => {
+            if (prefersReducedMotion) {
+                return;
+            }
             cell.addEventListener('mouseenter', () => {
                 const tooltip = document.createElement('div');
                 tooltip.className = 'fixed bg-surface-bright text-on-surface px-2 py-1 rounded text-[10px] pointer-events-none z-[100] border border-border-subtle';
-                tooltip.innerText = 'Atividade: ' + (Math.floor(Math.random() * 100)) + '%';
+                tooltip.innerText = 'Atividade: ' + cell.dataset.activity + '%';
                 tooltip.id = 'temp-tooltip';
                 document.body.appendChild(tooltip);
-                
+
                 cell.addEventListener('mousemove', (e) => {
                     tooltip.style.left = (e.clientX + 10) + 'px';
                     tooltip.style.top = (e.clientY - 30) + 'px';
                 });
             });
-            
             cell.addEventListener('mouseleave', () => {
                 const tooltip = document.getElementById('temp-tooltip');
                 if(tooltip) tooltip.remove();

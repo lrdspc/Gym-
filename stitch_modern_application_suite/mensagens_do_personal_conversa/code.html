@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 
-<html class="dark" lang="en"><head>
+<html class="dark" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mensagens do Personal em Conversa</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Bebas+Neue&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -113,6 +113,41 @@
         .no-scrollbar::-webkit-scrollbar {
             display: none;
         }
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background: #c8f135;
+            color: #171e00;
+            font-weight: 700;
+            transform: translateY(-200%);
+        }
+        .skip-link:focus-visible {
+            transform: translateY(0);
+        }
+        :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+            outline: 2px solid #c8f135;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 4px rgba(200, 241, 53, 0.18);
+        }
+        :where(a, button, input, select, textarea, summary, [role="button"]) {
+            touch-action: manipulation;
+        }
+        img {
+            display: block;
+            height: auto;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 <style>
     body {
@@ -121,78 +156,79 @@
   </style>
   </head>
 <body class="bg-pure-black text-on-surface font-body-md overflow-hidden">
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 <!-- Top AppBar -->
 <header class="bg-pure-black fixed top-0 w-full z-50 flex justify-between items-center px-container-margin h-touch-target-min">
 <div class="flex items-center gap-4">
 <div class="w-8 h-8 rounded-full overflow-hidden border border-primary-container">
-<img class="w-full h-full object-cover" data-alt="A professional headshot of a fitness coach with short dark hair and a focused expression. The background is a dimly lit, high-end gym with charcoal tones and electric lime lighting accents. The overall aesthetic is clean, professional, and intense, matching the dark performance theme of the app." src="https://lh3.googleusercontent.com/aida/ADBb0uiWn76HVp0LMBoK20h0yfgfOvnu1qblDHyk0w6VAhE-Vf5E6Sw1XMK_Vt54Jt0T8ECBYNg9uBMTVRfqvkVA06M5FrSBmX79NpkzMgV2gRMI00MEd9wecC-9NXHHdwjTvfJU617qrDQJfy4Cf-FESs-1ddbls2fex23Fp3DvTTLHmuAcblSmG9YiPMbWYE3-zw88Ou1JPgSkfu6lM-ZluD7K6mchtm7ySuWSQh3Re4HCbF-YU915D_VNhKc"/>
+<img alt="Foto do treinador" class="w-full h-full object-cover" decoding="async" height="32" src="https://lh3.googleusercontent.com/aida/ADBb0uiWn76HVp0LMBoK20h0yfgfOvnu1qblDHyk0w6VAhE-Vf5E6Sw1XMK_Vt54Jt0T8ECBYNg9uBMTVRfqvkVA06M5FrSBmX79NpkzMgV2gRMI00MEd9wecC-9NXHHdwjTvfJU617qrDQJfy4Cf-FESs-1ddbls2fex23Fp3DvTTLHmuAcblSmG9YiPMbWYE3-zw88Ou1JPgSkfu6lM-ZluD7K6mchtm7ySuWSQh3Re4HCbF-YU915D_VNhKc" width="32"/>
 </div>
 <h1 class="font-headline-lg text-headline-lg tracking-widest text-primary-container">TRAINFLOW</h1>
 </div>
-<button class="text-primary-container hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<button aria-label="Abrir notificações" class="text-primary-container hover:opacity-80 transition-opacity active:scale-95 duration-150" type="button">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
 </button>
 </header>
-<!-- Desktop Sidebar / Chat List Overlay for Mobile -->
-<main class="pt-touch-target-min pb-button-height-standard flex h-screen">
-<!-- Conversation List -->
+<!-- Barra lateral desktop e lista de conversas -->
+<main class="pt-touch-target-min pb-button-height-standard flex h-screen" id="main-content">
+<!-- Lista de conversas -->
 <aside class="hidden md:flex flex-col w-1/3 max-w-sm border-r border-border-subtle bg-surface-container-lowest overflow-hidden">
 <div class="p-gutter">
 <div class="relative">
 <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted">search</span>
-<input class="w-full bg-surface-container border-none rounded-lg pl-10 text-body-md py-2 focus:ring-1 focus:ring-primary-container" placeholder="Search students..." type="text"/>
+<input aria-label="Buscar alunos" autocomplete="off" class="w-full bg-surface-container border-none rounded-lg pl-10 text-body-md py-2 focus:ring-1 focus:ring-primary-container" name="buscar-alunos" placeholder="Buscar alunos..." type="search"/>
 </div>
 </div>
 <div class="flex-1 overflow-y-auto no-scrollbar">
-<!-- Chat Item Active -->
+<!-- Conversa ativa -->
 <div class="flex items-center gap-4 px-gutter py-4 bg-surface-container-high border-l-4 border-primary-container cursor-pointer">
 <div class="relative">
-<img class="w-12 h-12 rounded-full object-cover" data-alt="Portrait of a young male athlete with a determined gaze, sweating after an intense workout. The lighting is cinematic and high-contrast, casting deep shadows against a dark industrial gym wall. The color palette is dominated by deep blacks and cool greys to maintain the high-performance brand identity." src="https://lh3.googleusercontent.com/aida/ADBb0uiX-4DNLQRt5aXSNo6q6BMDqBXdG0TLASg2ojTNABCZ3Z2HoYZARsbZ1kfiv7v2Zc8FzvaI98lgsaJpWksrHmpZpspklq9kJmzvXXYgyQVNoAYDpt1gqKGI65qf3zruMNqU73nPpkHAgH8m8nra6TJdpUrDMAaPPDKp9LE1jW9ABkqB02O1oy7vhYWVYJfhbRXN38ultP5gmVFGhQsjilVBnpfkyxnNh6hMcvn00fyWf4gCC0ME3SRBeFw"/>
+<img alt="Foto de Ricardo Silva" class="w-12 h-12 rounded-full object-cover" decoding="async" height="48" src="https://lh3.googleusercontent.com/aida/ADBb0uiX-4DNLQRt5aXSNo6q6BMDqBXdG0TLASg2ojTNABCZ3Z2HoYZARsbZ1kfiv7v2Zc8FzvaI98lgsaJpWksrHmpZpspklq9kJmzvXXYgyQVNoAYDpt1gqKGI65qf3zruMNqU73nPpkHAgH8m8nra6TJdpUrDMAaPPDKp9LE1jW9ABkqB02O1oy7vhYWVYJfhbRXN38ultP5gmVFGhQsjilVBnpfkyxnNh6hMcvn00fyWf4gCC0ME3SRBeFw" width="48"/>
 <div class="absolute bottom-0 right-0 w-3 h-3 bg-primary-container rounded-full border-2 border-pure-black"></div>
 </div>
 <div class="flex-1 min-w-0">
 <div class="flex justify-between items-baseline">
 <h3 class="font-bold text-on-surface truncate">Ricardo Silva</h3>
-<span class="text-[10px] text-primary-container">JUST NOW</span>
+<span class="text-[10px] text-primary-container">AGORA</span>
 </div>
-<p class="text-label-md text-text-muted truncate">Finished the leg press sets...</p>
+<p class="text-label-md text-text-muted truncate">Terminei as séries no leg press...</p>
 </div>
 <div class="bg-primary-container text-pure-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center">2</div>
 </div>
-<!-- Chat Item -->
+<!-- Conversa -->
 <div class="flex items-center gap-4 px-gutter py-4 hover:bg-surface-container transition-colors cursor-pointer border-l-4 border-transparent">
-<img class="w-12 h-12 rounded-full object-cover" data-alt="A focused female athlete in her late 20s during a recovery session. She is wearing sleek black athletic wear. The background is a minimalist studio with soft, focused spotlighting that creates a high-end, professional atmosphere. The image uses a desaturated color palette with subtle contrast." src="https://lh3.googleusercontent.com/aida/ADBb0ujYrjF9FIxsfsfHRziqZ9o3KfdeovV7zPYajcx8pNJ4a8wSEVHizuuREQtO6ALiOb_OB_axepiVH20DqvGsvRFwceOgFBlIMhlrvwt7THNLaiIr61tmDfzZSzD-oYy5c3FH2mC6XT9udK8jIQYcThC_FMwbolaJ7nUNjQKP_JML1Jh92AmH_XePrxkdZN45g_oVU_kcMwgbZbon3mkX8GWnK-R6MNb6XcGbbDw9SbtpICmaSnYNJxkNdQ"/>
+<img alt="Foto de Ana Martins" class="w-12 h-12 rounded-full object-cover" decoding="async" height="48" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0ujYrjF9FIxsfsfHRziqZ9o3KfdeovV7zPYajcx8pNJ4a8wSEVHizuuREQtO6ALiOb_OB_axepiVH20DqvGsvRFwceOgFBlIMhlrvwt7THNLaiIr61tmDfzZSzD-oYy5c3FH2mC6XT9udK8jIQYcThC_FMwbolaJ7nUNjQKP_JML1Jh92AmH_XePrxkdZN45g_oVU_kcMwgbZbon3mkX8GWnK-R6MNb6XcGbbDw9SbtpICmaSnYNJxkNdQ" width="48"/>
 <div class="flex-1 min-w-0">
 <div class="flex justify-between items-baseline">
 <h3 class="font-bold text-on-surface truncate">Ana Martins</h3>
 <span class="text-[10px] text-text-muted">14:20</span>
 </div>
-<p class="text-label-md text-text-muted truncate">The meal plan feels great.</p>
+<p class="text-label-md text-text-muted truncate">O plano alimentar está funcionando muito bem.</p>
 </div>
 </div>
-<!-- Chat Item -->
+<!-- Conversa -->
 <div class="flex items-center gap-4 px-gutter py-4 hover:bg-surface-container transition-colors cursor-pointer border-l-4 border-transparent">
-<img class="w-12 h-12 rounded-full object-cover" data-alt="A male gym-goer in his 30s adjusting his wrist wraps, looking ready for a heavy lift. The environment is a dark, gritty powerlifting gym with raw textures and strong directional lighting. The image emphasizes strength and focus, fitting the intense brand aesthetic of the design system." src="https://lh3.googleusercontent.com/aida/ADBb0uizflHHIowcscvPTbm0Jei5CJVZvqbQ6jV08_WO4Kjy6ZgPUadB3wIZw1rPeTKSKvsIuJXjEjBjDoWyXRRCl_kFJtPFDI5RF9HGbsT0a8MZLnoCWdnzY3rbJ2EVpWGYby0SA3D98mAOXMzYiT2PQ2X0ZWisVOaZcJx0bjUnl41MNESl8dcXh27zYyZqRYAIBHUX8nNyq3qhuTixM5a6hrbDCwmXVrB789xVLw1nEibG1rOJ1fRlsRSKZ2M"/>
+<img alt="Foto de Marcus Volt" class="w-12 h-12 rounded-full object-cover" decoding="async" height="48" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0uizflHHIowcscvPTbm0Jei5CJVZvqbQ6jV08_WO4Kjy6ZgPUadB3wIZw1rPeTKSKvsIuJXjEjBjDoWyXRRCl_kFJtPFDI5RF9HGbsT0a8MZLnoCWdnzY3rbJ2EVpWGYby0SA3D98mAOXMzYiT2PQ2X0ZWisVOaZcJx0bjUnl41MNESl8dcXh27zYyZqRYAIBHUX8nNyq3qhuTixM5a6hrbDCwmXVrB789xVLw1nEibG1rOJ1fRlsRSKZ2M" width="48"/>
 <div class="flex-1 min-w-0">
 <div class="flex justify-between items-baseline">
 <h3 class="font-bold text-on-surface truncate">Marcus Volt</h3>
-<span class="text-[10px] text-text-muted">YESTERDAY</span>
+<span class="text-[10px] text-text-muted">ONTEM</span>
 </div>
-<p class="text-label-md text-text-muted truncate">Can we reschedule to 6PM?</p>
+<p class="text-label-md text-text-muted truncate">Podemos remarcar para 18h?</p>
 </div>
 </div>
 </div>
 </aside>
-<!-- Active Chat Window -->
+<!-- Janela da conversa ativa -->
 <section class="flex-1 flex flex-col bg-pure-black relative">
-<!-- Chat Header -->
+<!-- Cabeçalho da conversa -->
 <div class="p-gutter border-b border-border-subtle flex items-center justify-between bg-surface-container-lowest/80 backdrop-blur-xl">
 <div class="flex items-center gap-3">
-<button class="md:hidden text-on-surface mr-2">
+<button aria-label="Voltar para conversas" class="md:hidden text-on-surface mr-2" type="button">
 <span class="material-symbols-outlined">arrow_back</span>
 </button>
 <div class="relative">
-<img class="w-10 h-10 rounded-full object-cover" data-alt="Close up of a determined athlete, Ricardo Silva, with beads of sweat on his forehead. The lighting is low-key with a sharp lime rim light that highlights his silhouette against the dark gym background. This portrait represents the high-intensity performance mood of the TRAINFLOW platform." src="https://lh3.googleusercontent.com/aida/ADBb0uiJBZk7ubeDbwM33NI1cNhK82NDH-tUkR_P0NIS_GFJCO2FD-rKsV30WMkJY8NwM7VIm2WtZxL62-X2vvY5jccHK8O7O17KLhWmgVUMbz4qcVo-oKfR62i1zlNSmL0cFiQBtwPV8N3C-_13uzi9ku69y1U92R9hC8b0DfTLkxrNr1FXLYO7lTQZ3Eh4b_MfBnDnl7CdPGkR07hOCCb98Zg75n6x_8qVzIotJSKSQUXew-pvgn4wylVuoQ"/>
+<img alt="Avatar de Ricardo Silva" class="w-10 h-10 rounded-full object-cover" decoding="async" height="40" src="https://lh3.googleusercontent.com/aida/ADBb0uiJBZk7ubeDbwM33NI1cNhK82NDH-tUkR_P0NIS_GFJCO2FD-rKsV30WMkJY8NwM7VIm2WtZxL62-X2vvY5jccHK8O7O17KLhWmgVUMbz4qcVo-oKfR62i1zlNSmL0cFiQBtwPV8N3C-_13uzi9ku69y1U92R9hC8b0DfTLkxrNr1FXLYO7lTQZ3Eh4b_MfBnDnl7CdPGkR07hOCCb98Zg75n6x_8qVzIotJSKSQUXew-pvgn4wylVuoQ" width="40"/>
 <div class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-primary-container rounded-full border-2 border-pure-black"></div>
 </div>
 <div>
@@ -201,13 +237,13 @@
 </div>
 </div>
 <div class="flex gap-4">
-<button class="text-on-surface hover:text-primary-container transition-colors">
+<button aria-label="Iniciar videochamada" class="text-on-surface hover:text-primary-container transition-colors" type="button">
 <span class="material-symbols-outlined">videocam</span>
 </button>
-<button class="text-on-surface hover:text-primary-container transition-colors">
+<button aria-label="Iniciar chamada de voz" class="text-on-surface hover:text-primary-container transition-colors" type="button">
 <span class="material-symbols-outlined">call</span>
 </button>
-<button class="text-on-surface hover:text-primary-container transition-colors">
+<button aria-label="Abrir mais opções" class="text-on-surface hover:text-primary-container transition-colors" type="button">
 <span class="material-symbols-outlined">more_vert</span>
 </button>
 </div>
@@ -239,7 +275,7 @@
 <div class="bg-surface-container-high text-on-surface p-4 rounded-t-2xl rounded-br-2xl rounded-bl-none shadow-lg">
 <p class="text-body-md">Understood. Bracing harder now. Here's the video from the last set.</p>
 <div class="mt-3 relative rounded-xl overflow-hidden aspect-video border border-border-subtle group cursor-pointer">
-<img class="w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-all" data-alt="A first-person perspective video thumbnail of a heavy barbell squat inside a dark, modern power rack. The lighting is cinematic with electric lime accents highlighting the plates. The scene is intense and focused, reflecting a high-performance training environment." src="https://lh3.googleusercontent.com/aida/ADBb0ugZhFfeh5Ehjj3QcZbneAu1act-KOM_gvoKyhJHRCCC5HQDWrsFZxSHUx9GHRkJvOq9jeKbnNGxYsMJK5Zc9mjRGQljtKwJlunIZ1uxoZX-VaHux4IyBLBlbHdklxcSa6TTO27vy4o8uq4LYwj53zZ_TisTlVzYAVdhRnJuOZmcu2Xd2KllYpQNF8l0x4tCA31EkueKrHh5CqmaWSG_wHrAudwWWxElPoZSLpKPgPxxVeshSb5o909nnlc"/>
+<img alt="Miniatura do video do agachamento" class="w-full h-full object-cover brightness-50 group-hover:brightness-75 transition-[filter]" decoding="async" height="180" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0ugZhFfeh5Ehjj3QcZbneAu1act-KOM_gvoKyhJHRCCC5HQDWrsFZxSHUx9GHRkJvOq9jeKbnNGxYsMJK5Zc9mjRGQljtKwJlunIZ1uxoZX-VaHux4IyBLBlbHdklxcSa6TTO27vy4o8uq4LYwj53zZ_TisTlVzYAVdhRnJuOZmcu2Xd2KllYpQNF8l0x4tCA31EkueKrHh5CqmaWSG_wHrAudwWWxElPoZSLpKPgPxxVeshSb5o909nnlc" width="320"/>
 <div class="absolute inset-0 flex items-center justify-center">
 <span class="material-symbols-outlined text-primary-container text-5xl" style="font-variation-settings: 'FILL' 1;">play_circle</span>
 </div>
@@ -250,7 +286,7 @@
 <!-- Sent Message -->
 <div class="flex items-end gap-2 max-w-[85%] ml-auto">
 <div class="bg-primary-container text-pure-black p-4 rounded-t-2xl rounded-bl-2xl rounded-br-none shadow-lg">
-<p class="text-body-md font-medium">Form looks solid, just keep your chest up. Finished the leg press sets...</p>
+<p class="text-body-md font-medium">A execução está sólida, só mantenha o peito aberto. Terminei as séries no leg press...</p>
 <div class="flex items-center justify-end gap-1 mt-1">
 <span class="text-[10px] opacity-70">09:18 AM</span>
 <span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">done_all</span>
@@ -260,18 +296,18 @@
 </div>
 <!-- Input Area -->
 <div class="p-4 bg-surface-container-lowest/80 backdrop-blur-xl border-t border-border-subtle">
-<div class="flex items-center gap-3 bg-surface-container rounded-full px-4 h-12 shadow-inner">
-<button class="text-primary-container hover:scale-110 transition-transform">
+<form action="#" aria-label="Enviar mensagem para Ricardo Silva" class="flex items-center gap-3 bg-surface-container rounded-full px-4 h-12 shadow-inner" method="get" onsubmit="event.preventDefault()">
+<button aria-label="Adicionar anexo" class="text-primary-container hover:scale-110 transition-transform" type="button">
 <span class="material-symbols-outlined">add</span>
 </button>
-<input class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface text-body-md placeholder-text-muted" placeholder="Type a message..." type="text"/>
-<button class="text-text-muted hover:text-primary-container transition-colors">
+<input aria-label="Digite uma mensagem" autocomplete="off" class="flex-1 bg-transparent border-none focus:ring-0 text-on-surface text-body-md placeholder-text-muted" enterkeyhint="send" name="mensagem" placeholder="Type a message..." type="text"/>
+<button aria-label="Inserir emoji" class="text-text-muted hover:text-primary-container transition-colors" type="button">
 <span class="material-symbols-outlined">sentiment_satisfied</span>
 </button>
-<button class="w-10 h-10 bg-primary-container text-pure-black rounded-full flex items-center justify-center active:scale-90 transition-transform">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+<button aria-label="Enviar mensagem" class="w-10 h-10 bg-primary-container text-pure-black rounded-full flex items-center justify-center active:scale-90 transition-transform" type="submit">
+<span class="material-symbols-outlined" data-icon="send" style="font-variation-settings: 'FILL' 1;">send</span>
 </button>
-</div>
+</form>
 </div>
 </section>
 </main>
@@ -279,30 +315,31 @@
 <nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center h-button-height-standard px-gutter pb-safe bg-pure-black/80 backdrop-blur-xl border-t border-border-subtle">
 <a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
+<span class="font-label-sm text-label-sm">Início</span>
 </a>
 <a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
-<span class="font-label-sm text-label-sm">Workout</span>
+<span class="font-label-sm text-label-sm">Treinos</span>
 </a>
 <a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="group">group</span>
 <span class="font-label-sm text-label-sm">Students</span>
 </a>
-<a class="flex flex-col items-center justify-center text-primary-container font-bold scale-110 transition-transform duration-200" href="#">
+<a aria-current="page" class="flex flex-col items-center justify-center text-primary-container font-bold scale-110 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="chat_bubble" style="font-variation-settings: 'FILL' 1;">chat_bubble</span>
-<span class="font-label-sm text-label-sm">Chat</span>
+<span class="font-label-sm text-label-sm">Mensagens</span>
 </a>
 <a class="flex flex-col items-center justify-center text-text-muted hover:text-primary-fixed-dim transition-colors" href="#">
 <span class="material-symbols-outlined" data-icon="person">person</span>
-<span class="font-label-sm text-label-sm">Profile</span>
+<span class="font-label-sm text-label-sm">Perfil</span>
 </a>
 </nav>
 <script>
         // Simple micro-interaction for sending message
-        const input = document.querySelector('input[type="text"]');
-        const sendBtn = document.querySelector('button .material-symbols-outlined[data-icon="send"]')?.parentElement || document.querySelector('button:has(span[style*="send"])');
+        const input = document.querySelector('input[name="mensagem"]');
+        const sendBtn = document.querySelector('.material-symbols-outlined[data-icon="send"]')?.parentElement;
         const chatContainer = document.querySelector('.chat-container');
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         if (sendBtn) {
             sendBtn.addEventListener('click', () => {
@@ -310,7 +347,7 @@
                     const msgDiv = document.createElement('div');
                     msgDiv.className = 'flex items-end gap-2 max-w-[85%] ml-auto';
                     msgDiv.innerHTML = `
-                        <div class="bg-primary-container text-pure-black p-4 rounded-t-2xl rounded-bl-2xl rounded-br-none shadow-lg animate-in slide-in-from-bottom-2 duration-300">
+                        <div class="bg-primary-container text-pure-black p-4 rounded-t-2xl rounded-bl-2xl rounded-br-none shadow-lg">
                             <p class="text-body-md font-medium">${input.value}</p>
                             <div class="flex items-center justify-end gap-1 mt-1">
                                 <span class="text-[10px] opacity-70">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
@@ -320,7 +357,7 @@
                     `;
                     chatContainer.appendChild(msgDiv);
                     input.value = '';
-                    chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: 'smooth' });
+                    chatContainer.scrollTo({ top: chatContainer.scrollHeight, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
                 }
             });
         }

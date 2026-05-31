@@ -123,41 +123,93 @@
             min-height: 100dvh;
             background-color: #000000;
         }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        .skip-link {
+            position: absolute;
+            left: 1rem;
+            top: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background: #c9f236;
+            color: #000000;
+            font: 600 0.875rem/1 Inter, sans-serif;
+            transform: translateY(-200%);
+            transition: transform 0.2s ease;
+        }
+
+        .skip-link:focus-visible {
+            transform: translateY(0);
+        }
+
+        :focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 4px;
+        }
+
+        button,
+        a,
+        [role="button"] {
+            touch-action: manipulation;
+        }
+
+        .snap-x {
+            touch-action: pan-x;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+                scroll-behavior: auto !important;
+            }
+        }
     </style>
 </head>
 <body class="bg-pure-black text-on-surface antialiased min-h-screen flex flex-col pt-20 pb-28 relative">
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
 <!-- TopAppBar -->
 <header class="bg-pure-black/90 backdrop-blur-xl border-b border-white/5 fixed top-0 w-full z-50">
 <div class="flex items-center justify-between px-container-margin h-button-height-standard max-w-7xl mx-auto w-full">
 <div class="flex items-center gap-3 active:scale-95 transition-transform cursor-pointer">
 <div class="w-8 h-8 rounded-full overflow-hidden bg-surface-variant flex items-center justify-center">
-<span class="material-symbols-outlined text-white/70" style="font-variation-settings: 'FILL' 1;">person</span>
+<span aria-hidden="true" class="material-symbols-outlined text-white/70" style="font-variation-settings: 'FILL' 1;">person</span>
 </div>
 </div>
-<h1 class="font-display-lg text-display-lg text-primary-fixed tracking-tighter">TRAINFLOW</h1>
-<button aria-label="Notifications" class="w-8 h-8 flex items-center justify-center text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform">
-<span class="material-symbols-outlined">notifications</span>
+<p aria-label="TRAINFLOW" class="font-display-lg text-display-lg text-primary-fixed tracking-tighter">TRAINFLOW</p>
+<button aria-label="Abrir notificações" class="w-8 h-8 flex items-center justify-center text-primary-fixed hover:opacity-80 transition-opacity active:scale-95 transition-transform" type="button">
+<span aria-hidden="true" class="material-symbols-outlined">notifications</span>
 </button>
 </div>
 </header>
-<main class="flex-grow w-full max-w-4xl mx-auto px-container-margin flex flex-col gap-stack-gap-lg">
+<main class="flex-grow w-full max-w-4xl mx-auto px-container-margin flex flex-col gap-stack-gap-lg" id="conteudo-principal" tabindex="-1">
 <!-- Welcome Header -->
 <section class="mt-8 animate-[fadeIn_0.5s_ease-out]">
-<h2 class="font-headline-md text-headline-md text-primary-fixed uppercase mb-1">BEM-VINDO AO NOVO NÍVEL</h2>
-<h3 class="font-display-lg text-display-lg text-white">OLÁ, <span class="text-white">LUCAS</span></h3>
+<p class="font-headline-md text-headline-md text-primary-fixed uppercase mb-1">BEM-VINDO AO NOVO NÍVEL</p>
+<h1 class="font-display-lg text-display-lg text-white">OLÁ, <span class="text-white">LUCAS</span></h1>
 <p class="font-body-md text-body-md text-white/60 mt-2 max-w-md">Analisamos seus dados. Seu plano foi construído para máxima eficiência baseada no seu perfil biológico.</p>
 </section>
 <!-- Somatotype Hero Card -->
-<section class="relative rounded-xl overflow-hidden bg-[#1A1A1A] border border-white/5 p-6 shadow-2xl animate-[slideUp_0.6s_ease-out_0.1s_both]">
+<section aria-labelledby="classificacao-title" class="relative rounded-xl overflow-hidden bg-[#1A1A1A] border border-white/5 p-6 shadow-2xl animate-[slideUp_0.6s_ease-out_0.1s_both]">
 <div class="absolute top-0 right-0 p-4 opacity-5 pointer-events-none">
-<span class="material-symbols-outlined text-9xl text-white">accessibility_new</span>
+<span aria-hidden="true" class="material-symbols-outlined text-9xl text-white">accessibility_new</span>
 </div>
 <div class="relative z-10">
 <div class="flex items-center gap-2 mb-4">
-<span class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">electric_bolt</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed" style="font-variation-settings: 'FILL' 1;">electric_bolt</span>
 <span class="font-label-md text-label-md text-primary-fixed tracking-widest uppercase">CLASSIFICAÇÃO</span>
 </div>
-<h4 class="font-headline-lg text-headline-lg text-white mb-2">ECTOMORFO</h4>
+<h2 class="font-headline-lg text-headline-lg text-white mb-2" id="classificacao-title">ECTOMORFO</h2>
 <div class="flex flex-col gap-2 mt-4 max-w-lg">
 <p class="font-body-md text-body-md text-white/70">
                         Metabolismo acelerado com dificuldade em ganho de massa. Foco total em <strong class="text-white">hipertrofia</strong> com volume controlado e cargas elevadas.
@@ -180,60 +232,60 @@
 </div>
 </section>
 <!-- Highlights Scroll -->
-<section class="animate-[slideUp_0.6s_ease-out_0.2s_both]">
-<h5 class="font-headline-md text-headline-md text-white mb-4">DIRETRIZES DO TREINO</h5>
-<div class="flex overflow-x-auto gap-4 pb-4 no-scrollbar -mx-container-margin px-container-margin snap-x">
+<section aria-labelledby="diretrizes-title" class="animate-[slideUp_0.6s_ease-out_0.2s_both]">
+<h2 class="font-headline-md text-headline-md text-white mb-4" id="diretrizes-title">DIRETRIZES DO TREINO</h2>
+<ul class="flex overflow-x-auto gap-4 pb-4 no-scrollbar -mx-container-margin px-container-margin snap-x" role="list">
 <!-- Highlight Card 1 -->
-<div class="min-w-[280px] bg-[#1A1A1A] rounded-lg p-5 border border-white/5 flex-shrink-0 snap-center hover:bg-[#222222] transition-colors">
+<li class="min-w-[280px] bg-[#1A1A1A] rounded-lg p-5 border border-white/5 flex-shrink-0 snap-center hover:bg-[#222222] transition-colors">
 <div class="w-10 h-10 rounded-full bg-black/30 flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-primary-fixed">vital_signs</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">vital_signs</span>
 </div>
-<h6 class="font-headline-md text-headline-md text-white text-[20px] mb-2 leading-tight">FALHA CONCÊNTRICA</h6>
+<h3 class="font-headline-md text-headline-md text-white text-[20px] mb-2 leading-tight">FALHA CONCÊNTRICA</h3>
 <p class="font-body-md text-body-md text-white/60 text-sm">
                         Busque a falha real nas duas últimas séries de cada exercício. O estímulo precisa ser agressivo.
                     </p>
-</div>
+</li>
 <!-- Highlight Card 2 -->
-<div class="min-w-[280px] bg-[#1A1A1A] rounded-lg p-5 border border-white/5 flex-shrink-0 snap-center hover:bg-[#222222] transition-colors">
+<li class="min-w-[280px] bg-[#1A1A1A] rounded-lg p-5 border border-white/5 flex-shrink-0 snap-center hover:bg-[#222222] transition-colors">
 <div class="w-10 h-10 rounded-full bg-black/30 flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-primary-fixed">timer</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">timer</span>
 </div>
-<h6 class="font-headline-md text-headline-md text-white text-[20px] mb-2 leading-tight">DESCANSO LONGO</h6>
+<h3 class="font-headline-md text-headline-md text-white text-[20px] mb-2 leading-tight">DESCANSO LONGO</h3>
 <p class="font-body-md text-body-md text-white/60 text-sm">
                         Respeite os 90-120 segundos de descanso. A recuperação neural é crucial para a próxima série pesada.
                     </p>
-</div>
+</li>
 <!-- Highlight Card 3 -->
-<div class="min-w-[280px] bg-[#1A1A1A] rounded-lg p-5 border border-white/5 flex-shrink-0 snap-center hover:bg-[#222222] transition-colors">
+<li class="min-w-[280px] bg-[#1A1A1A] rounded-lg p-5 border border-white/5 flex-shrink-0 snap-center hover:bg-[#222222] transition-colors">
 <div class="w-10 h-10 rounded-full bg-black/30 flex items-center justify-center mb-4">
-<span class="material-symbols-outlined text-primary-fixed">trending_up</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed">trending_up</span>
 </div>
-<h6 class="font-headline-md text-headline-md text-white text-[20px] mb-2 leading-tight">PROGRESSÃO</h6>
+<h3 class="font-headline-md text-headline-md text-white text-[20px] mb-2 leading-tight">PROGRESSÃO</h3>
 <p class="font-body-md text-body-md text-white/60 text-sm">
                         Anote todas as cargas. O objetivo de cada semana é superar a carga ou as repetições da semana anterior.
                     </p>
-</div>
-</div>
+</li>
+</ul>
 </section>
 <!-- Nutrition Note -->
-<section class="bg-[#1A1A1A] border-l-4 border-primary-fixed rounded-r-lg p-4 mb-4 animate-[slideUp_0.6s_ease-out_0.3s_both] border-opacity-50">
+<aside aria-labelledby="aviso-nutricional-title" class="bg-[#1A1A1A] border-l-4 border-primary-fixed rounded-r-lg p-4 mb-4 animate-[slideUp_0.6s_ease-out_0.3s_both] border-opacity-50">
 <div class="flex items-start gap-3">
-<span class="material-symbols-outlined text-primary-fixed mt-1">warning</span>
+<span aria-hidden="true" class="material-symbols-outlined text-primary-fixed mt-1">warning</span>
 <div>
-<h6 class="font-label-md text-label-md font-bold text-white mb-1">Aviso Nutricional Crítico</h6>
+<h2 class="font-label-md text-label-md font-bold text-white mb-1" id="aviso-nutricional-title">Aviso Nutricional Crítico</h2>
 <p class="font-body-md text-body-md text-white/70 text-sm">
                         Sem combustível, não há motor. Como Ectomorfo, pular refeições anulará o esforço do treino. Mantenha a ingestão de carboidratos alta pré e pós-treino.
                     </p>
 </div>
 </div>
-</section>
+</aside>
 <!-- Main CTA -->
-<div class="mt-auto pt-6 pb-4 animate-[slideUp_0.6s_ease-out_0.4s_both] sticky bottom-0 z-40 bg-gradient-to-t from-pure-black via-pure-black to-transparent">
-<button class="w-full h-[56px] bg-primary-fixed text-pure-black rounded-full font-headline-md text-headline-md flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all shadow-[0_8px_24px_rgba(201,242,54,0.15)]">
+<footer class="mt-auto pt-6 pb-4 animate-[slideUp_0.6s_ease-out_0.4s_both] sticky bottom-0 z-40 bg-gradient-to-t from-pure-black via-pure-black to-transparent">
+<button aria-label="Entender meu treino" class="w-full h-[56px] bg-primary-fixed text-pure-black rounded-full font-headline-md text-headline-md flex items-center justify-center gap-2 hover:brightness-110 active:scale-95 transition-all shadow-[0_8px_24px_rgba(201,242,54,0.15)]" type="button">
                 ENTENDER MEU TREINO
-                <span class="material-symbols-outlined font-bold">arrow_forward</span>
+                <span aria-hidden="true" class="material-symbols-outlined font-bold">arrow_forward</span>
 </button>
-</div>
+</footer>
 </main>
 <style>
         @keyframes fadeIn {

@@ -3,9 +3,9 @@
 <html class="dark" lang="pt-BR"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Relatórios Avançados do Trainer</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
       tailwind.config = {
@@ -124,6 +124,41 @@
         .heat-cell:hover {
             filter: brightness(1.5);
         }
+        .skip-link {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            z-index: 100;
+            padding: 0.75rem 1rem;
+            border-radius: 9999px;
+            background: #c9f236;
+            color: #171e00;
+            font-weight: 700;
+            transform: translateY(-200%);
+        }
+        .skip-link:focus-visible {
+            transform: translateY(0);
+        }
+        :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+            outline: 2px solid #c9f236;
+            outline-offset: 3px;
+            box-shadow: 0 0 0 4px rgba(201, 242, 54, 0.18);
+        }
+        :where(a, button, input, select, textarea, summary, [role="button"]) {
+            touch-action: manipulation;
+        }
+        img {
+            display: block;
+            height: auto;
+        }
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
+        }
         ::-webkit-scrollbar {
             width: 4px;
         }
@@ -142,22 +177,23 @@
   </style>
   </head>
 <body class="pb-24">
+<a class="skip-link" href="#main-content">Pular para o conteúdo</a>
 <!-- Top Navigation Anchor -->
 <header class="fixed top-0 w-full z-50 bg-background/80 dark:bg-background/80 backdrop-blur-xl border-b border-border-subtle flex items-center justify-between px-container-margin h-button-height-standard">
 <div class="flex items-center gap-4">
-<button class="active:scale-95 transition-transform">
+<button aria-label="Voltar" class="active:scale-95 transition-transform" type="button">
 <span class="material-symbols-outlined text-primary-fixed" data-icon="arrow_back">arrow_back</span>
 </button>
 <h1 class="font-display-lg text-[32px] text-primary-fixed tracking-tighter uppercase">RELATÓRIOS</h1>
 </div>
 <div class="flex items-center gap-4">
-<span class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="filter_list">filter_list</span>
+<button aria-label="Filtrar relatórios" class="material-symbols-outlined text-on-surface-variant hover:opacity-80 transition-opacity" data-icon="filter_list" type="button">filter_list</button>
 <div class="w-8 h-8 rounded-full overflow-hidden border border-primary-fixed">
-<img alt="Profile" data-alt="A close-up professional portrait of a fitness coach with an intense and focused expression. The lighting is dramatic, high-contrast chiaroscuro style, emphasizing athletic features against a deep black background. The overall aesthetic is professional, sharp, and mirrors a high-end athletic brand identity with subtle green rim lighting." src="https://lh3.googleusercontent.com/aida/ADBb0uiwwJdD2LlZzmolbrBeF9RGo1FS1B4NMcw1x9AHtI7VhzEL4tB35gt3IAT77__EZRurjBh-VKkLZSbsb40wQZL9IqUUindD1P9dHFVPOW_lHnq7ZY8CGBC8FkzsjgQstoL6VxL1-xSQ0nbIIOs7dwjXv2XQt1NNU98nCI_vIgi_Fj3AK0ihjBGYK0dnop_mIpyBhzK134h2M2E0EqQENW6E0Lefa4wcsvMTsCumq5TtgEMcEX6i2YmgfxU"/>
+<img alt="Foto do treinador" decoding="async" height="32" src="https://lh3.googleusercontent.com/aida/ADBb0uiwwJdD2LlZzmolbrBeF9RGo1FS1B4NMcw1x9AHtI7VhzEL4tB35gt3IAT77__EZRurjBh-VKkLZSbsb40wQZL9IqUUindD1P9dHFVPOW_lHnq7ZY8CGBC8FkzsjgQstoL6VxL1-xSQ0nbIIOs7dwjXv2XQt1NNU98nCI_vIgi_Fj3AK0ihjBGYK0dnop_mIpyBhzK134h2M2E0EqQENW6E0Lefa4wcsvMTsCumq5TtgEMcEX6i2YmgfxU" width="32"/>
 </div>
 </div>
 </header>
-<main class="mt-20 px-container-margin space-y-6">
+<main class="mt-20 px-container-margin space-y-6" id="main-content">
 <!-- Quick Stats Bento Grid -->
 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
 <!-- Retention Card -->
@@ -247,7 +283,7 @@
 </div>
 </div>
 </section>
-<!-- Most Executed Workouts -->
+<!-- Treinos mais executados -->
 <section class="space-y-4">
 <h2 class="font-headline-md text-on-surface">TREINOS MAIS EXECUTADOS</h2>
 <div class="space-y-3">
@@ -293,12 +329,12 @@
 <section class="space-y-4">
 <div class="flex justify-between items-end">
 <h2 class="font-headline-md text-on-surface">RANKING DE CONSISTÊNCIA</h2>
-<span class="font-label-sm text-primary-fixed border-b border-primary-fixed uppercase mb-1">Ver todos</span>
+<a class="font-label-sm text-primary-fixed border-b border-primary-fixed uppercase mb-1" href="#">Ver todos</a>
 </div>
 <div class="glass-card rounded-xl overflow-hidden">
 <div class="flex items-center p-4 border-b border-border-subtle gap-4">
 <span class="font-display-lg text-3xl text-primary-fixed w-6 text-center">1</span>
-<img alt="Top Student" class="w-10 h-10 rounded-full object-cover" data-alt="A muscular woman working out in a dark, atmospheric high-performance gym. Strong rim lighting separates her silhouette from the black background, emphasizing her sweat and intensity. High-end athletic aesthetic with professional photography feel." src="https://lh3.googleusercontent.com/aida/ADBb0uirvMJN57f5nWLdqP0Xuc2SjG4_8EAnUGHGM3pgHnxw_1700gmbV_xJz4CiMAfMhatB4gQPthQkMdXnGs7flj2Qo8D4AdZnHT9agJWzzIjeV-Tu48Ax9hunN7DrTVQLAU7fOyKPR1ZTCf43Wl0xaKHXaq5yeHKv4SIJygibA20VAqfQyKwDyIIIKXe2hU8IKBP9LJWGO7f7vQbdOo502jTbgyqjerdjgUYpbjOJldOpGnukOHB1sfTlXgI"/>
+<img alt="Foto de Mariana Costa" class="w-10 h-10 rounded-full object-cover" decoding="async" height="40" src="https://lh3.googleusercontent.com/aida/ADBb0uirvMJN57f5nWLdqP0Xuc2SjG4_8EAnUGHGM3pgHnxw_1700gmbV_xJz4CiMAfMhatB4gQPthQkMdXnGs7flj2Qo8D4AdZnHT9agJWzzIjeV-Tu48Ax9hunN7DrTVQLAU7fOyKPR1ZTCf43Wl0xaKHXaq5yeHKv4SIJygibA20VAqfQyKwDyIIIKXe2hU8IKBP9LJWGO7f7vQbdOo502jTbgyqjerdjgUYpbjOJldOpGnukOHB1sfTlXgI" width="40"/>
 <div class="flex-grow">
 <p class="font-body-md font-bold">Mariana Costa</p>
 <div class="flex gap-1 mt-1">
@@ -314,7 +350,7 @@
 </div>
 <div class="flex items-center p-4 border-b border-border-subtle gap-4">
 <span class="font-display-lg text-3xl text-on-surface-variant w-6 text-center">2</span>
-<img alt="Student" class="w-10 h-10 rounded-full object-cover" data-alt="Close up portrait of a male athlete in a dark training environment. Hard directional lighting highlights muscle definition and grit. The background is pitch black, giving a dramatic and elite sports performance vibe." src="https://lh3.googleusercontent.com/aida/ADBb0uheH273Rf5UZWL3e8D8jnFR_soHum36SvVOQZQeTssXs-bQxIngUsGCeFPkNyEuI-HPVdFfYRciICH7-jIDeS_2MA1AU7nIituTt9fxIH_OSaIZOGrS-TYiuMqCpDopAVGusCNbtGqNIViLd1xjcg_eFpaS96SoKxf2S6NvNlVcHCdWaRbW3XkiTDlGfDIoAASL0gBBL6P1OvqgVxj5FnCjEgNJsAxBpSkaxYoO6ZU0OqGK7Ttc4_GhSg"/>
+<img alt="Foto de Ricardo Alvez" class="w-10 h-10 rounded-full object-cover" decoding="async" height="40" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0uheH273Rf5UZWL3e8D8jnFR_soHum36SvVOQZQeTssXs-bQxIngUsGCeFPkNyEuI-HPVdFfYRciICH7-jIDeS_2MA1AU7nIituTt9fxIH_OSaIZOGrS-TYiuMqCpDopAVGusCNbtGqNIViLd1xjcg_eFpaS96SoKxf2S6NvNlVcHCdWaRbW3XkiTDlGfDIoAASL0gBBL6P1OvqgVxj5FnCjEgNJsAxBpSkaxYoO6ZU0OqGK7Ttc4_GhSg" width="40"/>
 <div class="flex-grow">
 <p class="font-body-md font-bold">Ricardo Alvez</p>
 <div class="flex gap-1 mt-1">
@@ -330,7 +366,7 @@
 </div>
 <div class="flex items-center p-4 gap-4">
 <span class="font-display-lg text-3xl text-on-surface-variant w-6 text-center">3</span>
-<img alt="Student" class="w-10 h-10 rounded-full object-cover" data-alt="An athlete focused on training in a low-light gym. Moody atmosphere with a pure black background and sharp electric lime green highlights reflecting off the gear. Visual style is professional, energetic, and clean." src="https://lh3.googleusercontent.com/aida/ADBb0ugNaBBDk6pImKviGW3ZEH36wVjT4ctINjWd6ZJcTDOxhAN9M-jHFS7ZP9KUE-tNJLToFewHtlUTPAwjyJuZlceq9bRdR1Ym_TzPHHSPoBqqEcRFZi-Vsuk2aE31DMLemN0IfKVZazoPTeOZkpNbh1QCHuz-T2xm6Yf7AswYXVPaRW2xK8IDTqriN20Ho15kbM4abbkiyAC7qcAecEz_9pFofFs40DsjMHu7b6-OoaiTofwGNalYPJt0PAw"/>
+<img alt="Foto de Juliana Mendes" class="w-10 h-10 rounded-full object-cover" decoding="async" height="40" loading="lazy" src="https://lh3.googleusercontent.com/aida/ADBb0ugNaBBDk6pImKviGW3ZEH36wVjT4ctINjWd6ZJcTDOxhAN9M-jHFS7ZP9KUE-tNJLToFewHtlUTPAwjyJuZlceq9bRdR1Ym_TzPHHSPoBqqEcRFZi-Vsuk2aE31DMLemN0IfKVZazoPTeOZkpNbh1QCHuz-T2xm6Yf7AswYXVPaRW2xK8IDTqriN20Ho15kbM4abbkiyAC7qcAecEz_9pFofFs40DsjMHu7b6-OoaiTofwGNalYPJt0PAw" width="40"/>
 <div class="flex-grow">
 <p class="font-body-md font-bold">Juliana Mendes</p>
 <div class="flex gap-1 mt-1">
@@ -347,35 +383,43 @@
 </div>
 </section>
 </main>
-<!-- Bottom Navigation Shell -->
+<!-- Navegação inferior -->
 <nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-pure-black/80 backdrop-blur-3xl border-t border-border-subtle">
 <div class="flex justify-around items-center h-button-height-standard px-gutter w-full max-w-md mx-auto">
 <a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="home">home</span>
-<span class="font-label-sm text-label-sm">Home</span>
+<span class="font-label-sm text-label-sm">Início</span>
 </a>
 <a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="fitness_center">fitness_center</span>
-<span class="font-label-sm text-label-sm">Workout</span>
+<span class="font-label-sm text-label-sm">Treinos</span>
 </a>
 <a class="flex flex-col items-center justify-center text-secondary-fixed-dim hover:text-primary-fixed transition-colors active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
-<span class="font-label-sm text-label-sm">Chat</span>
+<span class="font-label-sm text-label-sm">Mensagens</span>
 </a>
-<a class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
+<a aria-current="page" class="flex flex-col items-center justify-center text-primary-fixed font-bold bg-surface-variant/30 rounded-full px-4 py-1 active:scale-90 transition-transform duration-200" href="#">
 <span class="material-symbols-outlined" data-icon="analytics" style="font-variation-settings: 'FILL' 1;">analytics</span>
 <span class="font-label-sm text-label-sm">Relatórios</span>
 </a>
 </div>
 </nav>
-<!-- Floating Action Button Contextual (Export Report) -->
-<button class="fixed bottom-24 right-6 w-14 h-14 bg-primary-fixed text-pure-black rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform hover:shadow-[0_0_20px_rgba(201,242,54,0.4)]">
+<!-- Botão flutuante contextual de exportação -->
+<button aria-label="Exportar relatório" class="fixed bottom-24 right-6 w-14 h-14 bg-primary-fixed text-pure-black rounded-full shadow-2xl flex items-center justify-center active:scale-90 transition-transform hover:shadow-[0_0_20px_rgba(201,242,54,0.4)]" type="button">
 <span class="material-symbols-outlined" data-icon="ios_share">ios_share</span>
 </button>
 <script>
         // Micro-interactions for chart bars
         window.addEventListener('DOMContentLoaded', () => {
+            const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             const cells = document.querySelectorAll('.heat-cell');
+            if (prefersReducedMotion) {
+                cells.forEach((cell) => {
+                    cell.classList.add('opacity-100');
+                    cell.style.transitionDelay = '0ms';
+                });
+                return;
+            }
             cells.forEach((cell, index) => {
                 setTimeout(() => {
                     cell.style.transitionDelay = `${index * 20}ms`;
